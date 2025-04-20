@@ -89,7 +89,6 @@
     /* Scroll-to-Top Button */
     .scroll-to-top-btn {
       position: fixed;
-      bottom: 20px;
       right: 20px;
       background-color: #FF6347;
       color: white;
@@ -97,21 +96,23 @@
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      padding: 20px;
-      font-size: 10px;
+      padding: 0; /* Changed from 20px to prevent sizing issues */
+      font-size: 24px; /* Larger arrow icon */
       cursor: pointer;
       display: none;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
-      z-index: 1001; /* Above footer */
+      z-index: 1001;
+      bottom: 80px; /* Default desktop position (adjust based on footer height) */
     }
     
-    /* Footer (if fixed) */
+    /* Footer */
     footer {
       position: fixed;
       bottom: 0;
       width: 100%;
-      z-index: 1000; /* Below scroll button */
+      height: 60px; /* Explicit height needed for calculations */
+      z-index: 1000;
     }
     
     /* Mobile Adjustments */
@@ -120,13 +121,13 @@
         width: 50px;
         height: 50px;
         right: 15px;
-        bottom: 70px; /* Place above footer */
+        bottom: 70px; /* 10px above footer */
+        font-size: 20px;
       }
-    }
-
-
-    .scroll-to-top-btn:hover {
-      background-color: #e65134;
+      
+      footer {
+        height: 50px; /* Match mobile footer height */
+      }
     }
 
     .video-title {
@@ -290,7 +291,21 @@
       document.getElementById(id).classList.add('active');
     }
 
-
+    function adjustScrollButton() {
+      const footer = document.querySelector('footer');
+      const scrollBtn = document.querySelector('.scroll-to-top-btn');
+      
+      if (window.innerWidth > 768) {
+        // Desktop: place button 20px above footer
+        const footerHeight = footer.offsetHeight;
+        scrollBtn.style.bottom = `${footerHeight + 20}px`;
+      }
+    }
+    
+    // Run on load and resize
+    window.addEventListener('load', adjustScrollButton);
+    window.addEventListener('resize', adjustScrollButton);
+    
     window.onscroll = function() {
       const btn = document.querySelector('.scroll-to-top-btn');
       if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
