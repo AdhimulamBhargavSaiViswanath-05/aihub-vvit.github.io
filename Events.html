@@ -76,30 +76,22 @@
     }
 
     @media (max-width: 768px) {
-      .card {
-        padding: 15px; /* Slightly reduce padding */
-        margin-top: 10px; /* Reduce margin */
-        border-radius: 8px; /* Slightly rounder corners */
+      .video-container {
+          flex: 1 1 100%;
       }
-      
-      /* Optional: Adjust font sizes inside cards */
-      .card h3 {
-        font-size: 1.2rem; /* Slightly smaller headings */
-      }
-      
-      .card p {
-        font-size: 0.9rem; /* Slightly smaller text */
-      }
-    }
-    .video-container {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      flex: 1 1 calc(50% - 20px); /* 2 per row with gap */
-      max-width: calc(50% - 20px);
-      box-sizing: border-box;
-    }
+      .hack1{
+      display: none;
+  }
+  }
+  .video-container {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(50% - 20px); /* 2 per row with gap */
+    max-width: calc(50% - 20px);
+    box-sizing: border-box;
+  }
 
 
     /* Scroll-to-Top Button */
