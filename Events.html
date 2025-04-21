@@ -17,13 +17,7 @@
       padding: 80px;
     }
 
-  
-    /* If your header is taller (e.g., on mobile), use a media query */
-    @media (max-width: 768px) {
-      body {
-        padding-top: 60px;
-      }
-    }
+
 
     .subtabs {
       display: flex;
@@ -76,22 +70,51 @@
     }
 
     @media (max-width: 768px) {
-      .video-container {
-          flex: 1 1 100%;
+      body {
+        padding: 20px; /* Changed from 60px to better fit small screens */
       }
-      .hack1{
-      display: none;
-  }
-  }
-  .video-container {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    flex: 1 1 calc(50% - 20px); /* 2 per row with gap */
-    max-width: calc(50% - 20px);
-    box-sizing: border-box;
-  }
+
+      .video-container {
+        flex: 1 1 100%; /* Full width */
+        min-width: 100%; /* Ensure it takes up full width */
+      }
+
+      .card, .video-container {
+        padding: 15px; /* Slightly smaller padding on mobile */
+      }
+
+      .hack1 {
+        display: none;
+      }
+    }
+
+    .video-container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      flex: 1 1 45%; /* slightly less strict width */
+      min-width: 300px; /* ensures readability on mid-size screens */
+      box-sizing: border-box;
+    }
+
+    .subtab-content {
+      width: 100%; /* Ensures full width on all screens */
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 480px) {
+      .subtab-button {
+        width: 50%; /* Buttons take equal width in one row */
+        font-size: 14px;
+        padding: 8px 0;
+      }
+
+      .subtabs {
+        flex-wrap: wrap; /* Allows wrapping on smaller screens */
+      }
+    }
+
 
 
     /* Scroll-to-Top Button */
