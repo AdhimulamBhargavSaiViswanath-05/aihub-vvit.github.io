@@ -2,216 +2,326 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-    <link rel="icon" href="./images/ai.png" type="image/png">
-    <required-links></required-links>
-    <link rel="stylesheet" href="./styling/meetups.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-  <meta charset="UTF-8">
+  <link rel="icon" href="./images/ai.png" type="image/png">
+  <required-links></required-links>
+  <link rel="stylesheet" href="./styling/meetups.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
   <title>Events</title>
   <style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f0f2f5;
-    padding: 80px 20px 20px 20px;
-    margin-top: 0;
-  }
-
-  .subtabs {
-    display: flex;
-    gap: 5px;
-    border-bottom: 3px solid orange;
-    margin-bottom: 20px;
-    flex-wrap: wrap; /* Important for small screens */
-  }
-
-  .subtab-button {
-    padding: 10px 0;
-    width: 150px;
-    text-align: center;
-    background-color: #c5aa7b;
-    color: white;
-    border: 1px solid orange;
-    border-bottom: none;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 30px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .subtab-button.active {
-    background-color: #FF6347;
-  }
-
-  .subtab-content {
-    display: none;
-    border: 1px solid orange;
-    background-color: #fff;
-    border-radius: 0 0 10px 10px;
-    padding: 20px;
-    margin-top: -1px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .subtab-content.active {
-    display: block;
-  }
-
-  .card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-top: 15px;
-  }
-
-  .video-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    width: 100%;
-  }
-
-  .video-container {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    flex: 1 1 calc(50% - 20px); /* Two cards in a row minus gap */
-    box-sizing: border-box;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  .video-title {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #333;
-    font-weight: bold;
-  }
-
-  .video-caption {
-    text-align: center;
-    font-size: 1rem;
-    color: #555;
-  }
-
-  iframe, .video-container img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 10px;
-  }
-
-  .button {
-    display: inline-block;
-    margin-top: 10px;
-    margin-right: 10px;
-    padding: 10px 15px;
-    background: #c5aa7b;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-
-  /* Hide extra videos initially */
-  .more-videos {
-    display: none;
-  }
-  
-  /* Style the View More button */
-  .view-more-btn {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #c5aa7b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .view-more-btn:hover {
-    background-color: #FF6347;
-  }
-
-  .button:hover {
-    background: #FF6347;
-  }
-
-  hr {
-    margin: 40px 0;
-  }
-
-  /* Scroll-to-Top Button */
-  .scroll-to-top-btn {
-    position: fixed;
-    right: 20px;
-    bottom: 80px;
-    background-color: #FF6347;
-    color: white;
-    border: none;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    font-size: 24px;
-    cursor: pointer;
-    display: none;
-    z-index: 1001;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-  }
-
-  footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    z-index: 1000;
-  }
-
-  /* ========== Mobile Improvements ========== */
-  @media (max-width: 768px) {
     body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      padding: 80px 20px 20px 20px;
+      margin-top: 0;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .subtabs {
+      display: flex;
+      gap: 5px;
+      border-bottom: 3px solid orange;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .subtab-button {
+      padding: 10px 0;
+      width: 150px;
+      text-align: center;
+      background-color: #c5aa7b;
+      color: white;
+      border: 1px solid orange;
+      border-bottom: none;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .subtab-button.active {
+      background-color: #FF6347;
+    }
+
+    .subtab-content {
+      display: none;
+      border: 1px solid orange;
+      background-color: #fff;
+      border-radius: 0 0 10px 10px;
       padding: 20px;
+      margin-top: -1px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
-    .video-container {
-      flex: 1 1 100%;
-      padding: 15px;
-    }
-
-    .video-title {
-      font-size: 1rem;
+    .subtab-content.active {
+      display: block;
     }
 
     .card {
-      padding: 15px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-top: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transform: translateY(-2px);
+    }
+
+    .video-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .video-container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      flex: 1 1 calc(50% - 20px);
+      box-sizing: border-box;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      min-height: 500px;
+      max-height: 500px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .video-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .video-container.expanded {
+      min-height: auto;
+      max-height: none;
+    }
+
+    .video-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 12px;
+      display: none;
+    }
+
+    .video-container.loading::after {
+      display: block;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .video-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+      font-weight: bold;
+      min-height: 50px;
+    }
+
+    .video-caption {
+      text-align: center;
+      font-size: 1rem;
+      color: #555;
+      flex-grow: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .video-container.expanded .video-caption {
+      -webkit-line-clamp: unset;
+    }
+
+    iframe, .video-container img {
+      width: 100%;
+      height: 250px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      object-fit: cover;
+    }
+
+    .video-tags {
+      display: flex;
+      gap: 5px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: #e0e0e0;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    .video-rating {
+      margin-top: 10px;
+      color: #FFA500;
+      font-size: 0.9rem;
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .share-btn {
+      background: #f0f0f0;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .share-btn:hover {
+      background: #c5aa7b;
+      color: white;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 10px;
+      margin-right: 10px;
+      padding: 10px 15px;
+      background: #c5aa7b;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      background: #FF6347;
+      transform: translateY(-2px);
+    }
+
+    .more-videos {
+      display: none;
+    }
+    
+    .view-more-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #c5aa7b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    
+    .view-more-btn:hover {
+      background-color: #FF6347;
+      transform: translateY(-2px);
     }
 
     .scroll-to-top-btn {
-      width: 50px;
-      height: 50px;
-      right: 15px;
-      bottom: 70px;
-      font-size: 20px;
+      position: fixed;
+      right: 20px;
+      bottom: 80px;
+      background-color: #FF6347;
+      color: white;
+      border: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      display: none;
+      z-index: 1001;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .scroll-to-top-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
     footer {
-      height: 50px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      z-index: 1000;
     }
-  }
-</style>
+
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+
+      .video-container {
+        flex: 1 1 100%;
+        padding: 15px;
+        min-height: 400px;
+      }
+
+      .video-title {
+        font-size: 1rem;
+      }
+
+      .card {
+        padding: 15px;
+      }
+
+      iframe, .video-container img {
+        height: 180px;
+      }
+
+      .scroll-to-top-btn {
+        width: 50px;
+        height: 50px;
+        right: 15px;
+        bottom: 70px;
+        font-size: 20px;
+      }
+
+      footer {
+        height: 50px;
+      }
+    }
+  </style>
 </head>
 <body>
   <special-header></special-header>
-<!-- Ongoing Events Section -->
+  
+  <!-- Ongoing Events Section -->
   <div class="section">
     <h2>Ongoing Events:</h2>
     <div class="subtabs">
@@ -238,7 +348,7 @@
       <button class="subtab-button" onclick="showSubTab('arch-hackathons', this, 'archives')">Hackathons</button>
     </div>
     
-    <!-- Meetups Archive (contains both Team and Open meetups) -->
+    <!-- Meetups Archive -->
     <div id="arch-meetups" class="subtab-content active">
       <!-- Team Meetups Section -->
       <div class="card">
@@ -251,6 +361,17 @@
             <p class="video-caption">
               In this online team meetup session, <strong>Bhargav Venkat</strong>, Mentor of our community, explained how the Python library 'behave' can help communities collaboratively develop software. He also encouraged taking up challenging projects fearlessly.
             </p>
+            <div class="video-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Tutorial</span>
+              <span class="tag">Collaboration</span>
+            </div>
+            <div class="video-rating">★★★★☆ (12)</div>
+            <div class="share-buttons">
+              <button class="share-btn"><i class="fab fa-facebook"></i></button>
+              <button class="share-btn"><i class="fab fa-twitter"></i></button>
+              <button class="share-btn"><i class="fab fa-linkedin"></i></button>
+            </div>
           </div>
 
           <!-- Hidden Team Meetups -->
@@ -260,6 +381,16 @@
             <p class="video-caption">
               <strong>John Smith</strong> demonstrates advanced Python programming techniques.
             </p>
+            <div class="video-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Advanced</span>
+            </div>
+            <div class="video-rating">★★★★★ (8)</div>
+            <div class="share-buttons">
+              <button class="share-btn"><i class="fab fa-facebook"></i></button>
+              <button class="share-btn"><i class="fab fa-twitter"></i></button>
+              <button class="share-btn"><i class="fab fa-linkedin"></i></button>
+            </div>
           </div>
           
           <div class="video-container more-videos">
@@ -268,9 +399,20 @@
             <p class="video-caption">
               <strong>Sarah Johnson</strong> introduces the fundamentals of web development.
             </p>
+            <div class="video-tags">
+              <span class="tag">Web</span>
+              <span class="tag">HTML/CSS</span>
+              <span class="tag">Beginner</span>
+            </div>
+            <div class="video-rating">★★★☆☆ (5)</div>
+            <div class="share-buttons">
+              <button class="share-btn"><i class="fab fa-facebook"></i></button>
+              <button class="share-btn"><i class="fab fa-twitter"></i></button>
+              <button class="share-btn"><i class="fab fa-linkedin"></i></button>
+            </div>
           </div>
         </div>
-        <button class="view-more-btn" onclick="toggleMoreVideos(this, 'arch-meetups .team-meetups')">View More</button>
+        <button class="view-more-btn" onclick="toggleMoreVideos(this)">View More</button>
       </div>
 
       <!-- Open Meetups Section -->
@@ -287,6 +429,17 @@
               was clearly explained by <strong>Rama Charan</strong>, Mentor. Other learning resources like 
               courses and computing tools such as Jupyter Notebooks available on Kaggle were also covered.
             </p>
+            <div class="video-tags">
+              <span class="tag">Kaggle</span>
+              <span class="tag">Data Science</span>
+              <span class="tag">Tutorial</span>
+            </div>
+            <div class="video-rating">★★★★★ (15)</div>
+            <div class="share-buttons">
+              <button class="share-btn"><i class="fab fa-facebook"></i></button>
+              <button class="share-btn"><i class="fab fa-twitter"></i></button>
+              <button class="share-btn"><i class="fab fa-linkedin"></i></button>
+            </div>
           </div>
 
           <!-- Hidden Open Meetups -->
@@ -296,6 +449,17 @@
             <p class="video-caption">
               <strong>Jane Doe</strong> introduces basic concepts of Data Science, including Python libraries.
             </p>
+            <div class="video-tags">
+              <span class="tag">Data Science</span>
+              <span class="tag">Python</span>
+              <span class="tag">Beginner</span>
+            </div>
+            <div class="video-rating">★★★★☆ (10)</div>
+            <div class="share-buttons">
+              <button class="share-btn"><i class="fab fa-facebook"></i></button>
+              <button class="share-btn"><i class="fab fa-twitter"></i></button>
+              <button class="share-btn"><i class="fab fa-linkedin"></i></button>
+            </div>
           </div>
 
           <div class="video-container more-videos">
@@ -304,9 +468,20 @@
             <p class="video-caption">
               <strong>Alex Johnson</strong> covers the fundamentals of machine learning algorithms.
             </p>
+            <div class="video-tags">
+              <span class="tag">Machine Learning</span>
+              <span class="tag">AI</span>
+              <span class="tag">Beginner</span>
+            </div>
+            <div class="video-rating">★★★★★ (18)</div>
+            <div class="share-buttons">
+              <button class="share-btn"><i class="fab fa-facebook"></i></button>
+              <button class="share-btn"><i class="fab fa-twitter"></i></button>
+              <button class="share-btn"><i class="fab fa-linkedin"></i></button>
+            </div>
           </div>
         </div>
-        <button class="view-more-btn" onclick="toggleMoreVideos(this, 'arch-meetups .open-meetups')">View More</button>
+        <button class="view-more-btn" onclick="toggleMoreVideos(this)">View More</button>
       </div>
     </div>
 
@@ -316,7 +491,9 @@
         <h3>Hackathon</h3>
         <div class="video-list">
           <div class="video-container">
+          <h4 class="video-title">"[AIHUB-VVIT] Hackathon Contest#01"</h4>
             <img src="./images/hack.jpeg" alt="Hackathon Poster" style="width: 100%; max-width: 500px;" />
+            
             <p><strong>Event:</strong> "[AIHUB-VVIT] Hackathon Contest#01"</p>
             <p><strong>Date:</strong> April 13, 2025</p>
             <p><strong>Duration:</strong> One hour</p>
@@ -324,8 +501,18 @@
             <p><strong>Venue:</strong> Online</p>
             <p><strong>Details:</strong> First VVIT-exclusive AIH hackathon featuring 3 beginner C challenges.</p>
             <p><strong>Moderators:</strong> Harsha (6301791287), Vamsi (9515169914), Yaswanth (6301985668)</p>
+            <div class="video-tags">
+              <span class="tag">Hackathon</span>
+              <span class="tag">Programming</span>
+              <span class="tag">Competition</span>
+            </div>
             <a href="https://discord.gg/uF44vqrb" class="button">Join Discord</a>
             <a href="https://www.hackerrank.com/contests/aihub-vvitcontest01/leaderboard" class="button">Leaderboard</a>
+            <div class="share-buttons">
+              <button class="share-btn"><i class="fab fa-facebook"></i></button>
+              <button class="share-btn"><i class="fab fa-twitter"></i></button>
+              <button class="share-btn"><i class="fab fa-linkedin"></i></button>
+            </div>
           </div>
 
           <!-- Hidden Hackathons -->
@@ -335,9 +522,19 @@
             <p class="video-caption">
               <strong>Jane Doe</strong> explains problem-solving techniques using Python.
             </p>
+            <div class="video-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Problem Solving</span>
+            </div>
+            <div class="video-rating">★★★★☆ (7)</div>
+            <div class="share-buttons">
+              <button class="share-btn"><i class="fab fa-facebook"></i></button>
+              <button class="share-btn"><i class="fab fa-twitter"></i></button>
+              <button class="share-btn"><i class="fab fa-linkedin"></i></button>
+            </div>
           </div>
         </div>
-        <button class="view-more-btn" onclick="toggleMoreVideos(this, 'arch-hackathons')">View More</button>
+        <button class="view-more-btn" onclick="toggleMoreVideos(this)">View More</button>
       </div>
     </div>
   </div>
@@ -346,6 +543,26 @@
   <button id="scrollToTopBtn" class="scroll-to-top-btn" onclick="scrollToTop()">↑</button>
   
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize View More buttons
+      document.querySelectorAll('.card').forEach(card => {
+        const moreVideos = card.querySelectorAll('.more-videos');
+        const viewMoreBtn = card.querySelector('.view-more-btn');
+        
+        if (moreVideos.length < 2) {
+          if (viewMoreBtn) viewMoreBtn.style.display = 'none';
+          
+          // Show all videos if there's only one extra
+          if (moreVideos.length === 1) {
+            moreVideos[0].style.display = 'block';
+          }
+        }
+      });
+
+      // Adjust scroll button position
+      adjustScrollButton();
+    });
+
     function showSubTab(id, element, section) {
       const sectionDiv = element.closest('.section');
       const buttons = sectionDiv.querySelectorAll('.subtab-button');
@@ -364,11 +581,10 @@
       
       if (window.innerWidth > 768) {
         const footerHeight = footer.offsetHeight;
-        scrollBtn.style.bottom = `${footerHeight + 20}px`;
+        scrollBtn.style.bottom = ${footerHeight + 20}px;
       }
     }
     
-    window.addEventListener('load', adjustScrollButton);
     window.addEventListener('resize', adjustScrollButton);
     
     window.onscroll = function() {
@@ -384,20 +600,25 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Improved View More functionality
-    function toggleMoreVideos(button, selector) {
-      // Find the closest card container
+    function toggleMoreVideos(button) {
       const card = button.closest('.card');
-      
-      // Find all more-videos elements within this card
       const moreVideos = card.querySelectorAll('.more-videos');
-      const isHidden = moreVideos[0].style.display !== 'block';
+      const mainVideos = card.querySelectorAll('.video-container:not(.more-videos)');
       
-      moreVideos.forEach(video => {
-        video.style.display = isHidden ? 'block' : 'none';
-      });
-      
-      button.textContent = isHidden ? 'View Less' : 'View More';
+      if (moreVideos.length >= 2) {
+        const isHidden = moreVideos[0].style.display !== 'block';
+        
+        moreVideos.forEach(video => {
+          video.style.display = isHidden ? 'block' : 'none';
+          video.classList.toggle('expanded', isHidden);
+        });
+        
+        mainVideos.forEach(video => {
+          video.classList.toggle('expanded', isHidden);
+        });
+        
+        button.textContent = isHidden ? 'View Less' : 'View More';
+      }
     }
   </script>
   <special-footer></special-footer>
