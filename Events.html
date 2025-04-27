@@ -189,6 +189,31 @@
         display: none;
       }
     }
+
+    /* Specifically for images inside video-container */
+    .video-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+  
+    /* Improve text layout inside video-container for mobile */
+    @media (max-width: 768px) {
+      .video-container p {
+        font-size: 0.95rem;
+        text-align: left;
+      }
+  
+      .video-container {
+        padding: 10px;
+      }
+  
+      .video-container img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+    }
   </style>
 
 </head>
