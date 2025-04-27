@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./images/ai.png" type="image/png">
     <required-links></required-links>
     <link rel="stylesheet" href="./styling/meetups.css">
@@ -10,212 +11,231 @@
   <meta charset="UTF-8">
   <title>Events</title>
   <style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f0f2f5;
-    padding: 80px 20px 20px 20px;
-    margin-top: 0;
-  }
-
-/*   .section {
-  margin-top: 80px; /* This will push the section below the header */
-  } */
-
-
-  .subtabs {
-    display: flex;
-    gap: 5px;
-    border-bottom: 3px solid orange;
-    margin-bottom: 20px;
-    flex-wrap: wrap; /* Important for small screens */
-  }
-
-  .subtab-button {
-    padding: 10px 0;
-    width: 150px;
-    text-align: center;
-    background-color: #c5aa7b;
-    color: white;
-    border: 1px solid orange;
-    border-bottom: none;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 30px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .subtab-button.active {
-    background-color: #FF6347;
-  }
-
-  .subtab-content {
-    display: none;
-    border: 1px solid orange;
-    background-color: #fff;
-    border-radius: 0 0 10px 10px;
-    padding: 20px;
-    margin-top: -1px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .subtab-content.active {
-    display: block;
-  }
-
-  .card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-top: 15px;
-  }
-
-  .video-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    width: 100%;
-  }
-
-  .video-container {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    flex: 1 1 calc(50% - 20px); /* Two cards in a row minus gap */
-    box-sizing: border-box;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  .video-title {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #333;
-    font-weight: bold;
-  }
-
-  .video-caption {
-    text-align: center;
-    font-size: 1rem;
-    color: #555;
-  }
-
-  iframe, .video-container img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 10px;
-  }
-
-  .button {
-    display: inline-block;
-    margin-top: 10px;
-    margin-right: 10px;
-    padding: 10px 15px;
-    background: #c5aa7b;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-
-  /* Hide extra videos initially */
-  .more-videos {
-    display: none;
-  }
-  
-  /* Style the View More button */
-  .view-more-btn {
-    display: block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #c5aa7b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .view-more-btn:hover {
-    background-color: #c5aa7b;
-  }
-
-
-  .button:hover {
-    background: #e65134;
-  }
-
-  hr {
-    margin: 40px 0;
-  }
-
-  /* Scroll-to-Top Button */
-  .scroll-to-top-btn {
-    position: fixed;
-    right: 20px;
-    bottom: 80px;
-    background-color: #FF6347;
-    color: white;
-    border: none;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    font-size: 24px;
-    cursor: pointer;
-    display: none;
-    z-index: 1001;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-  }
-
-  footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    z-index: 1000;
-  }
-
-  /* ========== Mobile Improvements ========== */
-  @media (max-width: 768px) {
     body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      padding: 80px;
+    }
+
+
+
+    .subtabs {
+      display: flex;
+      gap: 5px;
+      border-bottom: 3px solid orange;
+      margin-bottom: 20px;
+    }
+
+    .subtab-button {
+      padding: 10px 0;
+      width: 150px;
+      text-align: center;
+      background-color: #c5aa7b;
+      color: white;
+      border: 1px solid orange;
+      border-bottom: none;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      position: relative;
+      top: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .subtab-button.active {
+      background-color: #FF6347;
+      color: white;
+    }
+
+    .subtab-content {
+      display: none;
+      border: 1px solid orange;
+      background-color: #fff;
+      border-radius: 0 0 10px 10px;
       padding: 20px;
+      margin-top: -1px;
     }
 
-    .video-container {
-      flex: 1 1 100%;
-      padding: 15px;
-    }
-
-    .video-title {
-      font-size: 1rem;
+    .subtab-content.active {
+      display: block;
     }
 
     .card {
-      padding: 15px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 15px;
     }
 
+    @media (max-width: 768px) {
+      body {
+        padding: 20px; /* Changed from 60px to better fit small screens */
+      }
+
+      .video-container {
+        flex: 1 1 100%; /* Full width */
+        min-width: 100%; /* Ensure it takes up full width */
+      }
+
+      .card, .video-container {
+        padding: 15px; /* Slightly smaller padding on mobile */
+      }
+
+      .hack1 {
+        display: none;
+      }
+    }
+
+    .video-container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      flex: 1 1 45%; /* slightly less strict width */
+      min-width: 300px; /* ensures readability on mid-size screens */
+      box-sizing: border-box;
+    }
+
+    .subtab-content {
+      width: 100%; /* Ensures full width on all screens */
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 480px) {
+      .subtab-button {
+        width: 50%; /* Buttons take equal width in one row */
+        font-size: 14px;
+        padding: 8px 0;
+      }
+
+      .subtabs {
+        flex-wrap: wrap; /* Allows wrapping on smaller screens */
+      }
+    }
+
+
+
+    /* Scroll-to-Top Button */
     .scroll-to-top-btn {
-      width: 50px;
-      height: 50px;
-      right: 15px;
-      bottom: 70px;
-      font-size: 20px;
+      position: fixed;
+      right: 20px;
+      background-color: #FF6347;
+      color: white;
+      border: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      padding: 0; /* Changed from 20px to prevent sizing issues */
+      font-size: 24px; /* Larger arrow icon */
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      z-index: 1001;
+      bottom: 80px; /* Default desktop position (adjust based on footer height) */
     }
-
+    
+    /* Footer */
     footer {
-      height: 50px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 60px; /* Explicit height needed for calculations */
+      z-index: 1000;
     }
-  }
-</style>
+    
+    /* Mobile Adjustments */
+    @media (max-width: 768px) {
+      .scroll-to-top-btn {
+        width: 50px;
+        height: 50px;
+        right: 15px;
+        bottom: 70px; /* 10px above footer */
+        font-size: 20px;
+      }
+      
+      footer {
+        height: 50px; /* Match mobile footer height */
+      }
+    }
+    /* Video List Container - Make it fully responsive */
+    .video-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      width: 100%;
+    }
+    
+    /* Video Container - Dynamic sizing */
+    .video-container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      flex: 1 1 45%; /* Grow/shrink from 45% base */
+      min-width: 300px; /* Minimum card width */
+      box-sizing: border-box;
+      text-align: left;
+    }
+    
+    /* Mobile Optimization */
+    @media (max-width: 768px) {
+      .video-container {
+        flex: 1 1 100%; /* Full width on mobile */
+        min-width: 100%; /* Override any minimum */
+      }
+      
+      /* Optional: Adjust card padding for mobile */
+      .card, .video-container {
+        padding: 15px;
+      }
+    }
+    .video-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .video-caption {
+      text-align: center;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 10px;
+      margin-right: 10px;
+      padding: 10px 15px;
+      background: #c5aa7b;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .button:hover {
+      background: #e65134;
+    }
 
 
+
+    iframe {
+      width: 100%;
+      height: 315px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    hr {
+      margin: 40px 0;
+    }
+
+  </style>
 </head>
 <body>
   <special-header></special-header>
@@ -237,9 +257,6 @@
       </div>
     </div>
   </div>
-
-
-  
   
 
   <!-- Archives Section -->
@@ -333,7 +350,7 @@
       if (window.innerWidth > 768) {
         // Desktop: place button 20px above footer
         const footerHeight = footer.offsetHeight;
-        scrollBtn.style.bottom = ${footerHeight + 20}px;
+        scrollBtn.style.bottom = `${footerHeight + 20}px`;
       }
     }
     
@@ -353,22 +370,6 @@
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    // JavaScript to handle View More functionality
-    function viewMore(sectionId) {
-      // Select all extra videos in the given section
-      const moreVideos = document.querySelectorAll(#${sectionId} .more-videos);
-      const viewMoreButton = document.querySelector(#${sectionId} .view-more-btn);
-    
-      // Show all hidden videos
-      moreVideos.forEach(video => {
-        video.style.display = 'block';
-      });
-    
-      // Hide the "View More" button after clicking
-      viewMoreButton.style.display = 'none';
-    }
-
 
   </script>
   <special-footer></special-footer>
