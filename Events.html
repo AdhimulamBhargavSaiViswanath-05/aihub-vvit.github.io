@@ -10,211 +10,182 @@
   <meta charset="UTF-8">
   <title>Events</title>
   <style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    padding: 80px 20px 20px 20px;
+  }
+
+  .subtabs {
+    display: flex;
+    gap: 5px;
+    border-bottom: 3px solid orange;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Important for small screens */
+  }
+
+  .subtab-button {
+    padding: 10px 0;
+    width: 150px;
+    text-align: center;
+    background-color: #c5aa7b;
+    color: white;
+    border: 1px solid orange;
+    border-bottom: none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .subtab-button.active {
+    background-color: #FF6347;
+  }
+
+  .subtab-content {
+    display: none;
+    border: 1px solid orange;
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+    padding: 20px;
+    margin-top: -1px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .subtab-content.active {
+    display: block;
+  }
+
+  .card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 15px;
+  }
+
+  .video-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .video-container {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    flex: 1 1 calc(50% - 20px); /* Two cards in a row minus gap */
+    box-sizing: border-box;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .video-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .video-caption {
+    text-align: center;
+    font-size: 1rem;
+    color: #555;
+  }
+
+  iframe, .video-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .button {
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 10px 15px;
+    background: #c5aa7b;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .button:hover {
+    background: #e65134;
+  }
+
+  hr {
+    margin: 40px 0;
+  }
+
+  /* Scroll-to-Top Button */
+  .scroll-to-top-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 80px;
+    background-color: #FF6347;
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+    z-index: 1001;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 1000;
+  }
+
+  /* ========== Mobile Improvements ========== */
+  @media (max-width: 768px) {
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f2f5;
-      padding: 80px 20px 20px 20px;
-    }
-  
-    .subtabs {
-      display: flex;
-      gap: 5px;
-      border-bottom: 3px solid orange;
-      margin-bottom: 20px;
-      flex-wrap: wrap; /* Allows wrapping on smaller screens */
-    }
-  
-    .subtab-button {
-      padding: 10px 0;
-      width: 150px;
-      text-align: center;
-      background-color: #c5aa7b;
-      color: white;
-      border: 1px solid orange;
-      border-bottom: none;
-      border-top-left-radius: 0px;
-      border-top-right-radius: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      position: relative;
-      top: 3px;
-      transition: all 0.3s ease;
-    }
-  
-    .subtab-button.active {
-      background-color: #FF6347;
-      color: white;
-    }
-  
-    .subtab-content {
-      display: none;
-      border: 1px solid orange;
-      background-color: #fff;
-      border-radius: 0 0 10px 10px;
       padding: 20px;
-      margin-top: -1px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-  
-    .subtab-content.active {
-      display: block;
-    }
-  
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      margin-top: 15px;
-    }
-  
-    .video-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      width: 100%;
-    }
-  
-    .video-container {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      flex: 1 1 45%; /* Grow/shrink from 45% base */
-      min-width: 300px; /* Minimum card width */
-      box-sizing: border-box;
-      text-align: left;
-    }
-  
-    .video-title {
-      font-size: 18px;
-      margin-bottom: 10px;
-      color: #333;
-      font-weight: bold;
-    }
-  
-    .video-caption {
-      text-align: center;
-      font-size: 1rem;
-      color: #555;
-    }
-  
-    .button {
-      display: inline-block;
-      margin-top: 10px;
-      margin-right: 10px;
-      padding: 10px 15px;
-      background: #c5aa7b;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-  
-    .button:hover {
-      background: #e65134;
-    }
-  
-    iframe {
-      width: 100%;
-      height: 315px;
-      border: none;
-      border-radius: 10px;
-      margin-top: 10px;
-    }
-  
-    hr {
-      margin: 40px 0;
-    }
-  
-    /* Scroll-to-Top Button */
-    .scroll-to-top-btn {
-      position: fixed;
-      right: 20px;
-      bottom: 80px; /* Adjust based on footer height */
-      background-color: #FF6347;
-      color: white;
-      border: none;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      padding: 0;
-      font-size: 24px;
-      cursor: pointer;
-      display: none;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-      z-index: 1001;
-    }
-  
-    /* Footer */
-    footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      height: 60px;
-      z-index: 1000;
-    }
-  
-    /* Mobile Adjustments */
-    @media (max-width: 768px) {
-      body {
-        padding: 20px;
-      }
-  
-      .video-container {
-        flex: 1 1 100%;
-        min-width: 100%;
-        padding: 15px;
-      }
-  
-      .card {
-        padding: 15px;
-      }
-  
-      .scroll-to-top-btn {
-        width: 50px;
-        height: 50px;
-        right: 15px;
-        bottom: 70px;
-        font-size: 20px;
-      }
-  
-      footer {
-        height: 50px;
-      }
-  
-      .hack1 {
-        display: none;
-      }
     }
 
-    /* Specifically for images inside video-container */
-    .video-container img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
+    .video-container {
+      flex: 1 1 100%;
+      padding: 15px;
     }
-  
-    /* Improve text layout inside video-container for mobile */
-    @media (max-width: 768px) {
-      .video-container p {
-        font-size: 0.95rem;
-        text-align: left;
-      }
-  
-      .video-container {
-        padding: 10px;
-      }
-  
-      .video-container img {
-        max-width: 100%;
-        height: auto;
-        margin-bottom: 10px;
-      }
+
+    .video-title {
+      font-size: 1rem;
     }
-  </style>
+
+    .card {
+      padding: 15px;
+    }
+
+    .scroll-to-top-btn {
+      width: 50px;
+      height: 50px;
+      right: 15px;
+      bottom: 70px;
+      font-size: 20px;
+    }
+
+    footer {
+      height: 50px;
+    }
+  }
+</style>
+
 
 </head>
 <body>
