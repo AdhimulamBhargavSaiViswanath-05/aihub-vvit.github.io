@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./images/ai.png" type="image/png">
+    <title>AI-HUB-Calculus using MATLAB</title>
+    <required-links></required-links>
+    <style>
+        /* Remove white background from table */
+        .custom-table, .custom-table th, .custom-table td {
+            background-color: transparent !important;
+        }
+        /* Remove blue color from buttons and set to gold */
+        .btn-outline-primary {
+            color: rgb(212, 175, 55);
+            border-color: rgb(212, 175, 55);
+            background-color: transparent !important;
+        }
+        .btn-outline-primary:hover, 
+        .btn-outline-primary:active, 
+        .btn-outline-primary:focus {
+            color: #fff !important;
+            background-color: rgb(212, 175, 55) !important;
+            border-color: rgb(212, 175, 55) !important;
+        }
+    </style>
+</head>
+<body>
+    <special-header></special-header>
+
+    <h1 id="page-title" class="text-center mt-3">Calculus using MATLAB</h1>
+    <hr>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-2 border-end p-4">
+                <h5>Navigation</h5>
+                <button class="btn btn-outline-primary w-100 mb-2" onclick="showTab('about')">About</button>
+                <button class="btn btn-outline-primary w-100" onclick="showTab('experiments')">Experiments</button>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-9 p-3">
+                <div id="content-area">
+                    <h2>Welcome!</h2>
+                    <p>Select a tab on the left to view content.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <special-footer></special-footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./reuse_elements/HeaderFooter.js"></script>
+
+    <script>
+        let aboutCount = 0;
+
+        function showTab(tab) {
+            const contentArea = document.getElementById('content-area');
+            if (tab === 'about') {
+                aboutCount++;
+                contentArea.innerHTML = `
+                    <h2>About the Course</h2>
+                    <p>This course introduces Calculus concepts implemented in MATLAB.</p>
+                `;
+            } else if (tab === 'experiments') {
+    contentArea.innerHTML = `
+    <h2>Experiments</h2>
+    <table class="table table-bordered custom-table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Experiment Name</th>
+                <th>MATLAB</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>
+                    <a href="./experiment_viewer.html?path=./experiments/exp1.md" target="_blank">
+                        Introduction to MATLAB
+                    </a>
+                </td>
+                <td>
+                    <a href="./experiments/exp1.html" target="_blank">
+                        Walkthrough
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>
+                    <a href="./experiment_viewer.html?path=./experiments/exp2.md" target="_blank">
+                        Limits and Continuity
+                    </a>
+                </td>
+                <td>
+                    <a href="./experiments/exp1.html" target="_blank">
+                        Walkthrough
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>
+                    <a href="./experiment_viewer.html?path=./experiments/exp3.md" target="_blank">
+                        Differentiation Basics
+                    </a>
+                </td>
+                <td>
+                    <a href="./experiments/exp1.html" target="_blank">
+                        Walkthrough
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    `;
+            }
+        }
+    </script>
+</body>
+</html>
