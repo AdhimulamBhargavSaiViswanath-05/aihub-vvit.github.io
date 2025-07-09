@@ -101,3 +101,47 @@ document.getElementById('download-pdf').onclick = function() {
         document.querySelector('.bottom-controls').style.display = '';
     });
 };
+if (drawBtn && drawCanvas && drawControls) {
+    drawBtn.onclick = () => {
+      drawCanvas.style.display = 'block';
+      drawControls.style.display = 'block';
+      resizeCanvas();
+      ctx = drawCanvas.getContext('2d');
+    };
+    window.addEventListener('resize', resizeCanvas);
+  
+    drawCanvas.addEventListener('mousedown', (e) => {
+      drawing = true;
+      ctx.beginPath();
+      ctx.moveTo(e.clientX, e.clientY);
+    });
+    drawCanvas.addEventListener('mousemove', (e) => {
+      if (!drawing) return;
+      ctx.lineTo(e.clientX, e.clientY);
+      ctx.stroke();
+    });
+    drawCanvas.addEventListener('mouseup', () => {
+      drawing = false;
+    });
+    drawCanvas.addEventListener('mouseleave', () => {
+      drawing = false;
+    });
+    clearBtn.onclick = () => {
+      ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+    };
+    closeDrawBtn.onclick = () => {
+      drawCanvas.style.display = 'none';
+      drawControls.style.display = 'none';
+    };
+    saveBtn.onclick = () => {
+      // Hide controls to avoid capturing them
+      drawControls.style.visibility = 'hidden';
+      html2canvas(document.body).then(canvas => {
+        drawControls.style.visibility = 'visible';
+        const link = document.createElement('a');
+        link.download = 'page_with_drawing.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    };
+  };

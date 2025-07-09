@@ -16,6 +16,7 @@
   <div class="top-controls">
     <div style="display: flex; width: 100%; flex-direction: row; align-items: center; justify-content: space-between; gap: 10px;">
       <button id="back-btn" class="btn btn-outline-danger">Back</button>
+      <button id="exp-container" class="btn btn-outline-secondary">Explanation</button>
       <div id="slide-buttons" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
       <button id="draw-btn" class="btn btn-outline-secondary">Draw</button>
     </div>
@@ -63,7 +64,7 @@
 
   <!-- Drawing Canvas Overlay -->
   <canvas id="draw-canvas" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:2000; background:transparent;"></canvas>
-  <div id="draw-controls" style="display:none; position:fixed; top:20px; right:150px; z-index:2100;">
+  <div id="draw-controls" style="display:none; position:fixed; top:70px; right:100px; z-index:2100;">
     <button id="save-btn" class="btn btn-outline-success btn-sm">Save</button>
     <button id="clear-btn" class="btn btn-outline-danger btn-sm">Clear</button>
     <button id="close-draw-btn" class="btn btn-outline-secondary btn-sm">Close</button>
@@ -73,7 +74,7 @@
     const slidesData = [
   {
     code: "%Step 1: Define x as a symbolic variable\n% MATLAB2014b\nclear all\nclose all\nclc\n% Define symbolic variable\nsyms x\nwhos",
-    output: "Name      Size            Bytes  Class     Attributes\n\n  g         1x1               112     symfun              \n  t          1x1               112     sym ",
+    output: "Name\t      Size  \t          Bytes \t Class  \t   Attributes\n\n  g \t        1x1\t               112   \t  symfun              \n  t          1x1  \t             112 \t    sym ",
     explanation: [
       "clear all clears all variables from memory.",
       "close all closes any open figure windows.",
@@ -251,7 +252,10 @@
 
     // Add Back button functionality
 document.getElementById("back-btn").onclick = () => {
-  window.location.href = "../Matlab.html";
+  window.location.href = "../Matlab.html?tab=experiments";
+};
+document.getElementById("exp-container").onclick = () => {
+  window.location.href = "../experiment_viewer.html?path=./experiments/exp1.md";
 };
 
 // Numbered slide buttons
@@ -332,7 +336,7 @@ if (drawBtn && drawCanvas && drawControls) {
   saveBtn.onclick = () => {
     // Hide controls to avoid capturing them
     drawControls.style.visibility = 'hidden';
-    html2canvas(document.body).then(canvas => {
+    html2canvas(document.body, { scale: 0.5 }).then(canvas => {
       drawControls.style.visibility = 'visible';
       const link = document.createElement('a');
       link.download = 'page_with_drawing.png';

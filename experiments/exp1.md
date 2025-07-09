@@ -46,7 +46,7 @@ Symbolic Differentiation enables us to analytically compute exact derivative exp
 
 - **Perform**: Write a MATLAB program to perform symbolic differentiations of the following
 
-  **Task#1.1:** f(x) = x^3 - 2x^2 + 5x - 1
+  **Task#1.1:** $f(x) = x^3 - 2x^2 + 5x - 1$
 
   - Step 1: Define xas a symbolic variable
   - Step 2: Define the function fx= x3-2x2+5x-1 in terms of that symbolic variable x.
