@@ -58,12 +58,16 @@
 </head>
 
 <body>
-  <div class="top-controls">
-    <div style="display: flex; width: 100%; flex-direction: row; align-items: center; justify-content: space-between; gap: 10px;">
-      <button id="back-btn" class="btn btn-outline-danger">list of experiments</button>
-      <button id="exp-container" class="btn btn-outline-secondary">Explanation</button>
-      <div id="slide-buttons" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
+  <div class="top-breadcrumb" style="margin-top: 0.5em; margin-left: 0.5em; font-size: 1.05em; display: flex; justify-content: space-between; align-items: center; padding-right: 20px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+          <a href="/calculus_using_matlab/Matlab.html" style="text-decoration: none; color: #007bff;">Calculus <span class="arrow-black">&gt;&gt;</span></a><a href="/calculus_using_matlab/Matlab.html?tab=experiments" style="text-decoration: none; color: #007bff;">Experiments <span class="arrow-black">&gt;&gt;</span></a><a href="/calculus_using_matlab/experiment_viewer.html?path=./problem_statement/exp1.md" style="text-decoration: none; color: #007bff;">Problem Statement <span class="arrow-black">&gt;&gt;</span></a>
+          <h5 style="margin: 0 0 0 8px; font-size: 1.05em; display: inline;">1.First &amp; Second Order Derivatives</h5>
+      </div>
       <button id="draw-btn" class="btn btn-outline-secondary">Draw</button>
+  </div>
+  <div class="top-controls">
+    <div style="display: flex; width: 100%; flex-direction: row; align-items: center; gap: 10px; justify-content: center;">
+      <div id="slide-buttons" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
     </div>
   </div>
   <div class="container-fluid exp-container">
@@ -333,14 +337,6 @@
         updateSlide();
       }
     });
-
-    // Add Back button functionality
-document.getElementById("back-btn").onclick = () => {
-  window.location.href = "../Matlab.html?tab=experiments";
-};
-document.getElementById("exp-container").onclick = () => {
-  window.location.href = "../experiment_viewer.html?path=./experiments/exp1.md";
-};
 
 // Numbered slide buttons
 function renderSlideButtons() {
