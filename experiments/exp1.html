@@ -10,6 +10,50 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-matlab.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <style>
+    .code-box {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-x: hidden;
+      padding: 10px;
+  max-height: 500px;
+  overflow-y: auto;
+    }
+  
+    .code-box pre, .code-box code {
+      white-space: pre-wrap !important;
+      word-wrap: break-word !important;
+      overflow-x: hidden !important;
+    }
+    .slide-topic {
+      color: #bfa032;
+      font-size: 1.15rem;
+      font-weight: 600;
+      text-align: left;
+      width: 100%;
+    }
+    .slide-topic-box {
+      background: #fffbe6;
+      border: 1.5px solid #bfa032;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      margin: 0 auto 1.2rem auto;
+      width: 100%;
+      max-width: 700px;
+      box-shadow: 0 2px 8px rgba(212,175,55,0.07);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .slide-topic {
+      color: #bfa032;
+      font-size: 1.15rem;
+      font-weight: 600;
+      text-align: center;
+      margin: 0;
+    }
+  </style>
+  
 </head>
 
 <body>
@@ -21,30 +65,26 @@
       <button id="draw-btn" class="btn btn-outline-secondary">Draw</button>
     </div>
   </div>
-
   <div class="container-fluid exp-container">
     <div class="row h-100">
-      <!-- Code Section -->
-      <div class="col-md-4 border-end p-3">
+      <!-- Code Section (40%) -->
+      <div class="col-md-5 col-12 border-end p-3" style="flex: 0 0 40%; max-width: 40%;">
         <h4>Experiment Code</h4>
         <pre class="code-box"><code class="language-matlab" id="code-block"></code></pre>
       </div>
-
-      <!-- Output Section -->
-      <div class="col-md-4 border-end p-3 text-center">
-        <h4>Output</h4>
-        <div id="output-block"
-          oncopy="return false"
-          oncontextmenu="return false"
-          tabindex="0"
-          aria-label="Output block. Copying is disabled;">
-        </div>
-      </div>
-
-      <!-- Explanation Section -->
-      <div class="col-md-4 p-3">
+      <!-- Explanation + Output Section (60%) -->
+      <div class="col-md-7 col-12 p-3" style="flex: 0 0 60%; max-width: 60%;">
         <h4>Explanation</h4>
         <div id="slides"></div>
+        <div id="output-section" style="margin-top:2rem; display:none;">
+          <h4>Output</h4>
+          <div id="output-block"
+            oncopy="return false"
+            oncontextmenu="return false"
+            tabindex="0"
+            aria-label="Output block. Copying is disabled;">
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -64,7 +104,7 @@
 
   <!-- Drawing Canvas Overlay -->
   <canvas id="draw-canvas" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:2000; background:transparent;"></canvas>
-  <div id="draw-controls" style="display:none; position:fixed; top:70px; right:100px; z-index:2100;">
+  <div id="draw-controls" style="display:none; position:fixed; top:70px; right:20px; z-index:2100;">
     <button id="save-btn" class="btn btn-outline-success btn-sm">Save</button>
     <button id="clear-btn" class="btn btn-outline-danger btn-sm">Clear</button>
     <button id="close-draw-btn" class="btn btn-outline-secondary btn-sm">Close</button>
@@ -73,6 +113,7 @@
   <script>
     const slidesData = [
   {
+    topic: "Defining Symbolic Variables",
     code: "%Step 1: Define x as a symbolic variable\n% MATLAB2014b\nclear all\nclose all\nclc\n% Define symbolic variable\nsyms x\nwhos",
     output: "Name\t      Size  \t          Bytes \t Class  \t   Attributes\n\n  g \t        1x1\t               112   \t  symfun              \n  t          1x1  \t             112 \t    sym ",
     explanation: [
@@ -83,6 +124,7 @@
     ]
   },
   {
+    topic: "Defining the Function",
     code: "% Step 2: Define the function\n% f = t^3 - 2*t^2 + 5*t - 1;\nf = x^3 - 2*x^2 + 5*x - 1;\ndisp('The given function f(x) is ');\ndisp(f)",
     output: "The given function f(x) is  \nx^3 - 2*x^2 + 5*x - 1",
     explanation: [
@@ -91,6 +133,7 @@
     ]
   },
   {
+    topic: "Computing Derivatives",
     code: "%Step 3: Compute the First derivative\ndf_dx = diff(f);\nfprintf('First derivative f''(x) =  %s\\n', char(df_dx));",
     output: "First derivative f'(x) =  3*x^2 - 4*x + 5",
     explanation: [
@@ -100,6 +143,7 @@
     ]
   },
   {
+    topic: "Computing Derivatives",
     code: "%Step4: Second derivative\nd2f_dx2 = diff(f, 2); % Or diff(df_dx)\nfprintf('Second derivative f''''(x) =  %s\\n', char(d2f_dx2));",
     output: "Second derivative f''(x) =  6*x - 4",
     explanation: [
@@ -109,6 +153,7 @@
     ]
   },
   {
+    topic: "Evaluating Derivatives",
     code: "% You can also evaluate the derivatives at specific points\nx_val = 2;\ndf_dx_at_2 = subs(df_dx, x, x_val);\n% disp will display numbers directly\ndisp(['First derivative f''(', num2str(x_val), ') = ', num2str(double(df_dx_at_2))]);\n\nd2f_dx2_at_2 = subs(d2f_dx2, x, x_val);\n% disp will display numbers directly\ndisp(['Second derivative f''''(', num2str(x_val), ') = ', num2str(double(d2f_dx2_at_2))]);",
     output: "First derivative f'(2) = 9\nSecond derivative f''(2) = 8",
     explanation: [
@@ -118,6 +163,7 @@
     ]
   },
   {
+    topic: "Defining Symbolic Functions",
     code: "% MATLAB2014b\nclear all\nclose all\nclc\n% Define symbolic variable\nsyms g(t)\nwhos",
     output: "Name      Size            Bytes  Class     Attributes\n\ng         1x1               112     symfun              \nt         1x1               112     sym ",
     explanation: [
@@ -128,6 +174,7 @@
     ]
   },
   {
+    topic: "Defining Symbolic Functions",
     code: "% Define the function\ng(t) = input('Enter your function g(t) = ');\ndisp('The given function g(t) = ');\ndisp(g(t))",
     output: "Enter your function g(t) = sin(t^2)\nThe given function g(t) = sin(t^2)",
     explanation: [
@@ -137,6 +184,7 @@
     ]
   },
   {
+    topic: "Computing Derivatives",
     code: "% First derivative\ndg_dt = diff(g);\nfprintf('First derivative g''(t) =  %s\\n', char(dg_dt));",
     output: "First derivative g'(t) =  2*t*cos(t^2)",
     explanation: [
@@ -146,6 +194,7 @@
     ]
   },
   {
+    topic: "Evaluating Derivatives",
     code: "% You can also evaluate the derivatives at specific points\nt_val = input('Enter the value of t at which first derivative to be evaluated: ');\ndg_dt_at_t = subs(dg_dt, t, t_val);\n% disp will display numbers directly\ndisp(['First derivative g''(', num2str(t_val), ') = ', num2str(double(dg_dt_at_t))]);",
     output: "Enter the value of t at which first derivative to be evaluated: pi/3\nFirst derivative g'(1.0472) = 0.95631",
     explanation: [
@@ -156,6 +205,7 @@
     ]
   },
   {
+    topic: "Computing Derivatives",
     code: "% Second derivative\nd2g_dt2 = diff(g, 2); % Or diff(dg_dt)\nfprintf('Second derivative g''''(t) =  %s\\n', char(d2g_dt2));",
     output: "Second derivative g''(t) =  2*cos(t^2) - 4*t^2*sin(t^2)",
     explanation: [
@@ -165,6 +215,7 @@
     ]
   },
   {
+    topic: "Evaluating Derivatives",
     code: "% You can also evaluate the derivatives at specific points\nt_val = input('Enter the value of t at which second derivative to be evaluated: ');\nd2g_dt2_at_t = subs(d2g_dt2, t, t_val);\n% disp will display numbers directly\ndisp(['Second derivative g''''(', num2str(t_val), ') = ', num2str(double(d2g_dt2_at_t))]);",
     output: "Enter the value of t at which second derivative to be evaluated: pi/3\nSecond derivative g''(1.0472) = -2.9893",
     explanation: [
@@ -175,6 +226,7 @@
     ]
   },
   {
+    topic: "Working with Data",
     code: "clear all\nclose all\nclc\n% Sample data\nx_data = 0:0.1:10;\ny_data = x_data.^2; % Let's pretend this is experimental data from y = x^2",
     output: "",
     explanation: [
@@ -186,6 +238,7 @@
     ]
   },
   {
+    topic: "Working with Data",
     code: "% First derivative (approximation)\ndy_dx_approx = diff(y_data) ./ diff(x_data);\n% The length of dy_dx_approx will be one less than x_data and y_data",
     output: "",
     explanation: [
@@ -194,6 +247,7 @@
     ]
   },
   {
+    topic: "Working with Data",
     code: "% To plot it, you might want to use the midpoint of each x interval.\nx_midpoints = (x_data(1:end-1) + x_data(2:end)) / 2;",
     output: "",
     explanation: [
@@ -202,6 +256,7 @@
     ]
   },
   {
+    topic: "Working with Data",
     code: "% Second derivative (approximation)\n% Apply diff again to the approximated first derivative\nd2y_dx2_approx = diff(dy_dx_approx) ./ diff(x_midpoints);",
     output: "",
     explanation: [
@@ -223,7 +278,13 @@
       Prism.highlightElement(codeBox);
 
       // Update output
-      outputBlock.innerHTML = slidesData[currentSlide].output.replace(/\n/g, "<br>");
+      if (slidesData[currentSlide].output && slidesData[currentSlide].output.trim() !== "") {
+        document.getElementById("output-section").style.display = "block";
+        outputBlock.innerHTML = slidesData[currentSlide].output.replace(/\n/g, "<br>");
+      } else {
+        document.getElementById("output-section").style.display = "none";
+        outputBlock.innerHTML = "";
+      }
 
       // Update explanation
       slidesList.innerHTML = `
@@ -234,6 +295,20 @@
 
       // Update slide number
       slideNumber.textContent = `Step ${currentSlide + 1} of ${slidesData.length}`;
+
+      // Find the .top-controls element
+      const topControls = document.querySelector('.top-controls');
+
+      // Remove any existing topic box after .top-controls
+      document.querySelectorAll('.slide-topic-box').forEach(box => box.remove());
+
+      // Add topic just below the .top-controls row, centered
+      if (slidesData[currentSlide].topic) {
+        const topicBox = document.createElement('div');
+        topicBox.className = 'slide-topic-box mb-3';
+        topicBox.innerHTML = `<h5 class="slide-topic text-center m-0">${slidesData[currentSlide].topic}</h5>`;
+        topControls.parentElement.insertBefore(topicBox, topControls.nextSibling);
+      }
     }
 
     document.getElementById("next-slide").addEventListener("click", () => {

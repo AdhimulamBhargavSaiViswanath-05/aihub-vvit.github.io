@@ -1,137 +1,201 @@
-.experiment-card{
-    border-radius: 1rem;
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    width: 100%;
-}
-.cards{
-    display: flex;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 100px;
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #fff;
+  color: #222;
+  margin: 0;
 }
 
-.card-image, .card-img{
-    width: 14.3rem;
-    height: 100%;
-    margin: 0px;
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: #222;
 }
 
-.card-img{
-    width: 220px;
-    height: 220px;
-    border-radius: 1rem;
-    padding: 0.3rem;
-    object-fit: contain;
-    background: transparent;
-    box-shadow: none;
-    margin: 0 auto;
+.experiment-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 1.5rem 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
 }
 
-.card-body{
-    flex: 1;
-    padding: 1rem;
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.btn{
-    margin-top: 1rem;
-    margin-left: 0.7rem;
+.card-img {
+  width: 220px;
+  height: 220px;
+  border-radius: 0.5rem;
+  object-fit: contain;
+  margin-right: 1rem;
+  background: transparent;
+  box-shadow: none;
 }
+
+.card-body {
+  flex: 1;
+  padding: 0.5rem 0;
+}
+
+.experiment-title {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
 .card-subtitle {
-    font-style: italic;
-    font-size: 18px;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #666;
+  margin-bottom: 0.5rem;
 }
-.card-title {
-    /* font-family: 'Playfair Display', serif; */
-    font-weight: 700;
-    font-style: italic;
-    font-size: 1.4rem;
-    color: #333;
+
+.card-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.6rem;
 }
-.card-text{
-        font-size: 1rem;
+
+.card-body a {
+  color: rgb(212, 175, 55);
+  font-weight: 600;
+  margin-right: 8px;
+  text-decoration: none;
 }
-#buttons{
-    padding: 0rem;
-    display: flex;
-    flex-wrap: wrap;
+
+.card-body a:hover {
+  text-decoration: underline;
 }
-#text-scroll{
-    height: 6rem;
-    overflow: scroll;
-    scroll-behavior: smooth;
-    &::-webkit-scrollbar {
-        display: none;
-    }
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;
+
+.btn {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  margin: 0.4rem 0;
 }
-@media (max-width: 768px) {
-  .experiment-row {
-    flex-direction: column !important;
-    text-align: center;
-    padding: 1rem 0.5rem;
-    min-height: unset !important;
-  }
-  .experiment-image {
-    min-width: unset !important;
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-  .card-img {
-    width: 70vw;
-    max-width: 250px;
-    height: auto;
-    margin: 0 auto 1rem auto;
-  }
-  .experiment-body {
-    padding-left: 0 !important;
-    padding-top: 0.5rem;
-  }
-  .experiment-title {
-    font-size: 1.2rem;
-  }
-  .card-text, .card-subtitle {
-    font-size: 1rem;
-  }
-  #nav-col {
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
-  }
-  #nav-col button {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-top: 0.4rem !important;
-    padding-bottom: 0.4rem !important;
-  }
-}
-@media (min-width: 769px) {
-  #nav-col {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    justify-content: flex-start !important;
-    padding-top: 1.5rem !important;
-    padding-bottom: 0 !important;
-  }
-  #nav-col button {
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    text-align: left;
-  }
-}
-/* Remove blue color from buttons and set to gold */
+
 .btn-outline-primary {
   color: rgb(212, 175, 55);
   border-color: rgb(212, 175, 55);
-  background-color: transparent !important;
+  background: transparent;
 }
-.btn-outline-primary:hover, 
-.btn-outline-primary:active, 
+
+.btn-outline-primary:hover,
 .btn-outline-primary:focus {
-  color: #fff !important;
-  background-color: rgb(212, 175, 55) !important;
-  border-color: rgb(212, 175, 55) !important;
+  background-color: rgb(212, 175, 55);
+  color: #fff;
+}
+
+#nav-col {
+  border-right: 1px solid #ddd;
+  padding: 1.5rem 0.8rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  display: flex;
+}
+
+#nav-col h5 {
+  margin-bottom: 1rem;
+}
+
+#nav-col button {
+  margin: 0.3rem 0;
+  width: 100%;
+  text-align: left;
+}
+
+hr {
+  border-top: 1.5px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .experiment-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .card-img {
+    margin: 0 auto 1rem auto;
+    width: 75vw;
+    max-width: 300px;
+    height: auto;
+  }
+
+  .card-body {
+    padding: 0.5rem 0;
+  }
+
+  .experiment-title {
+    font-size: 1.3rem;
+  }
+
+  .card-subtitle, .card-text {
+    font-size: 1rem;
+  }
+
+  #nav-col {
+    padding: 0.8rem;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #nav-col h5 {
+    display: none;
+  }
+
+  #nav-col button {
+    margin: 0.3rem 0.5rem;
+    width: auto;
+    text-align: center;
+  }
+}
+/* Fix experiment buttons alignment in desktop */
+#nav-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  /* stay left aligned */
+  justify-content: flex-start;
+  padding: 1.5rem 0.8rem;
+  border-right: 1px solid #ddd;
+  height: 100%;
+}
+
+#nav-col h5 {
+  margin-bottom: 1rem;
+}
+
+#nav-col button {
+  margin: 0.5rem 0;
+  width: 100%;
+  text-align: left;
+}
+
+/* In mobile — stack them horizontally */
+@media (max-width: 768px) {
+  #nav-col {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #nav-col h5 {
+    display: none;
+  }
+
+  #nav-col button {
+    margin: 0.3rem 0.5rem;
+    width: auto;
+    text-align: center;
+  }
 }
