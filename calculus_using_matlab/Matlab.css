@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {
 .card-body a {
   color: rgb(212, 175, 55);
   font-weight: 600;
-  margin-right: 8px;
+  margin-right: 2px;
   text-decoration: none;
 }
 
