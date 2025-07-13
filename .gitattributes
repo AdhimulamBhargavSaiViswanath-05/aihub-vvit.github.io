@@ -1,0 +1,13 @@
+# Enforce LF line endings for source code files
+*.js     text eol=lf
+*.css    text eol=lf
+*.html   text eol=lf
+
+# Optional: If you have images, keep them as-is (no line ending normalization)
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+
+# Optional: If you ever add MATLAB code files
+*.m      text eol=lf
