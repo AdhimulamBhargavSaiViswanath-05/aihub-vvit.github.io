@@ -54,6 +54,7 @@ Symbolic Differentiation enables us to analytically compute exact derivative exp
   - Step 4: Compute the second order derivative of fx using diff(f,2)and display it as a symbolic expression.
   - Step 5: Evaluate the function f(x), first order derivative f'(x), and the second order derivative f''(x) at specific points, say x=2, and then display those numerical values. 
 
+*code walkthrought*:
 
 **Task#1.2:** gt=sin⁡t2
 

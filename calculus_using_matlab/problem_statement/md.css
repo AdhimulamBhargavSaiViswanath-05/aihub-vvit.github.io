@@ -140,3 +140,19 @@
         font-size: 0.95em;
     }
 }
+
+/* For experiment navigation links in markdown viewer */
+.experiment-nav a {
+  text-decoration: none !important;
+  color: #007bff !important;
+}
+
+.experiment-nav a:hover {
+  text-decoration: none !important;
+  color: #007bff !important;
+}
+
+.experiment-nav a .arrow-black {
+  color: #000 !important;
+  text-decoration: none !important;
+}

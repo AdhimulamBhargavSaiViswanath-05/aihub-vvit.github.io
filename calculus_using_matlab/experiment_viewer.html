@@ -33,8 +33,8 @@
                 navDiv.className = 'experiment-nav';
                 navDiv.style.marginBottom = '1em';
                 navDiv.innerHTML = `
-                  <a href="/calculus_using_matlab/Matlab.html?tab=experiments">Experiment <span class="arrow-black">&gt;&gt;</span></a>
-                  <a id="code-walkthrough-link" href="#">Code Walkthrough <span class="arrow-black">&gt;&gt;</span></a>
+                  <a href="/calculus_using_matlab/Matlab.html?tab=experiments">Experiment <span class="arrow-black">&gt;</span></a>
+                  <a id="code-walkthrough-link" href="#">Code Walkthrough <span class="arrow-black">&gt;</span></a>
                 `;
                 // Set the correct code walkthrough link based on the .md file in the URL
                 const mdPath = expPath;
@@ -42,11 +42,11 @@
                 if (mdPath) {
                   const match = mdPath.match(/exp(\d+)\.md$/);
                   if (match) {
-                    expFile = 'exp' + match[1] + '.html';
+                    expFile = match[1];
                   }
                 }
                 if (expFile) {
-                  navDiv.querySelector('#code-walkthrough-link').href = '/calculus_using_matlab/experiments/' + expFile;
+                  navDiv.querySelector('#code-walkthrough-link').href = '/calculus_using_matlab/experiments/experiment_viewer.html?exp=exp' + expFile;
                 } else {
                   navDiv.querySelector('#code-walkthrough-link').style.display = 'none';
                 }

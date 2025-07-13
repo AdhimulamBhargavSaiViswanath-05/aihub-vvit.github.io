@@ -10,53 +10,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-matlab.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <style>
-    .code-box {
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      overflow-x: hidden;
-      padding: 10px;
-  max-height: 500px;
-  overflow-y: auto;
-    }
-  
-    .code-box pre, .code-box code {
-      white-space: pre-wrap !important;
-      word-wrap: break-word !important;
-      overflow-x: hidden !important;
-    }
-    .slide-topic {
-      color: #bfa032;
-      font-size: 1.15rem;
-      font-weight: 600;
-      text-align: left;
-      width: 100%;
-    }
-    .slide-topic-box {
-  background: #fffbe6;
-  border: 1.5px solid #bfa032;
-  border-radius: 8px;
-  padding: 0.75rem 1.5rem;
-  margin: 0 0 1.2rem 20px;
-  width: fit-content;
-  max-width: 700px;
-  box-shadow: 0 2px 8px rgba(212,175,55,0.07);
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-
-    .slide-topic {
-      color: #bfa032;
-      font-size: 1.15rem;
-      font-weight: 600;
-      text-align: center;
-      margin: 0;
-    }
-  </style>
-  
+  <script src="common.js"></script>
 </head>
-
 <body>
   <div class="top-breadcrumb" style="margin-top: 0.5em; margin-left: 0.5em; font-size: 1.05em; display: flex; justify-content: space-between; align-items: center; padding-right: 20px;">
       <div style="display: flex; align-items: center; gap: 8px;">
@@ -124,7 +79,11 @@
   </div>
 
   <script>
-    const slidesData = [
+    // Ensure currentSlide is initialized
+    window.currentSlide = window.currentSlide || 0;
+
+    // Make slidesData global
+    window.slidesData = [
   {
     topic: "[1/15]:Defining Symbolic Variables",
     code: "%Step 1: Define x as a symbolic variable\n% MATLAB2014b\nclear all\nclose all\nclc\n% Define symbolic variable\nsyms x\nwhos",
@@ -278,22 +237,33 @@
     ]
   }
 ];
-    let currentSlide = 0;
-
+    // Custom updateSlide function
     function updateSlide() {
       const codeBox = document.getElementById("code-block");
       const outputBlock = document.getElementById("output-block");
       const slidesList = document.getElementById("slides");
       const slideNumber = document.getElementById("slide-number");
 
+      // Defensive: If codeBox is missing, do nothing
+      if (!codeBox) return;
+
+      // Always use window.currentSlide
+      const slide = window.slidesData[window.currentSlide];
+
+      // Defensive: If slide is missing, clear codeBox
+      if (!slide) {
+        codeBox.textContent = '';
+        return;
+      }
+
       // Update code
-      codeBox.textContent = slidesData[currentSlide].code;
-      Prism.highlightElement(codeBox);
+      codeBox.textContent = slide.code || '';
+      if (window.Prism) Prism.highlightElement(codeBox);
 
       // Update output
-      if (slidesData[currentSlide].output && slidesData[currentSlide].output.trim() !== "") {
+      if (slide.output && slide.output.trim() !== "") {
         document.getElementById("output-section").style.display = "block";
-        outputBlock.innerHTML = slidesData[currentSlide].output.replace(/\n/g, "<br>");
+        outputBlock.innerHTML = slide.output.replace(/\n/g, "<br>");
       } else {
         document.getElementById("output-section").style.display = "none";
         outputBlock.innerHTML = "";
@@ -302,12 +272,12 @@
       // Update explanation
       slidesList.innerHTML = `
         <div class="slide active">
-          <ul>${slidesData[currentSlide].explanation.map(item => `<li>${item}</li>`).join("")}</ul>
+          <ul>${(slide.explanation || []).map(item => `<li>${item}</li>`).join("")}</ul>
         </div>
       `;
 
       // Update slide number
-      slideNumber.textContent = `Step ${currentSlide + 1} of ${slidesData.length}`;
+      slideNumber.textContent = `Step ${window.currentSlide + 1} of ${window.slidesData.length}`;
 
       // Find the .top-controls element
       const topControls = document.querySelector('.top-controls');
@@ -316,129 +286,21 @@
       document.querySelectorAll('.slide-topic-box').forEach(box => box.remove());
 
       // Add topic just below the .top-controls row, centered
-      if (slidesData[currentSlide].topic) {
+      if (slide.topic) {
         const topicBox = document.createElement('div');
         topicBox.className = 'slide-topic-box mb-3';
-        topicBox.innerHTML = `<h5 class="slide-topic text-left m-0">${slidesData[currentSlide].topic}</h5>`;
+        topicBox.innerHTML = `<h5 class="slide-topic text-left m-0">${slide.topic}</h5>`;
         topControls.parentElement.insertBefore(topicBox, topControls.nextSibling);
       }
     }
 
-    document.getElementById("next-slide").addEventListener("click", () => {
-      if (currentSlide < slidesData.length - 1) {
-        currentSlide++;
-        updateSlide();
-      }
-    });
+    // Make updateSlide available to common.js
+    window.updateSlide = updateSlide;
+    window.experimentCommon = window.experimentCommon || {};
+    window.experimentCommon.updateSlide = updateSlide;
 
-    document.getElementById("prev-slide").addEventListener("click", () => {
-      if (currentSlide > 0) {
-        currentSlide--;
-        updateSlide();
-      }
-    });
-
-// Numbered slide buttons
-function renderSlideButtons() {
-  const btnContainer = document.getElementById("slide-buttons");
-  btnContainer.innerHTML = "";
-  for (let i = 0; i < slidesData.length; i++) {
-    const btn = document.createElement("button");
-    btn.textContent = i + 1;
-    btn.className = "btn btn-sm " + (i === currentSlide ? "btn-primary" : "btn-outline-primary");
-    btn.style.minWidth = "36px";
-    btn.onclick = () => {
-      currentSlide = i;
-      updateSlide();
-      renderSlideButtons();
-    };
-    btnContainer.appendChild(btn);
-  }
-}
-
-// Update renderSlideButtons call in updateSlide
-const originalUpdateSlide = updateSlide;
-updateSlide = function() {
-  originalUpdateSlide();
-  renderSlideButtons();
-};
-
-// Initial render
-updateSlide();
-
-// Drawing functionality
-const drawBtn = document.getElementById('draw-btn');
-const drawCanvas = document.getElementById('draw-canvas');
-const drawControls = document.getElementById('draw-controls');
-const clearBtn = document.getElementById('clear-btn');
-const closeDrawBtn = document.getElementById('close-draw-btn');
-const saveBtn = document.getElementById('save-btn');
-let drawing = false;
-let ctx;
-let penColor = '#000000';
-
-function resizeCanvas() {
-  drawCanvas.width = window.innerWidth;
-  drawCanvas.height = window.innerHeight;
-}
-
-if (drawBtn && drawCanvas && drawControls) {
-  drawBtn.onclick = () => {
-    drawCanvas.style.display = 'block';
-    drawControls.style.display = 'block';
-    resizeCanvas();
-    ctx = drawCanvas.getContext('2d');
-    ctx.strokeStyle = penColor;
-  };
-  window.addEventListener('resize', resizeCanvas);
-
-  drawCanvas.addEventListener('mousedown', (e) => {
-    drawing = true;
-    ctx.beginPath();
-    ctx.moveTo(e.clientX, e.clientY);
-    ctx.strokeStyle = penColor;
-  });
-  drawCanvas.addEventListener('mousemove', (e) => {
-    if (!drawing) return;
-    ctx.lineTo(e.clientX, e.clientY);
-    ctx.strokeStyle = penColor;
-    ctx.stroke();
-  });
-  drawCanvas.addEventListener('mouseup', () => {
-    drawing = false;
-  });
-  drawCanvas.addEventListener('mouseleave', () => {
-    drawing = false;
-  });
-  clearBtn.onclick = () => {
-    ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-  };
-  closeDrawBtn.onclick = () => {
-    drawCanvas.style.display = 'none';
-    drawControls.style.display = 'none';
-  };
-  saveBtn.onclick = () => {
-    // Hide controls to avoid capturing them
-    drawControls.style.visibility = 'hidden';
-    html2canvas(document.body, { scale: 0.5 }).then(canvas => {
-      drawControls.style.visibility = 'visible';
-      const link = document.createElement('a');
-      link.download = 'page_with_drawing.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    });
-  };
-}
-
-// Pen color selector logic
-document.querySelectorAll('.color-btn').forEach(btn => {
-  btn.onclick = function() {
-    penColor = this.getAttribute('data-color');
-    // Optionally, visually indicate selected color
-    document.querySelectorAll('.color-btn').forEach(b => b.style.borderColor = '#ccc');
-    this.style.borderColor = '#bfa032';
-  };
-});
-</script>
+    // Initial render
+    document.addEventListener('DOMContentLoaded', updateSlide);
+  </script>
 </body>
 </html>

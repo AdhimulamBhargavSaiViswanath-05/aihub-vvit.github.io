@@ -14,11 +14,11 @@
 </head>
 
 <body>
-  <div class="top-breadcrumb" style="margin-top: 0.5em; margin-left: 0.5em; font-size: 1.05em; display: flex; justify-content: space-between; align-items: center; padding-right: 20px;">
-      <div style="display: flex; align-items: center; gap: 8px;">
-          <a href="/calculus_using_matlab/Matlab.html" style="text-decoration: none; color: #007bff;">Calculus <span class="arrow-black">&gt;&gt;</span></a><a href="/calculus_using_matlab/Matlab.html?tab=experiments" style="text-decoration: none; color: #007bff;">Experiments <span class="arrow-black">&gt;&gt;</span></a><a href="#" id="problem-statement-link" style="text-decoration: none; color: #007bff;">Problem Statement <span class="arrow-black">&gt;&gt;</span></a>
-          <h5 style="margin: 0 0 0 8px; font-size: 1.05em; display: inline;" id="experiment-title">Experiment Title</h5>
-      </div>
+    <div class="top-breadcrumb" style="margin-top: 0.5em; margin-left: 0.5em; font-size: 1.05em; display: flex; justify-content: space-between; align-items: center; padding-right: 20px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <a href="/calculus_using_matlab/Matlab.html" style="text-decoration: none; color: #007bff;">Calculus <span class="arrow-black">&gt;</span></a><a href="/calculus_using_matlab/Matlab.html?tab=experiments" style="text-decoration: none; color: #007bff;">Experiments <span class="arrow-black">&gt;</span></a><a href="#" id="problem-statement-link" style="text-decoration: none; color: #007bff;">Problem Statement <span class="arrow-black">&gt;</span></a>
+            <h5 style="margin: 0 0 0 8px; font-size: 1.05em; display: inline;" id="experiment-title">Experiment Title</h5>
+        </div>
       <button id="draw-btn" class="btn btn-outline-secondary">Draw</button>
   </div>
   <div class="top-controls">
@@ -65,7 +65,7 @@
 
   <!-- Drawing Canvas Overlay -->
   <canvas id="draw-canvas" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:2000; background:transparent;"></canvas>
-  <div id="draw-controls" style="display:none; position:fixed; top:90px; right:20px; z-index:2100;">
+  <div id="draw-controls" style="display:none; position:fixed; top:100px; right:20px; z-index:2100;">
     <div id="color-picker" style="display:inline-block; margin-right:12px;">
         <button class="color-btn" data-color="#000000" style="background:#000; width:24px; height:24px; border-radius:50%; border:2px solid #ccc; margin-right:4px;"></button>
         <button class="color-btn" data-color="#ff0000" style="background:#ff0000; width:24px; height:24px; border-radius:50%; border:2px solid #ccc; margin-right:4px;"></button>
@@ -106,7 +106,7 @@
           document.getElementById('experiment-title').textContent = data.title;
           
           // Initialize the experiment with the loaded data
-          initExperiment(data.slides);
+          initExperiment(data.slides, data);
           console.log('Experiment initialization completed');
         })
         .catch(error => {
@@ -120,6 +120,118 @@
             </div>
           `;
         });
+    }
+
+    // Function to initialize experiment with loaded data
+    function initExperiment(slides, data) {
+      // Ensure currentSlide is initialized
+      window.currentSlide = window.currentSlide || 0;
+      
+      // Set global slidesData
+      window.slidesData = slides;
+      
+      // Define updateSlide function
+      function updateSlide() {
+        const codeBox = document.getElementById("code-block");
+        const outputBlock = document.getElementById("output-block");
+        const slidesList = document.getElementById("slides");
+        const slideNumber = document.getElementById("slide-number");
+
+        // Defensive: If codeBox is missing, do nothing
+        if (!codeBox) return;
+
+        // Always use window.currentSlide
+        const slide = window.slidesData[window.currentSlide];
+
+        // Defensive: If slide is missing, clear codeBox
+        if (!slide) {
+          codeBox.textContent = '';
+          return;
+        }
+
+        // Update code
+        codeBox.textContent = slide.code || '';
+        if (window.Prism) Prism.highlightElement(codeBox);
+
+        // Update output
+        if (slide.output && slide.output.trim() !== "") {
+          document.getElementById("output-section").style.display = "block";
+          outputBlock.innerHTML = slide.output.replace(/\n/g, "<br>");
+        } else {
+          document.getElementById("output-section").style.display = "none";
+          outputBlock.innerHTML = "";
+        }
+
+        // Update explanation
+        slidesList.innerHTML = `
+          <div class="slide active">
+            <ul>${(slide.explanation || []).map(item => `<li>${item}</li>`).join("")}</ul>
+          </div>
+        `;
+
+        // Update slide number
+        slideNumber.textContent = `Step ${window.currentSlide + 1} of ${window.slidesData.length}`;
+
+        // Find the .top-controls element
+        const topControls = document.querySelector('.top-controls');
+
+        // Remove any existing topic box after .top-controls
+        document.querySelectorAll('.slide-topic-box').forEach(box => box.remove());
+
+        // Add topic just below the .top-controls row, centered
+        if (slide.topic) {
+          const topicBox = document.createElement('div');
+          topicBox.className = 'slide-topic-box mb-3';
+          topicBox.innerHTML = `<h5 class="slide-topic text-left m-0">${slide.topic}</h5>`;
+          topControls.parentElement.insertBefore(topicBox, topControls.nextSibling);
+        }
+      }
+
+      // Make updateSlide available to common.js
+      window.updateSlide = updateSlide;
+      window.experimentCommon = window.experimentCommon || {};
+      window.experimentCommon.updateSlide = updateSlide;
+
+      // Initial render
+      updateSlide();
+      
+      // Render slide buttons after data is loaded
+      setTimeout(() => {
+        if (window.experimentCommon && window.experimentCommon.renderSlideButtons) {
+          window.experimentCommon.renderSlideButtons();
+        } else {
+          // Fallback: render slide buttons manually
+          renderSlideButtons();
+        }
+      }, 100);
+    }
+
+    // Fallback function to render slide buttons
+    function renderSlideButtons() {
+      const btnContainer = document.getElementById('slide-buttons');
+      if (!btnContainer || !window.slidesData) {
+        console.log('Cannot render slide buttons:', { btnContainer, slidesData: window.slidesData });
+        return;
+      }
+      
+      console.log('Rendering slide buttons for', window.slidesData.length, 'slides');
+      
+      btnContainer.innerHTML = "";
+      for (let i = 0; i < window.slidesData.length; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i + 1;
+        btn.className = 'btn btn-sm ' + (i === window.currentSlide ? 'btn-primary' : 'btn-outline-primary');
+        btn.style.minWidth = '36px';
+        btn.onclick = () => {
+          console.log('Slide button clicked:', i);
+          window.currentSlide = i;
+          if (window.updateSlide) {
+            window.updateSlide();
+            renderSlideButtons();
+          }
+        };
+        btnContainer.appendChild(btn);
+      }
     }
   </script>
 </body>
