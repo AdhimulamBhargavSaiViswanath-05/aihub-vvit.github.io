@@ -188,7 +188,8 @@
         if (slide.topic) {
           const topicBox = document.createElement('div');
           topicBox.className = 'slide-topic-box mb-3';
-          topicBox.innerHTML = `<h5 class="slide-topic text-left m-0">${slide.topic}</h5>`;
+          let partLabel = slide.part ? `<span class="badge bg-warning text-dark" style="margin-right: 12px;">Part ${slide.part}</span>` : '';
+          topicBox.innerHTML = `<h5 class="slide-topic text-left m-0">${partLabel}${slide.topic}</h5>`;
           topControls.parentElement.insertBefore(topicBox, topControls.nextSibling);
         }
       }
