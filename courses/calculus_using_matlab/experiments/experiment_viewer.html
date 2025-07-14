@@ -15,9 +15,9 @@
 
 <body>
     <div class="top-breadcrumb" style="margin-top: 0.5em; margin-left: 0.5em; font-size: 1.05em; display: flex; justify-content: space-between; align-items: center; padding-right: 20px;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-            <a href="../Matlab.html" style="text-decoration: none; color: #007bff;">Calculus <span class="arrow-black">&gt;</span></a><a href="../Matlab.html?tab=experiments" style="text-decoration: none; color: #007bff;">Experiments <span class="arrow-black">&gt;</span></a><a href="#" id="problem-statement-link" style="text-decoration: none; color: #007bff;">Problem Statement <span class="arrow-black">&gt;</span></a>
-            <h5 style="margin: 0 0 0 8px; font-size: 1.05em; display: inline;" id="experiment-title">Experiment Title</h5>
+        <div style="display: flex; align-items: center; gap: 3px">
+            <a href="../Matlab.html" style="text-decoration: none; color: #007bff;">Calculus <span class="arrow-black">&gt;</span></a><a href="../Matlab.html?tab=experiments" style="text-decoration: none; color: #007bff;">List of Experiments <span class="arrow-black">&gt;</span></a>
+            <a href="#" id="experiment-title-link" style="text-decoration: none; color: #007bff; font-size: 1.05em;"></a>
         </div>
       <button id="draw-btn" class="btn btn-outline-secondary">Draw</button>
   </div>
@@ -91,9 +91,10 @@
       const urlParams = new URLSearchParams(window.location.search);
       const experimentId = urlParams.get('exp') || 'exp1';
       
-      // Update the problem statement link based on experiment ID
-      const problemStatementLink = document.getElementById('problem-statement-link');
-      problemStatementLink.href = `../experiment_viewer.html?path=./problem_statement/${experimentId}.md`;
+      // Remove the code that sets the experiment title link here
+      // const experimentTitleLink = document.getElementById('experiment-title-link');
+      // experimentTitleLink.href = `../problem_statement/${experimentId}.md`;
+      // experimentTitleLink.textContent = data.title;
       
       // Load the experiment data file
       fetch(`data/${experimentId}.json`)
@@ -103,7 +104,11 @@
           
           // Update the page title
           document.title = data.title + ' - Introduction to MATLAB';
-          document.getElementById('experiment-title').textContent = data.title;
+
+          // Set the experiment title link now that data is loaded
+          const experimentTitleLink = document.getElementById('experiment-title-link');
+          experimentTitleLink.href = `../experiment_viewer.html?path=./problem_statement/${experimentId}.md`;
+          experimentTitleLink.textContent = data.title;
           
           // Initialize the experiment with the loaded data
           initExperiment(data.slides, data);
