@@ -1,0 +1,201 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #fff;
+  color: #222;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: #222;
+}
+
+.experiment-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 1.5rem 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.card-img {
+  width: 220px;
+  height: 220px;
+  border-radius: 0.5rem;
+  object-fit: contain;
+  margin-right: 1rem;
+  background: transparent;
+  box-shadow: none;
+}
+
+.card-body {
+  flex: 1;
+  padding: 0.5rem 0;
+}
+
+.experiment-title {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-subtitle {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.6rem;
+}
+
+.card-body a {
+  color: rgb(212, 175, 55);
+  font-weight: 600;
+  margin-right: 8px;
+  text-decoration: none;
+}
+
+.card-body a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  margin: 0.4rem 0;
+}
+
+.btn-outline-primary {
+  color: rgb(212, 175, 55);
+  border-color: rgb(212, 175, 55);
+  background: transparent;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: rgb(212, 175, 55);
+  color: #fff;
+}
+
+#nav-col {
+  border-right: 1px solid #ddd;
+  padding: 1.5rem 0.8rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  display: flex;
+}
+
+#nav-col h5 {
+  margin-bottom: 1rem;
+}
+
+#nav-col button {
+  margin: 0.3rem 0;
+  width: 100%;
+  text-align: left;
+}
+
+hr {
+  border-top: 1.5px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .experiment-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .card-img {
+    margin: 0 auto 1rem auto;
+    width: 75vw;
+    max-width: 300px;
+    height: auto;
+  }
+
+  .card-body {
+    padding: 0.5rem 0;
+  }
+
+  .experiment-title {
+    font-size: 1.3rem;
+  }
+
+  .card-subtitle, .card-text {
+    font-size: 1rem;
+  }
+
+  #nav-col {
+    padding: 0.8rem;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #nav-col h5 {
+    display: none;
+  }
+
+  #nav-col button {
+    margin: 0.3rem 0.5rem;
+    width: auto;
+    text-align: center;
+  }
+}
+/* Fix experiment buttons alignment in desktop */
+#nav-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  /* stay left aligned */
+  justify-content: flex-start;
+  padding: 1.5rem 0.8rem;
+  border-right: 1px solid #ddd;
+  height: 100%;
+}
+
+#nav-col h5 {
+  margin-bottom: 1rem;
+}
+
+#nav-col button {
+  margin: 0.5rem 0;
+  width: 100%;
+  text-align: left;
+}
+
+/* In mobile — stack them horizontally */
+@media (max-width: 768px) {
+  #nav-col {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #nav-col h5 {
+    display: none;
+  }
+
+  #nav-col button {
+    margin: 0.3rem 0.5rem;
+    width: auto;
+    text-align: center;
+  }
+}

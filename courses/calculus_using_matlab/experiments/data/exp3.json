@@ -1,0 +1,106 @@
+{
+  "title": "3.Limits and Continuity",
+  "slides": [
+    {
+      "topic": "[1/10]:Defining Symbolic Variables",
+      "code": "%Step 1: Define x as a symbolic variable\n% MATLAB2014b\nclear all\nclose all\nclc\n% Define symbolic variable\nsyms x\nwhos",
+      "output": "Name      Size            Bytes  Class     Attributes\n\nx         1x1               112     sym ",
+      "explanation": [
+        "clear all clears all variables from memory.",
+        "close all closes any open figure windows.",
+        "clc clears the command window.",
+        "syms x creates a symbolic variable x for symbolic math operations."
+      ]
+    },
+    {
+      "topic": "[2/10]:Defining the Function",
+      "code": "% Step 2: Define the function\nf = (x^2 - 1) / (x - 1);\ndisp('The function f(x) = ');\ndisp(f)",
+      "output": "The function f(x) = (x^2 - 1)/(x - 1)",
+      "explanation": [
+        "We define a function f(x) = (x²-1)/(x-1).",
+        "This function has a removable discontinuity at x = 1.",
+        "The limit as x approaches 1 exists and equals 2."
+      ]
+    },
+    {
+      "topic": "[3/10]:Computing Limits",
+      "code": "% Step 3: Compute limit as x approaches 1\nlimit_value = limit(f, x, 1);\nfprintf('Limit as x approaches 1: %s\\n', char(limit_value));",
+      "output": "Limit as x approaches 1: 2",
+      "explanation": [
+        "limit(f, x, 1) computes the limit of f(x) as x approaches 1.",
+        "Even though f(1) is undefined, the limit exists.",
+        "This is a removable discontinuity."
+      ]
+    },
+    {
+      "topic": "[4/10]:Left and Right Limits",
+      "code": "% Step 4: Compute left and right limits\nleft_limit = limit(f, x, 1, 'left');\nright_limit = limit(f, x, 1, 'right');\nfprintf('Left limit: %s, Right limit: %s\\n', char(left_limit), char(right_limit));",
+      "output": "Left limit: 2, Right limit: 2",
+      "explanation": [
+        "We compute both left and right limits at x = 1.",
+        "Both limits are equal to 2, confirming the limit exists.",
+        "This shows the function is continuous at x = 1 (after removing the hole)."
+      ]
+    },
+    {
+      "topic": "[5/10]:Limit at Infinity",
+      "code": "% Step 5: Compute limit as x approaches infinity\ng = (2*x^2 + 3*x + 1) / (x^2 + 1);\ninfinity_limit = limit(g, x, inf);\nfprintf('Limit as x approaches infinity: %s\\n', char(infinity_limit));",
+      "output": "Limit as x approaches infinity: 2",
+      "explanation": [
+        "We compute the limit of g(x) as x approaches infinity.",
+        "This is a rational function where degree of numerator equals degree of denominator.",
+        "The limit is the ratio of leading coefficients: 2/1 = 2."
+      ]
+    },
+    {
+      "topic": "[6/10]:Continuity Check",
+      "code": "% Step 6: Check continuity at a point\nh = x^2 + 1;\n% Check if h is continuous at x = 2\npoint_value = subs(h, x, 2);\nlimit_at_point = limit(h, x, 2);\nfprintf('h(2) = %s, Limit = %s\\n', char(point_value), char(limit_at_point));",
+      "output": "h(2) = 5, Limit = 5",
+      "explanation": [
+        "We check if h(x) = x² + 1 is continuous at x = 2.",
+        "A function is continuous at a point if f(a) = lim(x→a) f(x).",
+        "Here h(2) = 5 and lim(x→2) h(x) = 5, so h is continuous at x = 2."
+      ]
+    },
+    {
+      "topic": "[7/10]:Discontinuity Example",
+      "code": "% Step 7: Function with jump discontinuity\nk = piecewise(x < 0, -1, x >= 0, 1);\nleft_limit_k = limit(k, x, 0, 'left');\nright_limit_k = limit(k, x, 0, 'right');\nfprintf('Left limit: %s, Right limit: %s\\n', char(left_limit_k), char(right_limit_k));",
+      "output": "Left limit: -1, Right limit: 1",
+      "explanation": [
+        "We define a piecewise function with a jump discontinuity at x = 0.",
+        "Left limit is -1, right limit is 1.",
+        "Since left limit ≠ right limit, the limit does not exist at x = 0."
+      ]
+    },
+    {
+      "topic": "[8/10]:Squeeze Theorem",
+      "code": "% Step 8: Squeeze theorem example\n% -1 ≤ sin(x)/x ≤ 1 for x ≠ 0\nsyms n\nsqueeze_expr = sin(n)/n;\nsqueeze_limit = limit(squeeze_expr, n, inf);\nfprintf('Limit using squeeze theorem: %s\\n', char(squeeze_limit));",
+      "output": "Limit using squeeze theorem: 0",
+      "explanation": [
+        "We use the squeeze theorem to find lim(n→∞) sin(n)/n.",
+        "Since -1/n ≤ sin(n)/n ≤ 1/n and lim(n→∞) ±1/n = 0.",
+        "By squeeze theorem, lim(n→∞) sin(n)/n = 0."
+      ]
+    },
+    {
+      "topic": "[9/10]:L'Hôpital's Rule",
+      "code": "% Step 9: L'Hôpital's rule example\n% lim(x→0) (sin(x))/x\nlhopital_expr = sin(x)/x;\nlhopital_limit = limit(lhopital_expr, x, 0);\nfprintf('Limit using L''Hôpital''s rule: %s\\n', char(lhopital_limit));",
+      "output": "Limit using L'Hôpital's rule: 1",
+      "explanation": [
+        "We compute lim(x→0) sin(x)/x using L'Hôpital's rule.",
+        "This is a 0/0 indeterminate form.",
+        "Taking derivatives: lim(x→0) cos(x)/1 = 1."
+      ]
+    },
+    {
+      "topic": "[10/10]:Continuity on Intervals",
+      "code": "% Step 10: Check continuity on an interval\n% f(x) = x² is continuous on [-1, 1]\nx_vals = -1:0.1:1;\ny_vals = x_vals.^2;\nfprintf('f(x) = x² is continuous on [-1, 1]\\n');\nfprintf('f(-1) = %.2f, f(1) = %.2f\\n', y_vals(1), y_vals(end));",
+      "output": "f(x) = x² is continuous on [-1, 1]\nf(-1) = 1.00, f(1) = 1.00",
+      "explanation": [
+        "We verify that f(x) = x² is continuous on the closed interval [-1, 1].",
+        "Polynomial functions are continuous everywhere.",
+        "The function takes all values between f(-1) = 1 and f(1) = 1."
+      ]
+    }
+  ]
+} 
