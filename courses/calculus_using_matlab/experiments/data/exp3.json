@@ -1,105 +1,93 @@
 {
   "title": "3.Limits and Continuity",
   "slides": [
-    {
-      "topic": "[1/10]:Defining Symbolic Variables",
-      "code": "%Step 1: Define x as a symbolic variable\n% MATLAB2014b\nclear all\nclose all\nclc\n% Define symbolic variable\nsyms x\nwhos",
-      "output": "Name      Size            Bytes  Class     Attributes\n\nx         1x1               112     sym ",
+     {
+      "topic": "[1/8]: Clear the workspace and command window to start fresh.",
+      "code": "% MATLAB Script to Demonstrate Maxima/Minima using Taylor Series\n% Clear workspace and command window\nclear all;\nclc;",
+      "output": "",
       "explanation": [
-        "clear all clears all variables from memory.",
-        "close all closes any open figure windows.",
-        "clc clears the command window.",
-        "syms x creates a symbolic variable x for symbolic math operations."
+        "clear all: Clears all variables from memory.",
+        "clc: Clears the command window.",
+        "Purpose: Starts the script with a clean environment."
       ]
     },
     {
-      "topic": "[2/10]:Defining the Function",
-      "code": "% Step 2: Define the function\nf = (x^2 - 1) / (x - 1);\ndisp('The function f(x) = ');\ndisp(f)",
-      "output": "The function f(x) = (x^2 - 1)/(x - 1)",
+      "topic": "[2/8]: Define the symbolic function f(x) = x⁴ - 4x² for analysis.",
+      "code": "% Define the function\n% Example function: f(x) = x^4 - 4x^2 (has a minimum and two maxima)\nsyms x;\nf = x^4 - 4*x^2;\ndisp('Function:');\ndisp(f);",
+      "output": "Function:\nx^4 - 4*x^2",
       "explanation": [
-        "We define a function f(x) = (x²-1)/(x-1).",
-        "This function has a removable discontinuity at x = 1.",
-        "The limit as x approaches 1 exists and equals 2."
+        "syms x: Declares x as a symbolic variable.",
+        ": Defines the function .",
+        "disp(f): Displays the function in the command window."
       ]
     },
     {
-      "topic": "[3/10]:Computing Limits",
-      "code": "% Step 3: Compute limit as x approaches 1\nlimit_value = limit(f, x, 1);\nfprintf('Limit as x approaches 1: %s\\n', char(limit_value));",
-      "output": "Limit as x approaches 1: 2",
+      "topic": "[3/8]: Compute the first derivative f '(x) to locate the critical points.",
+      "code": "% Compute the first derivative\nf_prime = diff(f, x);\ndisp('First Derivative:');\ndisp(f_prime);",
+      "output": "First Derivative:\n4*x^3 - 8*x",
       "explanation": [
-        "limit(f, x, 1) computes the limit of f(x) as x approaches 1.",
-        "Even though f(1) is undefined, the limit exists.",
-        "This is a removable discontinuity."
+        "diff(f, x): Calculates the first derivative .",
+        "f_prime: Stores the derivative.",
+        "F_prime is also a symbolic data type like f.",
+        "disp(f_prime): Displays the result in the command window."
       ]
     },
     {
-      "topic": "[4/10]:Left and Right Limits",
-      "code": "% Step 4: Compute left and right limits\nleft_limit = limit(f, x, 1, 'left');\nright_limit = limit(f, x, 1, 'right');\nfprintf('Left limit: %s, Right limit: %s\\n', char(left_limit), char(right_limit));",
-      "output": "Left limit: 2, Right limit: 2",
+      "topic": "[4/8]: Solve f '(x) = 0 to find the x-values of critical points.",
+      "code": "% Find critical points by solving f'(x) = 0\ncritical_points = double(solve(f_prime == 0, x));\ndisp('Critical Points:');\ndisp(critical_points);",
+      "output": "Critical Points:\n0\n1.4142\n-1.4142",
       "explanation": [
-        "We compute both left and right limits at x = 1.",
-        "Both limits are equal to 2, confirming the limit exists.",
-        "This shows the function is continuous at x = 1 (after removing the hole)."
+        "solve(f_prime == 0, x): Solves to find critical points.",
+        "double(...): Converts symbolic results to numeric values.",
+        "disp(critical_points): Displays the critical points."
       ]
     },
     {
-      "topic": "[5/10]:Limit at Infinity",
-      "code": "% Step 5: Compute limit as x approaches infinity\ng = (2*x^2 + 3*x + 1) / (x^2 + 1);\ninfinity_limit = limit(g, x, inf);\nfprintf('Limit as x approaches infinity: %s\\n', char(infinity_limit));",
-      "output": "Limit as x approaches infinity: 2",
+      "topic": "[5/8]: Compute the second derivative f ''(x) to classify the nature of each critical point.",
+      "code": "% Compute the second derivative\nf_double_prime = diff(f_prime, x);\ndisp('Second Derivative:');\ndisp(f_double_prime);",
+      "output": "Second Derivative:\n12*x^2 - 8",
       "explanation": [
-        "We compute the limit of g(x) as x approaches infinity.",
-        "This is a rational function where degree of numerator equals degree of denominator.",
-        "The limit is the ratio of leading coefficients: 2/1 = 2."
+        "diff(f_prime, x): Calculates the second derivative .",
+        "f_double_prime: Stores the second derivative.",
+        "disp(f_double_prime): Displays it in the command window."
       ]
     },
     {
-      "topic": "[6/10]:Continuity Check",
-      "code": "% Step 6: Check continuity at a point\nh = x^2 + 1;\n% Check if h is continuous at x = 2\npoint_value = subs(h, x, 2);\nlimit_at_point = limit(h, x, 2);\nfprintf('h(2) = %s, Limit = %s\\n', char(point_value), char(limit_at_point));",
-      "output": "h(2) = 5, Limit = 5",
+      "topic": "[6/8]: Evaluate f ''(x) at each critical point to determine if it is a maximum, minimum, or inconclusive.",
+      "code": "% Evaluate the second derivative at critical points\n% and determine maxima/minima\ndisp('Nature of Critical Points:');\nfor i = 1:length(critical_points)\n    x0 = critical_points(i);\n    second_deriv_value = double(subs(f_double_prime, x, x0));\n    fprintf('At x = %.2f, f''''(x) = %.2f', x0, second_deriv_value);\n    if second_deriv_value > 0\n        fprintf(' -> Local Minimum\\n');\n    elseif second_deriv_value < 0\n        fprintf(' -> Local Maximum\\n');\n    else\n        fprintf(' -> Need higher-order terms to determine\\n');\n    end\nend",
+      "output": "Nature of Critical Points:\nAt x = 0.00, f''(x) = -8.00 -> Local Maximum\nAt x = 1.41, f''(x) = 16.00 -> Local Minimum\nAt x = -1.41, f''(x) = 16.00 -> Local Minimum",
       "explanation": [
-        "We check if h(x) = x² + 1 is continuous at x = 2.",
-        "A function is continuous at a point if f(a) = lim(x→a) f(x).",
-        "Here h(2) = 5 and lim(x→2) h(x) = 5, so h is continuous at x = 2."
+        "subs(...): Substitutes critical point into .",
+        "if-else: Checks sign of f''(x) to identify min or max.",
+        "fprintf(...): Prints the nature of each critical point.",
+        "for i = 1:length(...): Loops through all critical points.",
+        "double(...): Converts symbolic second derivative to a numeric value for comparison."
       ]
     },
     {
-      "topic": "[7/10]:Discontinuity Example",
-      "code": "% Step 7: Function with jump discontinuity\nk = piecewise(x < 0, -1, x >= 0, 1);\nleft_limit_k = limit(k, x, 0, 'left');\nright_limit_k = limit(k, x, 0, 'right');\nfprintf('Left limit: %s, Right limit: %s\\n', char(left_limit_k), char(right_limit_k));",
-      "output": "Left limit: -1, Right limit: 1",
+      "topic": "[7/8]: Use second-order Taylor series to approximate the function near each critical point and plot the results.",
+      "code": "% Taylor series approximation around each critical point\n% We'll use a second-order Taylor series: f(x) ? f(a) + f'(a)(x-a) + (f''(a)/2)(x-a)^2\nfigure; hold on; grid on; xlabel('x'); ylabel('f(x)'); title('Function and Taylor Series Approximation at Critical Points');\n% Define x-range for plotting\nx_range = linspace(-3, 3, 1000);\nf_numeric = matlabFunction(f); % Convert symbolic function to numeric\nplot(x_range, f_numeric(x_range), 'b-', 'LineWidth', 2, 'DisplayName', 'f(x) = x^4 - 4x^2');\n% Colors for Taylor approximations\ncolors = ['r', 'g', 'm'];\n% Loop through critical points to compute and plot Taylor series\nfor i = 1:length(critical_points)\n    x0 = critical_points(i);\n    % Compute Taylor series terms\n    f_at_x0 = double(subs(f, x, x0));\n    f_prime_at_x0 = double(subs(f_prime, x, x0)); % Should be 0 at critical points\n    f_double_prime_at_x0 = double(subs(f_double_prime, x, x0));\n    % Second-order Taylor approximation: f(x) ? f(x0) + f'(x0)(x-x0) + (f''(x0)/2)(x-x0)^2;\n    taylor_approx = f_at_x0 + f_prime_at_x0*(x - x0) + (f_double_prime_at_x0/2)*(x - x0)^2;\n    taylor_numeric = matlabFunction(taylor_approx); % Plot Taylor approximation near the critical point\n    x_near = linspace(x0 - 0.5, x0 + 0.5, 100); % Narrow range around critical point\n    plot(x_near, taylor_numeric(x_near), 'Color', colors(i), 'LineWidth', 1.5, ...\n        'DisplayName', sprintf('Taylor at x = %.2f', x0));\n    % Mark critical point\n    plot(x0, f_at_x0, 'ko', 'MarkerFaceColor', colors(i), ...\n        'DisplayName', sprintf('Critical Point x = %.2f', x0));\nend\n% Add legend and adjust plot\nlegend('show');\nhold off;",
+      "output": "<img src='../images/exp3.png' alt='exp1 plot' style='max-width:100%;height:auto;'>",
       "explanation": [
-        "We define a piecewise function with a jump discontinuity at x = 0.",
-        "Left limit is -1, right limit is 1.",
-        "Since left limit ≠ right limit, the limit does not exist at x = 0."
+        "figure; plot(...): Plots the original function and Taylor approximations.",
+        "taylor_approx: Builds the 2nd-order Taylor series near each critical point.",
+        "matlabFunction(...): Converts symbolic Taylor expression to numeric form for plotting.",
+        "x_near: Chooses a small range around each critical point to plot the approximation.",
+        "colors(...): Assigns different colors to each Taylor curve for clarity.",
+        "plot(...): Draws both the Taylor curves and critical points on the graph.",
+        "hold on; keeps all plots on the same figure for easy comparison.",
+        "legend('show'); displays labels for the original function and each Taylor approximation.",
+        "The Taylor series visually shows how the function behaves locally near maxima/minima."
       ]
     },
     {
-      "topic": "[8/10]:Squeeze Theorem",
-      "code": "% Step 8: Squeeze theorem example\n% -1 ≤ sin(x)/x ≤ 1 for x ≠ 0\nsyms n\nsqueeze_expr = sin(n)/n;\nsqueeze_limit = limit(squeeze_expr, n, inf);\nfprintf('Limit using squeeze theorem: %s\\n', char(squeeze_limit));",
-      "output": "Limit using squeeze theorem: 0",
+      "topic": "[8/8]: Display an explanation of the results using derivative tests and Taylor series approximation.",
+      "code": "% Display explanation\ndisp('Explanation:');\ndisp('The blue curve is the original function f(x) = x^4 - 4x^2.');\ndisp('Critical points are where f''(x) = 0. We check f''''(x) to determine if it''s a max or min:');\ndisp('- If f''''(x) > 0, the curve opens upward -> Minimum.');\ndisp('- If f''''(x) < 0, the curve opens downward -> Maximum.');\ndisp('The colored curves are second-order Taylor approximations near each critical point.');\ndisp('Notice how the Taylor series matches the function''s shape near these points!');",
+      "output": "Explanation:\nThe blue curve is the original function f(x) = x^4 - 4x^2.\nCritical points are where f'(x) = 0. We check f''(x) to determine if it's a max or min:\n- If f''(x) > 0, the curve opens upward -> Minimum.\n- If f''(x) < 0, the curve opens downward -> Maximum.\nThe colored curves are second-order Taylor approximations near each critical point.\nNotice how the Taylor series matches the function's shape near these points!",
       "explanation": [
-        "We use the squeeze theorem to find lim(n→∞) sin(n)/n.",
-        "Since -1/n ≤ sin(n)/n ≤ 1/n and lim(n→∞) ±1/n = 0.",
-        "By squeeze theorem, lim(n→∞) sin(n)/n = 0."
-      ]
-    },
-    {
-      "topic": "[9/10]:L'Hôpital's Rule",
-      "code": "% Step 9: L'Hôpital's rule example\n% lim(x→0) (sin(x))/x\nlhopital_expr = sin(x)/x;\nlhopital_limit = limit(lhopital_expr, x, 0);\nfprintf('Limit using L''Hôpital''s rule: %s\\n', char(lhopital_limit));",
-      "output": "Limit using L'Hôpital's rule: 1",
-      "explanation": [
-        "We compute lim(x→0) sin(x)/x using L'Hôpital's rule.",
-        "This is a 0/0 indeterminate form.",
-        "Taking derivatives: lim(x→0) cos(x)/1 = 1."
-      ]
-    },
-    {
-      "topic": "[10/10]:Continuity on Intervals",
-      "code": "% Step 10: Check continuity on an interval\n% f(x) = x² is continuous on [-1, 1]\nx_vals = -1:0.1:1;\ny_vals = x_vals.^2;\nfprintf('f(x) = x² is continuous on [-1, 1]\\n');\nfprintf('f(-1) = %.2f, f(1) = %.2f\\n', y_vals(1), y_vals(end));",
-      "output": "f(x) = x² is continuous on [-1, 1]\nf(-1) = 1.00, f(1) = 1.00",
-      "explanation": [
-        "We verify that f(x) = x² is continuous on the closed interval [-1, 1].",
-        "Polynomial functions are continuous everywhere.",
-        "The function takes all values between f(-1) = 1 and f(1) = 1."
+        "Displays a summary of the results for the user.",
+        "Explains how the second derivative test helps classify maxima/minima.",
+        "Highlights that the Taylor series approximations closely match the function near critical points."
       ]
     }
   ]

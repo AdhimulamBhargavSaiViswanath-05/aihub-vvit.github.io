@@ -27,13 +27,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-img {
-  width: 220px;
-  height: 220px;
-  border-radius: 0.5rem;
+  width: 170px;
+  min-width: 130px;
+  max-width: 200px;
+  height: auto;
+  margin-right: 0.8rem;
   object-fit: contain;
-  margin-right: 1rem;
-  background: transparent;
-  box-shadow: none;
 }
 
 .card-body {
@@ -114,16 +113,16 @@ hr {
 
 @media (max-width: 768px) {
   .experiment-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 1rem 0;
+    flex-direction: row !important;
+    align-items: center;
+    text-align: left;
   }
 
   .card-img {
-    margin: 0 auto 1rem auto;
-    width: 75vw;
-    max-width: 300px;
-    height: auto;
+    width: 150px;
+    min-width: 110px;
+    max-width: 180px;
+    margin-right: 0.5rem;
   }
 
   .card-body {
@@ -132,6 +131,11 @@ hr {
 
   .experiment-title {
     font-size: 1.3rem;
+  }
+
+  .experiment-title.mb-2 {
+    font-size: 0.95rem;
+    padding-right: 0.1rem;
   }
 
   .card-subtitle, .card-text {
@@ -214,3 +218,21 @@ hr {
   color: #000;
   text-decoration: none;
 }
+.experiment-card {
+  flex-direction: row !important;
+  align-items: center;
+  text-align: left;
+}
+
+.experiment-title.mb-2 {
+  font-size: 1.05rem;
+  padding-right: 0.2rem;
+}
+
+@media (max-width: 768px) {
+  .experiment-title.mb-2 {
+    font-size: 0.95rem;
+    padding-right: 0.1rem;
+  }
+}
+

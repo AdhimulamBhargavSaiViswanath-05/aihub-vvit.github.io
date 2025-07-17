@@ -14,7 +14,7 @@ class SpecialHeader extends HTMLElement {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../index.html">Home</a>
+                            <a class="nav-link" href="/index.html">Home</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -36,7 +36,7 @@ class SpecialHeader extends HTMLElement {
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../../courses.html">Courses</a>
+                            <a class="nav-link" href="/courses.html">Courses</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../../blog.html">Blogs</a>

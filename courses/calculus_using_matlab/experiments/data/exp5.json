@@ -1,0 +1,78 @@
+{
+    "title": "5. Mean Value Theorem",
+    "slides": [
+         {
+      "topic": "[1/6]: Define symbolic variables and function",
+      "code": "% Experiment: Taylor Series Approximation of sin(x)\nclear all; % Clear workspace\nclc; % Clear command window\n% Step 1: Define symbolic variables and function\nsyms x;\nf = sin(x); % Function to approximate\na = 0; % Expansion point (Maclaurin series)",
+      "output": "",
+      "explanation": [
+        "clear all clears all variables from memory.",
+        "close all closes any open figure windows.",
+        "clc clears the command window.",
+        "syms x: Declares x as a symbolic variable.",
+        "f = sin(x): Defines the symbolic function to approximate.",
+        "a = 0: Expansion point (Maclaurin Series is a Taylor series centered at 0)."
+      ]
+    },
+    {
+      "topic": "[2/6]: Initialize Taylor series",
+      "code": "% Step 2: Initialize Taylor series\n% orders = [1, 3, 5, 7]; % Orders of approximation\norders = 1:2:11; % Orders of approximation\n% orders = [11]; % Orders of approximation\ntaylor_approx = cell(length(orders), 1); % Store approximations",
+      "output": "",
+      "explanation": [
+        "orders = 1:2:11: Chooses approximation orders (1, 3, 5, ..., 11) — odd-order approximations are better for sin(x) (odd function).",
+        "cell(length(orders), 1): Initializes a cell array to store symbolic Taylor polynomials for each order.",
+        "Why cell array? Symbolic expressions of different lengths (orders) are stored.",
+        "A cell is flexible and can hold heterogeneous data (like symbolic functions)."
+      ]
+    },
+    {
+      "topic": "[3/6]: Compute Taylor series for each order",
+      "code": "% Step 3: Compute Taylor series for each order\nfor i = 1:length(orders)\n    n = orders(i);\n    T = 0; % Initialize Taylor polynomial\n    for k = 0:n\n        % Compute kth derivative\n        df = diff(f, k);\n        % Evaluate at x = a\n        df_a = subs(df, x, a);\n        % Add kth term to series\n        T = T + (df_a / factorial(k)) * (x - a)^k;\n    end\n    taylor_approx{i} = T; % Store approximation\nend",
+      "output": "",
+      "explanation": [
+        "Outer loop: Goes through each order (n = 1, 3, ..., 11).",
+        "diff(f, k): Computes the k-th derivative of f.",
+        "subs(df, x, a): Substitutes x = a into the derivative to evaluate it.",
+        "(df_a / factorial(k)) * (x - a)^k: Adds the k-th term of the Taylor expansion.",
+        "Inner loop builds the full Taylor polynomial T for the order n.",
+        "taylor_approx{i}: Stores the final symbolic Taylor polynomial."
+      ]
+    },
+    {
+      "topic": "[4/6]: Convert symbolic function to numerical",
+      "code": "% Step 4: Convert symbolic function to numerical for plotting\nf_num = matlabFunction(f); % Actual function\nx_vals = linspace(-2*pi, 2*pi, 1000); % x values for plotting",
+      "output": "",
+      "explanation": [
+        "matlabFunction(f): Converts symbolic function f to a numerical function handle that can be used with plot.",
+        "x_vals: Creates 1000 points between -2π and 2π for plotting."
+      ]
+    },
+    {
+      "topic": "[5/6]: Plot original function and Taylor approximations",
+      "code": "% Step 5: Plot original function and Taylor approximations\nfigure(1); plot(x_vals, f_num(x_vals), 'k-', 'LineWidth', 2, 'DisplayName', 'sin(x)');\nylim([-5,5]);\nxlabel('x'); ylabel('y'); title('sin(x)');\nlegend('show'); grid on;\nfigure(2); plot(x_vals, f_num(x_vals), 'k-', 'LineWidth', 2, 'DisplayName', 'sin(x)');\nhold on;\ncolors = ['r', 'b', 'g', 'm', 'c', 'y'];\nfor i = 1:length(orders)\n    T_num = matlabFunction(taylor_approx{i}); % Convert to numerical\n    my_idx = find(abs(T_num(x_vals))<=5);\n    plot(x_vals(my_idx), T_num(x_vals(my_idx)), 'Color', colors(i), 'LineStyle', '--', ...\n        'DisplayName', sprintf('Order %d', orders(i)));\nend\nxlabel('x'); ylabel('y'); title('Taylor Series Approximation of sin(x) at x = 0');\nlegend('show'); grid on; hold off;",
+      "output": "<img src='../images/exp5.5a.png' alt='exp1 plot' style='max-width:100%;height:auto;'>,<img src='../images/exp5.5b.png' alt='exp1 plot' style='max-width:100%;height:auto;'>",
+      "explanation": [
+        "Figure 1: Original Function Plots sin(x) in black solid line.",
+        "Sets y-axis limit to avoid clutter.",
+        "Adds title, labels, grid, and legend.",
+        "Figure 2: Taylor Approximations Plots actual sin(x) and Taylor approximations for each order using dashed lines.",
+        "matlabFunction(...): Converts symbolic approximation to numeric function.",
+        "my_idx = find(abs(...) <= 5): Filters values to keep plot within bounds (y values less than 5 in magnitude).",
+        "Uses different colors for each order.",
+        "legend, title, xlabel, etc., make the plot readable."
+      ]
+    },
+    {
+      "topic": "[6/6]: Compute and plot truncation error",
+      "code": "% Step 6: Compute and plot truncation error\nfigure(3); for i = 1:length(orders)\n    T_num = matlabFunction(taylor_approx{i});\n    error = abs(f_num(x_vals) - T_num(x_vals));\n    semilogy(x_vals, error, 'Color', colors(i), ...\n        'DisplayName', sprintf('Order %d', orders(i)));\n    hold on;\nend\nxlabel('x'); ylabel('Absolute Error (log scale)'); title('Truncation Error of Taylor Series for sin(x)');\nlegend('show'); grid on; hold off;",
+      "output": "<img src='../images/exp5.png' alt='exp1 plot' style='max-width:100%;height:auto;'>",
+      "explanation": [
+        "Truncation error is the difference between the actual value of a function and the approximation obtained by a truncated series (like a Taylor series).",
+        "Computes absolute error: |true - approx|",
+        "semilogy(...): Plots the error on a logarithmic y-axis — useful when error spans several orders of magnitude.",
+        "Shows how error decreases as the order increases.",
+        "Adds grid, labels, and legend."
+      ]
+    }
+    ]
+}
