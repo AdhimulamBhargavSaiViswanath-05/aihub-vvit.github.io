@@ -1,0 +1,146 @@
+{
+  "title": "7. Derivative from First Principles",
+  "slides": [
+     {
+      "part": "A",
+      "topic": "[1/6]: Initial Setup & Display Purpose of the Experiment",
+      "code": "% Experiment: Jacobian Matrix and Functional Dependence\n% Clear workspace and command window\nclear all; close all; clc; warning off;\ndisp('=== Part 1: Jacobian Matrix and Functional Dependence ===');",
+      "output": "=== Part 1: Jacobian Matrix and Functional Dependence ===",
+      "explanation": [
+        "Clears the MATLAB environment: clear all: removes all variables from memory.",
+        "close all: closes all open figure windows.",
+        "clc: clears the command window output.",
+        "Disables warnings using warning off (optional, but silences runtime alerts).",
+        "Displays a title to indicate the beginning of Part 1 of the experiment.",
+        "Useful for visual separation in the command window output."
+      ]
+    },
+    {
+      "part": "A",
+      "topic": "[2/6]: Define Symbols and Functions",
+      "code": "syms x y;\nF = [x^2 + y; x*y];",
+      "output": "",
+      "explanation": [
+        "Declares symbolic variables and .",
+        "Defines a vector-valued function:F(x,y)=[x^2 + y; x*y]."
+      ]
+    },
+    {
+      "part": "A",
+      "topic": "[3/6]: Start by clearing the workspace using `clear all` and clearing the command window using `clc`. Then print a title for Rolle’s Theorem.",
+      "code": "J = jacobian(F, [x, y]);\ndisp(['Jacobian Matrix of F = ' string(F) 'with respect to [x, y]:']);\ndisp(J);",
+      "output": "Jacobian Matrix of F = matrix([[y + x^2], [x*y]])with respect to [x, y]:\n[ 2*x, 1]\n[ y, x]",
+      "explanation": [
+        "Computes the Jacobian matrix:J=[∂f1/∂x ∂f1/∂y; ∂f2/∂x ∂f2/∂y] = [2x 1; y x].",
+        "Displays the Jacobian matrix in the console."
+      ]
+    },
+    {
+      "part": "A",
+      "topic": "[4/6]: Analyze Functional Dependence via Determinant",
+      "code": "% Check functional dependence by computing the determinant (for 2x2 Jacobian)\ndet_J = det(J);\ndisp('Determinant of Jacobian:');\ndisp(det_J);\n% Simplify the determinant to check if it's identically zero\ndet_J_simplified = simplify(det_J);\ndisp('Simplified Determinant:');\ndisp(det_J_simplified);\n% Analyze functional dependence\nif det_J_simplified == 0\n    disp('The functions are functionally dependent (determinant is identically zero).');\nelse\n    disp('The functions are functionally independent (determinant is non-zero at some points).');\nend",
+      "output": "Determinant of Jacobian: 2*x^2 - y\nSimplified Determinant: 2*x^2 - y\nThe functions are functionally independent (determinant is non-zero at some points).\nDeterminant at (x,y) = (1,1): 1",
+      "explanation": [
+        "Calculates the determinant of the Jacobian: det(J) = (2*x)(x) -(1)(y) = 2*x^2 - y.Uses simplify() to reduce it symbolically.",
+        "Functional Dependence Logic:\n 1. If determinant is zero identically, then the functions are functionally dependent.\n 2.Otherwise, they are functionally independent."
+       ]
+    },
+    {
+      "part": "A",
+      "topic": "[5/6]: Evaluate Determinant at Specific Point",
+      "code": "% Evaluate determinant at a point to confirm (e.g., x=1, y=1)\ndet_J_val = double(subs(det_J, {x, y}, {1, 1}));\ndisp(['Determinant at (x,y) = (1,1): ' num2str(det_J_val)]);\nif det_J_val == 0\n    disp('At (1,1), the functions are dependent (singular Jacobian).');\nelse\n    disp('At (1,1), the functions are independent (non-singular Jacobian).');\nend",
+      "output": "At (1,1), the functions are independent (non-singular Jacobian).",
+      "explanation": [
+        "Evaluate the Jacobian determinant at a specific point (e.g., x=1,y=1) to check how the functions behave locally.",
+        "Check if the determinant is zero: 1.If zero → functions are dependent (Jacobian is singular).\n 2.If non-zero → functions are independent (Jacobian is non-singular).",
+        "This tells you whether the system is locally invertible at that point."
+      ]
+    },
+    {
+      "part": "A",
+      "topic": "[6/6]: Visualize Functions",
+      "code": "% Visualize the functions f1 and f2\nx_range = linspace(-2, 2, 50);\ny_range = linspace(-2, 2, 50);\n[X, Y] = meshgrid(x_range, y_range);\nf1_values = double(subs(F(1), {x, y}, {X, Y}));\nf2_values = double(subs(F(2), {x, y}, {X, Y}));\nfigure; subplot(1, 2, 1); surfc(X, Y, f1_values);\nxlabel('x');\n ylabel('y');\n zlabel('f1');\ntitle('Function f1 = x^2 + y'); grid on;\nsubplot(1, 2, 2); surfc(X, Y, f2_values);\nxlabel('x');\n ylabel('y');\n zlabel('f2');\ntitle('Function f2 = x*y');\n grid on;",
+      "output": "<img src='../images/exp7a.png' alt='exp1 plot' style='max-width:100%;height:auto;'>",
+      "explanation": [
+        "Generates 3D surface plots of two functions over the range:f1(x,y) = x^2 + y and f2(x,y) = x^2 + y and f2(x,y) = x*y over the range -2<= x, y <= 2.",
+        "Uses a meshgrid to evaluate the functions over a grid of x and y values.",
+        "Visualizes the shape and behavior of each function in 3D to understand how they vary with respect to x and y."
+      ]
+    },
+    {
+    "part": "B",
+    "topic": "[1/6]: Setup for Robotics Section",
+    "code": "% === Part 2: Real-Time Use Case - Robotics (2D Robotic Arm) === \n % Objective: Compute Jacobian for a 2D robotic arm to relate joint angles to end-effector position \n clear all;\n close all; \nclc \n disp('=== Part 2: Robotics - 2D Robotic Arm Jacobian ==='); ",
+    "output": "=== Part 2: Robotics - 2D Robotic Arm Jacobian ===",
+    "explanation": [
+      "clear all; \tClears all variables from the workspace to avoid conflicts.",
+      "close all;\t Closes all open figure or plot windows.",
+      "clc \t Clears the command window for better readability",
+      "disp('=== Part 2: Robotics - 2D Robotic Arm Jacobian ==='); \n Displays a message indicating the start of the 2D robotic arm Jacobian computation."
+    ]
+  },
+  {
+    "part": "B",
+    "topic": "[2/6]:: Define Symbols and Constants",
+    "code": "% Define symbolic variables for joint angles\n syms theta1 theta2 L1 L2;\n% Define arm lengths (constants for simplicity) \nL1_val = 1; % Length of first arm segment \nL2_val = 1; % Length of second arm segment",
+    "output": "",
+    "explanation": [
+      "syms theta1 theta2 L1 L2;\nDeclares symbolic variables for joint angles $$θ_1,θ_2$$ and arm lengths L_1,L_2.",
+      "L1_val = 1;\nSets the length of the first arm segment to 1 unit.",
+      "L2_val = 1;\n Sets the length of the second arm segment to 1 unit."
+    ]
+  },
+  {
+    "part": "B",
+    "topic": "[3/6]: Forward Kinematics (End-Effector Position)",
+    "code": "% End-effector position (x, y) for a 2-link planar arm\nx_e = L1*cos(theta1) + L2*cos(theta1 + theta2);\ny_e = L1*sin(theta1) + L2*sin(theta1 + theta2);\nF_arm = [x_e; y_e];",
+    "output": "",
+    "explanation": [
+      "Calculates the x-coordinate of the end-effector using forward kinematics.",
+      "Calculates the y-coordinate of the end-effector using forward kinematics.",
+      "Forms a column vector representing the 2D position [Xe Ye][xe; ye] of the end-effector."
+    ]
+  },
+  {
+    "part": "B",
+    "topic": "[4/6]: Compute the Symbolic Jacobian Matrix",
+    "code": "% Compute Jacobian with respect to [theta1, theta2]\nJ_arm = jacobian(F_arm, [theta1, theta2]);\ndisp('Jacobian Matrix for 2D Robotic Arm:');\ndisp(J_arm);",
+    "output": "Jacobian Matrix for 2D Robotic Arm:\n[ - L2*sin(theta1 + theta2) - L1*sin(theta1), -L2*sin(theta1 + theta2)]\n[   L2*cos(theta1 + theta2) + L1*cos(theta1),  L2*cos(theta1 + theta2)]",
+    "explanation": [
+      "Computes the Jacobian matrix of the end-effector position with respect to joint angles θ1 and θ2.",
+      "Displays a message to indicate the Jacobian matrix output.",
+      "Prints the computed Jacobian matrix in the command window."
+    ]
+  },
+  {
+    "part": "B",
+    "topic": "[5/6]: Evaluate Jacobian for Specific Joint Angles",
+    "code": "% Evaluate Jacobian at a specific configuration (theta1 = pi/4, theta2 = pi/4)\n% Fix: Substitute numerical value for theta2 to avoid symbolic variable error\ntheta1_val = pi/4;\ntheta2_val = pi/4; % Define a numerical value for theta2\nJ_arm_val = double(subs(J_arm, {theta1, theta2, L1, L2}, {theta1_val, theta2_val, L1_val, L2_val}));\ndisp('Jacobian at theta1 = pi/4, theta2 = pi/4:');\ndisp(J_arm_val);",
+    "output": "Jacobian at theta1 = π/4, theta2 = π/4:\n -1.7071   -1.0000 \n 0.7071         0",
+    "explanation": [
+      "Sets the value of θ1 to π/4  radians.",
+      "Sets the value of θ2 to π/4  radians.",
+      "Substitutes the numeric values of  θ1, θ2, L1, L2 into the symbolic Jacobian and converts it to a numeric matrix.",
+      "Prints a message indicating the configuration used.",
+      "Displays the evaluated numeric Jacobian matrix."
+    ]
+  },
+  {
+    "part": "B",
+    "topic": "[6/6]: Relate Joint Velocities to End-Effector Velocities",
+    "code": "% Plot end-effector path for varying theta2\ntheta1_val = pi/4;\ntheta2_range = linspace(0, 2*pi, 100);\nx_e_vals = double(subs(x_e, {theta1, theta2, L1, L2}, {theta1_val, theta2_range, L1_val, L2_val}));\ny_e_vals = double(subs(y_e, {theta1, theta2, L1, L2}, {theta1_val, theta2_range, L1_val, L2_val}));\nfigure;\nplot(x_e_vals, y_e_vals, 'b-', 'LineWidth', 2);\nxlabel('x'); ylabel('y');\ntitle('End-Effector Path for theta1 = pi/4, varying theta2');\ngrid on;\nlegend('End-Effector Trajectory');",
+    "output": "<img src='../images/exp7b.png' alt='exp1 plot' style='max-width:100%;height:auto;'>",
+    "explanation": [
+      "Sets joint angle θ1 to a constant value of π/4.",
+      "Creates 100 values of θ2 evenly spaced from 0 to 2π.",
+      "Computes the x and y positions of the end-effector for each θ2 value.",
+      "Opens a new figure window for plotting.",
+      "Plots the end-effector path in blue with thicker lines.",
+      "Labels the x- and y-axes.",
+      "Adds a title to the plot.",
+      "Turns on the grid for better visualization.",
+      "Adds a legend describing the plotted line."
+    ]
+  } 
+  ]
+}

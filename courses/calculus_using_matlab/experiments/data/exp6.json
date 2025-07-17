@@ -1,0 +1,117 @@
+{
+  "title": "6. Taylor Series Approximation",
+  "slides": [
+     {
+      "topic": "[1/11]: Start by clearing the workspace, closing figures, and clearing the command window.",
+      "code": "% Experiment: Partial Derivatives and Gradient Visualization\nclear all; % Clear workspace\nclose all; % Clear all figures\nclc; % Clear command window\nwarning off",
+      "output": "",
+      "explanation": [
+        "clear all: Removes all variables from the workspace.",
+        "close all: Closes all open figure windows.",
+        "clc: Clears the command window.",
+        "warning off: Turns off warning messages during execution."
+      ]
+    },
+    {
+      "topic": "[2/11]: Define symbolic variables and choose a multivariable function f(x, y).",
+      "code": "% Define symbolic variables and function\nsyms x y\nf = x^2 + y^2; % Example function\n% f = x^2 * sin(y); % Example function\n% f = x*y; % Example function\n% f = x+y; % Example function",
+      "output": "",
+      "explanation": [
+        "syms x y: Declares x and y as symbolic variables.",
+        "f = x^2 + y^2: Defines a multivariable function f(x, y).",
+        "Other functions are given as optional examples (commented out)."
+      ]
+    },
+    {
+      "topic": "[3/11]: Compute partial derivatives ∂f/∂x and ∂f/∂y of the function.",
+      "code": "% Compute partial derivatives\nfx = diff(f, x); % Partial derivative w.r.t x\nfy = diff(f, y); % Partial derivative w.r.t y",
+      "output": "",
+      "explanation": [
+        "diff(f, x): Computes the partial derivative of f with respect to x.",
+        "diff(f, y): Computes the partial derivative of f with respect to y.",
+        "fx and fy store the results separately."
+      ]
+    },
+    {
+      "topic": "[4/11]: Compute the gradient vector of the function f(x, y).",
+      "code": "% Compute gradient\ngrad_f = gradient(f, [x, y]);",
+      "output": "",
+      "explanation": [
+        "gradient(f, [x, y]): Calculates the gradient vector of the function f(x,y).",
+        "grad_f: Stores the result as a vector grad_f = [∂f/∂x, ∂f/∂y]."
+      ]
+    },
+    {
+      "topic": "[5/11]: Convert symbolic expressions to numeric functions for plotting.",
+      "code": "%Convert symbolic functions to numerical for plotting\nf_num = matlabFunction(f);\nfx_num = matlabFunction(fx);\nfy_num = matlabFunction(fy);",
+      "output": "",
+      "explanation": [
+        "matlabFunction(...): Converts symbolic expressions to numeric functions.",
+        "f_num, fx_num, fy_num: Used for plotting and numerical evaluation of f(x,y), ∂f/∂x, and ∂f/∂y f_num = f(x, y) ,fx_num = ∂f/∂x fy_num = ∂f/∂y"
+      ]
+    },
+    {
+      "topic": "[6/11]: Create meshgrid values for x and y, and evaluate f(x, y) over the grid.",
+      "code": "% [xg, yg] = meshgrid(linspace(-2, 2, 20), linspace(-pi, pi, 20));\n[xg, yg] = meshgrid(linspace(-2, 2, 20), linspace(-2, 2, 20));\nzg = f_num(xg, yg);\nfx_vars = symvar(fx); % get the list variables present in fx\nfy_vars = symvar(fy); % get the list variables present in fy\nif isempty(fx_vars)\n    fx_vals = double(fx)*ones(size(xg));\nelseif length(fx_vars)==1\n    fx_vals = fx_num(xg);\nelse\n    fx_vals = fx_num(xg,yg);\nend\nif isempty(fy_vars)\n    fy_vals = double(fy)*ones(size(yg));\nelseif length(fy_vars)==1\n    fy_vals = fy_num(yg);\nelse\n    fy_vals = fy_num(xg,yg);\nend",
+      "output": "",
+      "explanation": [
+        "meshgrid(...): Creates a grid of x and y values for plotting.",
+        "zg = f_num(xg, yg): Evaluates the function f(x,y) on the grid.",
+        "symvar(...): Finds which variables are used in fx and fy.",
+        "if-else blocks: Compute numerical values of partial derivatives based on variable dependency."
+      ]
+    },
+    {
+      "topic": "[7/11]: Plot the 3D surface of the function f(x, y) using surfc.",
+      "code": "% Plot 3D surfcace of the function\nfigure; surfc(xg, yg, zg);\nxlabel('x'); ylabel('y'); zlabel('f(x,y)');\ntitle(['surfcace Plot of f(x,y) = ' string(f)]);\ngrid on; hold off;",
+      "output": "<img src='../images/exp6.7.png' alt='exp1 plot' style='max-width:100%;height:auto;'>",
+      "explanation": [
+        "surfc(...): Plots a 3D surface with contour lines beneath it.",
+        "xlabel, ylabel, zlabel: Label the axes for clarity.",
+        "title(...): Displays the function being visualized.",
+        "grid on: Adds grid lines to the plot for better visibility."
+      ]
+    },
+    {
+      "topic": "[8/11]: Plot the 2D contour of f(x, y) with gradient vector field using quiver.",
+      "code": "% Plot 2D contour with gradient vector field\nfigure; contour(xg, yg, zg, 15, 'k'); hold on;\nquiver(xg, yg, fx_vals, fy_vals, 'b', 'LineWidth', 1.2);\nxlabel('x'); ylabel('y');\ntitle(['Contour Plot with Gradient Vector Field of f(x,y) = ' string(f)]);\ngrid on; legend('Contours', 'Gradient Vectors'); hold off;",
+      "output": "<img src='../images/exp6.8.png' alt='exp1 plot' style='max-width:100%;height:auto;'>",
+      "explanation": [
+        "contour(...): Draws 2D contour lines of the function f(x,y).",
+        "quiver(...): Plots gradient vectors (arrows) showing direction and magnitude.",
+        "legend(...): Labels contours and gradient vectors for clarity."
+      ]
+    },
+    {
+      "topic": "[9/11]: Plot the 3D surface of f(x, y) with gradient vectors using quiver3.",
+      "code": "% Plot 3D surfcace with gradient vectors\nfigure; surfc(xg, yg, zg, 'FaceAlpha', 0.8); hold on;\nquiver3(xg, yg, zg, fx_vals, fy_vals, zeros(size(zg)), 'r', 'LineWidth', 1.5);\nxlabel('x'); ylabel('y'); zlabel('f(x,y)');\ntitle(['3D surfcace with Gradient Vectors of f(x,y) = ' string(f)]);\ngrid on; legend('surfcace', 'Gradient Vectors'); hold off;",
+      "output": "<img src='../images/exp6.9.png' alt='exp1 plot' style='max-width:100%;height:auto;'>",
+      "explanation": [
+        "surfc(...): Plots a 3D surface with contours.",
+        "quiver3(...): Adds 3D gradient vectors pointing in the x–y plane.",
+        "FaceAlpha: Makes the surface semi-transparent for better visibility of vectors."
+      ]
+    },
+    {
+      "topic": "[10/11]: Plot the partial derivatives ∂f/∂x and ∂f/∂y as separate surface plots using surfc.",
+      "code": "%Plot partial derivatives as surfcaces \n figure;\nsubplot(1, 2, 1); surfc(xg, yg, fx_vals);\nxlabel('x'); ylabel('y'); zlabel('\\partial f / \\partial x');\ntitle('Partial Derivative \\partial f / \\partial x'); grid on;\nsubplot(1, 2, 2); surfc(xg, yg, fy_vals);\nxlabel('x'); ylabel('y'); zlabel('\\partial f / \\partial y');\ntitle('Partial Derivative \\partial f / \\partial y'); grid on;",
+      "output": "<img src='../images/exp6.png' alt='exp1 plot' style='max-width:100%;height:auto;'>",
+      "explanation": [
+        "subplot(1,2,1): Divides the figure into two plots; this is the first subplot.",
+        "surfc(...): Plots the 3D surface with contours for ∂f/∂x.",
+        "subplot(1,2,2): Second subplot for ∂f/∂y.",
+        "Labels and titles clearly show which partial derivative is being displayed."
+      ]
+    },
+    {
+      "topic": "[11/11]: Display symbolic expressions of partial derivatives and the gradient vector.",
+      "code": "% Display symbolic results\ndisp('Partial derivative with respect to x:');\ndisp(fx);\ndisp('Partial derivative with respect to y:');\ndisp(fy);\ndisp('Gradient vector:');\ndisp(grad_f);",
+      "output": "Partial derivative with respect to x: 2*x\nPartial derivative with respect to y:2*y \nGradient vector:\n2*x\n2*y",
+      "explanation": [
+        "Displays the symbolic expressions of the partial derivatives ∂f/∂x and ∂f/∂y.",
+        "Displays the symbolic gradient vector ∇f.",
+        "Helps verify the calculated derivatives and gradient visually in the command window."
+      ]
+    }
+  ]
+}

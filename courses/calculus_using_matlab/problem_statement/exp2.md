@@ -1,8 +1,11 @@
 
 **Topic:** First and Second order derivatives of functions of a single variable.
 
-|<p>Take a look at the list of functions and/or commands given below using MATLAB ‘help’ </p><p>syms, diff(), subs(), input(), double(), num2str(), plot(), xlabel(), ylabel(), title(), legend(), hold on, hold off, grid on, etc.       </p><p>Implement all Tasks given below.</p>|
-| - |
+> Take a look at the list of functions and/or commands given below using MATLAB ‘help’
+> 
+> `syms`, `diff()`, `subs()`, `input()`, `double()`, `num2str()`, `plot()`, `xlabel()`, `ylabel()`, `title()`, `legend()`, `hold on`, `hold off`, `grid on`, etc.
+> 
+> mplement all tasks given below.
 
 **Introduction**:
 
@@ -35,7 +38,6 @@ Symbolic Differentiation enables us to analytically compute exact derivative exp
 
 - **Learn to**
   - Define symbolic variables: Use syms to declare your variable(s) as symbolic. 
-    - Reference [1]: Check this [link](https://math.umd.edu/~jmr/241/calc.html) to learn 
   - Define the function: Write your function using the symbolic variable.
   - Use diff:
     - diff(f): Calculates the first derivative of f with respect to the default independent variable (usually x if defined first, or t if defined first, etc.).
@@ -54,7 +56,7 @@ Symbolic Differentiation enables us to analytically compute exact derivative exp
   - Step 4: Compute the second order derivative of fx using diff(f,2)and display it as a symbolic expression.
   - Step 5: Evaluate the function f(x), first order derivative f'(x), and the second order derivative f''(x) at specific points, say x=2, and then display those numerical values. 
 
-*code walkthrought*:
+**code walkthrought:**[link](./experiments/experiment_viewer.html?exp=exp2)
 
 **Task#1.2:** gt=sin⁡t2
 
@@ -64,12 +66,13 @@ Symbolic Differentiation enables us to analytically compute exact derivative exp
 - Step 4: Compute the second order derivative of gt using diff(g,2)and display it as a symbolic expression.
 - Step 5: Evaluate the function g(t), first order derivative g'(t), and the second order derivative g''(t) at specific points, say t=π4, and then display those numerical values.
 
+**code walkthrought:**[link](./experiments/experiment_viewer.html?exp=exp2)
 
 **Numerical Differentiation (Approximation)**
 
 While diff is primarily for symbolic differentiation, we can also perform numerical differentiation on arrays of data using diff. However, this is an approximation based on finite differences and is generally used when you have discrete data points rather than a continuous function. This demonstrates the practical application when exact function forms are unknown, highlighting the trade-offs between accuracy and data characteristics (like noise).
 
-Key concepts: 
+**Key concepts:**
 
 - **Learn**:
 
@@ -96,6 +99,8 @@ dydx≈ΔyΔx
 - Step 4: Compute the second derivative as per the formula given above i.e., by applying approximate derivative formula on the result of first derivative
 - Step 5:  Plot the (x, y) data points, their first derivative, and the second derivative.
 - Step 6: For the same function taken in step 1, compute the analytical first and second order derivatives using the built-in diff() function.
+
+**code walkthrought:**[link](./experiments/experiment_viewer.html?exp=exp2)
 
 **Conclusion**:
 

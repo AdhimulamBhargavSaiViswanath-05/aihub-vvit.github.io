@@ -1,0 +1,124 @@
+ {
+    "title": "4. Rolle’s Theorem",
+    "slides": [
+        {
+      "topic": "[1/11]: Start by clearing the workspace using `clear all` and clearing the command window using `clc`. Then print a title for Rolle’s Theorem.",
+      "code": "clear all; % Clear workspace\nclc; % Clear command window\ndisp('=== Rolle’s Theorem ===');",
+      "output": "=== Rolle’s Theorem ===",
+      "explanation": [
+        "Clears previous variables and command window.",
+        "Displays \"Rolle’s Theorem\" as the heading."
+      ]
+    },
+    {
+      "topic": "[2/11]: Define symbolic variable `x` using `syms x`, and then define the function `f(x) = x^2 - 2x + 1` for Rolle’s Theorem.",
+      "code": "syms x; % Declare symbolic variable x\nf_rolle = x^2 - 2*x + 1; % Function: f(x) = x^2 - 2x + 1",
+      "output": "",
+      "explanation": [
+        "Declares symbolic variable x.",
+        "Defines the symbolic function ."
+      ]
+    },
+    {
+      "topic": "[3/11]: Set the interval endpoints as a = 0 and b = 2. This defines [a, b] for the theorem.",
+      "code": "a_rolle = 0;\nb_rolle = 2;",
+      "output": "",
+      "explanation": [
+        "Sets the interval as and .",
+        "These are the bounds for applying Rolle’s Theorem."
+      ]
+    },
+    {
+      "topic": "[4/11]: Evaluate the function at both endpoints using `subs()` and `double()` to get f(a) and f(b). Then check if f(a) == f(b) to satisfy one condition of Rolle’s Theorem.",
+      "code": "f_a = double(subs(f_rolle, x, a_rolle)); % f(0)\nf_b = double(subs(f_rolle, x, b_rolle)); % f(2)\ndisp(['f(', num2str(a_rolle), ') = ', num2str(f_a)]);\ndisp(['f(', num2str(b_rolle), ') = ', num2str(f_b)]);\nif abs(f_a - f_b) < 1e-6\n    disp('Condition f(a) = f(b) satisfied');\nelse\n    disp('Warning: f(a) ≠ f(b), Rolle’s Theorem not applicable');\nend",
+      "output": "f(0) = 1\nf(2) = 1\nCondition f(a) = f(b) satisfied",
+      "explanation": [
+        "Define the function: The given function is .",
+        "Evaluate at the left endpoint : Substituting into the function:",
+        "Evaluate at the right endpoint : Substituting into the function:",
+        "Compare both values: We observe that .",
+        "Check the absolute difference using a tolerance :",
+        "Conclusion: Since within the tolerance, Rolle’s Theorem is applicable on the interval ."
+      ]
+    },
+    {
+      "topic": "[5/11]: Find the first derivative f′(x) using `diff()`, then solve f′(x) = 0 using `solve()` to find critical point(s) c inside (a, b).",
+      "code": "f_rolle_prime = diff(f_rolle, x); % f'(x)\ndisp(['First derivative: f''(x) = ', char(f_rolle_prime)]);\nc_rolle = double(solve(f_rolle_prime, x)); % Solve f'(x) = 0",
+      "output": "First derivative: f'(x) = 2*x - 2",
+      "explanation": [
+        "Differentiates the function .",
+        "Solves to find critical point(s) c."
+      ]
+    },
+    {
+      "topic": "[6/11]: Filter only real solutions of c that lie within the open interval (a, b), and display them.",
+      "code": "c_rolle = c_rolle(imag(c_rolle) == 0 & c_rolle > a_rolle & c_rolle < b_rolle);\ndisp(['Point(s) c where f''(c) = 0: ', num2str(c_rolle)]);",
+      "output": "Point(s) c where f'(c) = 0: 1",
+      "explanation": [
+        "Removes any non-real or out-of-interval values.",
+        "Keeps only the real solution(s) that lie inside the open interval ."
+      ]
+    },
+    {
+      "topic": "[7/11]: Plot the function f(x) over [a, b], mark the point(s) c where f′(c) = 0 using red dot(s), and draw the horizontal tangent line at that point.",
+      "code": "figure(1); hold on; grid on;\nf_rolle_handle = matlabFunction(f_rolle);\nx_vals = linspace(a_rolle, b_rolle, 100);\nplot(x_vals, f_rolle_handle(x_vals), 'b-', 'LineWidth', 2);\nplot(c_rolle, double(subs(f_rolle, x, c_rolle)), 'ro', 'MarkerFaceColor', 'r');\n% Tangent line at c\ny_rolle_c = double(subs(f_rolle, x, c_rolle));\nx_tangent = linspace(c_rolle - 0.5, c_rolle + 0.5, 50);\ny_tangent = y_rolle_c * ones(size(x_tangent));\nplot(x_tangent, y_tangent, 'k--', 'LineWidth', 1.5);\nxlabel('x'); ylabel('f(x)'); title('Rolle’s Theorem: Horizontal Tangent');\nlegend('f(x) = x^2 - 2x + 1', sprintf('c = %.2f', c_rolle), 'Tangent at c');\nhold off;",
+      "output": "<img src='../images/exp4.7.png' alt='exp1 plot' style='max-width:100%;height:auto;'>",
+      "explanation": [
+        "Create a new plot window: figure(1); hold on; grid on; → Opens a new graph window, keeps all plots on the same figure, and turns the grid on.",
+        "Convert symbolic function to normal function: f_rolle_handle = matlabFunction(f_rolle); → Converts to a regular function that can be used for plotting.",
+        "Generate x-values: x_vals = linspace(a_rolle, b_rolle, 100); → Creates 100 x-values between to draw the function smoothly.",
+        "Plot the main function: plot(x_vals, f_rolle_handle(x_vals), 'b-', 'LineWidth', 2); → Plots the curve of f(x) in blue color with a thick line.",
+        "Plot the critical point (c): plot(c_rolle, double(subs(f_rolle, x, c_rolle)), 'ro', 'MarkerFaceColor', 'r'); → Marks the point c=1 on the curve with a red dot, where the slope is zero.",
+        "Get the y-value at c: y_rolle_c = double(subs(f_rolle, x, c_rolle)); → Finds f(c), which is the y-coordinate at the critical point x=c.",
+        "Create x-values near c for tangent: x_tangent = linspace(c_rolle - 0.5, c_rolle + 0.5, 50); → Picks x-values around c to draw a short horizontal line.",
+        "Make y-values same for horizontal line: y_tangent = y_rolle_c * ones(size(x_tangent)); → All y-values are equal to f(c) to draw a flat (horizontal) tangent.",
+        "Plot the horizontal tangent line: plot(x_tangent, y_tangent, 'k--', 'LineWidth', 1.5); → Draws the tangent line at ccc using a dashed black line.",
+        "Add labels, title, and legend: xlabel('x'); ylabel('f(x)'); → Labels the x and y axes.",
+        "title('Rolle’s Theorem: Horizontal Tangent'); → Adds a title.",
+        "legend(...) → Shows what each part of the graph represents: the function the point the horizontal tangent at c"
+      ]
+    },
+    {
+      "topic": "[8/11]: Print a heading for Mean Value Theorem, then define a new function `f(x) = x^3 - 3x + 1`, and set a = 0, b = 2 again.",
+      "code": "disp('=== Mean Value Theorem ===');\nf_mvt = x^3 - 3*x + 1;\na_mvt = 0;\nb_mvt = 2;",
+      "output": "=== Mean Value Theorem ===",
+      "explanation": [
+        "Prints heading for Mean Value Theorem.",
+        "Defines a new function .",
+        "Sets interval again as ."
+      ]
+    },
+    {
+      "topic": "[9/11]: Calculate the average rate of change (secant slope) using the formula (f(b) - f(a)) / (b - a).",
+      "code": "secant_slope = double((subs(f_mvt, x, b_mvt) - subs(f_mvt, x, a_mvt)) / (b_mvt - a_mvt));\ndisp(['Average rate of change: (f(b) - f(a)) / (b - a) = ', num2str(secant_slope)]);",
+      "output": "Average rate of change: (f(b) - f(a)) / (b - a) = 1",
+      "explanation": [
+        "Calculates slope of the secant line (Secant Line) using"
+      ]
+    },
+    {
+      "topic": "[10/11]: Find the derivative f′(x), then solve the equation f′(x) = secant_slope to get point(s) c in (a, b) where the instantaneous rate matches the average rate.",
+      "code": "f_mvt_prime = diff(f_mvt, x);\ndisp(['First derivative: f''(x) = ', char(f_mvt_prime)]);\nc_mvt = double(solve(f_mvt_prime - secant_slope, x));\nc_mvt = c_mvt(imag(c_mvt) == 0 & c_mvt > a_mvt & c_mvt < b_mvt);\ndisp(['Point(s) c where f''(c) = secant slope: ', num2str(c_mvt')]);",
+      "output": "First derivative: f'(x) = 3*x^2 - 3\nPoint(s) c where f'(c) = secant slope: 1.1547",
+      "explanation": [
+        "Finds derivative f′(x).",
+        "Solves .",
+        "Filters the c values that lie in (a, b)."
+      ]
+    },
+    {
+      "topic": "[11/11]: Plot the function f(x), draw the secant line (green), and draw tangent line(s) at the c point(s). Mark those points clearly. Finally, print a textual explanation of the theorem visuals.",
+      "code": "figure(2); hold on; grid on;\nf_mvt_handle = matlabFunction(f_mvt);\nx_vals = linspace(a_mvt, b_mvt, 100);\nplot(x_vals, f_mvt_handle(x_vals), 'b-', 'LineWidth', 2);\n% Secant line\nsecant = subs(f_mvt, x, a_mvt) + secant_slope * (x - a_mvt);\nsecant_handle = matlabFunction(secant);\nplot(x_vals, secant_handle(x_vals), 'g--', 'LineWidth', 1.5);\n% Tangents at c\nlegend_entries = {'f(x) = x^3 - 3x + 1', 'Secant Line'};\nfor i = 1:length(c_mvt)\n    tangent_mvt = subs(f_mvt, x, c_mvt(i)) + secant_slope * (x - c_mvt(i));\n    tangent_handle = matlabFunction(tangent_mvt);\n    x_tangent = linspace(c_mvt(i) - 0.5, c_mvt(i) + 0.5, 50);\n    plot(x_tangent, tangent_handle(x_tangent), 'r-', 'LineWidth', 1.5);\n    plot(c_mvt(i), double(subs(f_mvt, x, c_mvt(i))), 'ro', 'MarkerFaceColor', 'r');\n    legend_entries{end+1} = sprintf('Tangent at c = %.2f', c_mvt(i));\n    legend_entries{end+1} = sprintf('c = %.2f', c_mvt(i));\nend\nxlabel('x'); ylabel('f(x)'); title('Mean Value Theorem: Tangent = Secant Slope');\nlegend(legend_entries);\nhold off;\n% Explanation text\ndisp('=== Explanation ===');\ndisp('Rolle’s Theorem: The red point(s) show where the tangent is horizontal (f''(c) = 0).');\ndisp('This happens because f(0) = f(2), so the function must \"turn\" somewhere.');\ndisp('Mean Value Theorem: The red point(s) show where the tangent slope equals the');\ndisp('secant slope (green dashed line). This represents instantaneous rate equaling');\ndisp('average rate, like a car’s speed matching its average speed over a trip.');\ndisp('To explore: Change f_rolle or f_mvt (e.g., to sin(x)) and re-run!');\ndisp('R2014b Note: Constant tangent lines (Rolle’s) are plotted as y = constant.');",
+      "output": "<img src='../images/exp4.png' alt='exp1 plot' style='max-width:100%;height:auto;'>",
+      "explanation": [
+        "Plot the function f(x):- The code sets up a graph and plots the curve of f(x) in blue between aaa and bbb.",
+        "Draw the secant line: It calculates and plots a green dashed line connecting the endpoints — this shows the average slope: slope=(f(b)-f(a))/(b-a)",
+        "Find and draw tangent(s) at ccc: It finds one or more points ccc where the tangent slope equals the secant slope, as stated in the Mean Value Theorem.",
+        "These are shown with red lines and dots.",
+        "Label the graph: X and Y axes are labeled, a title is added, and a legend explains what each line and point represents.",
+        "Show explanation: In the command window, it explains: Rolle’s Theorem: Tangent is flat when f(a)=f(b)",
+        "Mean Value Theorem (MVT): Tangent slope equals the average slope somewhere on the curve."
+      ]
+    }
+    ]
+}
