@@ -14,16 +14,19 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin: 1.5rem 0;
-  padding: 0;
+  margin: 0.7rem 0;
+  padding-bottom: 12px;
   border: none;
   box-shadow: none;
+  flex-direction: row !important;
+  text-align: left;
 }
 
 .cards {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
+  padding-bottom: 2.5rem; /* or increase as needed */
 }
 
 .card-img {
@@ -69,46 +72,10 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: underline;
 }
 
-.btn {
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-weight: 600;
-  margin: 0.4rem 0;
-}
-
-.btn-outline-primary {
-  color: rgb(212, 175, 55);
-  border-color: rgb(212, 175, 55);
-  background: transparent;
-}
-
-.btn-outline-primary:hover,
-.btn-outline-primary:focus {
-  background-color: rgb(212, 175, 55);
-  color: #fff;
-}
-
-#nav-col {
-  border-right: 1px solid #ddd;
-  padding: 1.5rem 0.8rem;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  display: flex;
-}
-
-#nav-col h5 {
-  margin-bottom: 1rem;
-}
-
-#nav-col button {
-  margin: 0.3rem 0;
-  width: 100%;
-  text-align: left;
-}
-
 hr {
   border-top: 1.5px solid #ddd;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 @media (max-width: 768px) {
@@ -141,87 +108,6 @@ hr {
   .card-subtitle, .card-text {
     font-size: 1rem;
   }
-
-  #nav-col {
-    padding: 0.8rem;
-    border-right: none;
-    border-bottom: 1px solid #ddd;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #nav-col h5 {
-    display: none;
-  }
-
-  #nav-col button {
-    margin: 0.3rem 0.5rem;
-    width: auto;
-    text-align: center;
-  }
-}
-/* Fix experiment buttons alignment in desktop */
-#nav-col {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;  /* stay left aligned */
-  justify-content: flex-start;
-  padding: 1.5rem 0.8rem;
-  border-right: 1px solid #ddd;
-  height: 100%;
-}
-
-#nav-col h5 {
-  margin-bottom: 1rem;
-}
-
-#nav-col button {
-  margin: 0.5rem 0;
-  width: 100%;
-  text-align: left;
-}
-
-/* In mobile — stack them horizontally */
-@media (max-width: 768px) {
-  #nav-col {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 0.8rem;
-    border-right: none;
-    border-bottom: 1px solid #ddd;
-  }
-
-  #nav-col h5 {
-    display: none;
-  }
-
-  #nav-col button {
-    margin: 0.3rem 0.5rem;
-    width: auto;
-    text-align: center;
-  }
-}
-
-.experiment-nav a {
-  margin-right: 1em;
-  font-weight: bold;
-  text-decoration: none;
-  color: #007bff;
-}
-.experiment-nav a:hover {
-  color: #0056b3;
-  text-decoration: underline;
-}
-.experiment-nav a .arrow-black {
-  color: #000;
-  text-decoration: none;
-}
-.experiment-card {
-  flex-direction: row !important;
-  align-items: center;
-  text-align: left;
 }
 
 .experiment-title.mb-2 {
@@ -234,5 +120,13 @@ hr {
     font-size: 0.95rem;
     padding-right: 0.1rem;
   }
+}
+
+#experiments {
+  scroll-margin-top: 80px; /* Adjust this value to match your header height */
+}
+
+#content-area {
+  padding-bottom: 2.5rem; /* or more if needed */
 }
 

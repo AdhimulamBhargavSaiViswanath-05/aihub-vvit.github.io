@@ -1,5 +1,5 @@
  {
-    "title": "4. Rolle’s Theorem",
+    "title": "3. Rolle’s Theorem",
     "slides": [
         {
       "topic": "[1/11]: Start by clearing the workspace using `clear all` and clearing the command window using `clc`. Then print a title for Rolle’s Theorem.",
