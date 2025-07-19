@@ -15,16 +15,100 @@
     <hr>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-2 border-end p-4 d-flex flex-md-column flex-row justify-content-center align-items-center" id="nav-col">
-                <h5 class="d-none d-md-block">Navigation</h5>
-                <button class="btn btn-outline-primary mb-2 mx-2 mx-md-0 w-auto w-md-100" onclick="showTab('about')">About</button>
-                <button class="btn btn-outline-primary mx-2 mx-md-0 w-auto w-md-100" onclick="showTab('experiments')">Experiments</button>
-            </div>
-            <!-- Right Column -->
-            <div class="col-12 col-md-9 p-3">
+            <div class="col-12 col-md-9 p-3" style="margin:auto; float:none;">
                 <div id="content-area">
-                    <h2>Welcome!</h2>
-                    <p>Select a tab above to view content.</p>
+                    <h4>About the Course</h4>
+                    <p>This course introduces Calculus concepts implemented in MATLAB.</p>
+                    <hr>
+                    <h4>Introduction to Matlab</h4>
+                    <p>MATLAB, which stands for MATrix LABoratory, is a high-level programming language and environment for numerical computing, data analysis, and visualization. It's widely used by engineers and scientists for tasks ranging from basic calculations to complex algorithm development and modeling. MATLAB excels at handling matrices and arrays, making it a powerful tool for solving problems expressed in mathematical notation.</p>
+                    <hr>
+                    <h4 id="experiments" style="margin-top: 30px;">Experiments</h4>
+                    <div class="cards">
+                        <div class="experiment-card">
+                            <div id="card-image">
+                                <img src="./images/exp2.png" alt="Project_image" class="card-img">
+                            </div>
+                            <div class="card-body">
+                                <div id="desc">
+                                    <h4 class="experiment-title mb-2">1.First and Second order derivatives of functions of a single variable.</h4>
+                                    <h6 class="card-subtitle mb-2 text-body-secondary"><b>Description</b></h6>
+                                    <p class="card-text">First and Second order derivatives of functions of a single variable</p>
+                                    <a href="./experiment_viewer.html?path=./problem_statement/exp2.md">|read more|</a><a href="./experiments/experiment_viewer.html?exp=exp2">code walkthrough|</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="experiment-card">
+                            <div id="card-image">
+                                <img src="./images/exp3.png" alt="Project_image" class="card-img">
+                            </div>
+                            <div class="card-body">
+                                <div id="desc">
+                                    <h4 class="experiment-title mb-2">2.Evaluating maxima or minima of a single variable function using Taylors series.</h4>
+                                    <h6 class="card-subtitle mb-2 text-body-secondary"><b>Description</b></h6>
+                                    <p class="card-text">First and Second order derivatives of functions of a single variable</p>
+                                    <a href="./experiment_viewer.html?path=./problem_statement/exp3.md">|read more|</a><a href="./experiments/experiment_viewer.html?exp=exp3">code walkthrough|</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="experiment-card">
+                            <div id="card-image">
+                                <img src="./images/exp4.png" alt="Project_image" class="card-img">
+                            </div>
+                            <div class="card-body">
+                                <div id="desc">
+                                    <h4 class="experiment-title mb-2">3.Verifying Rolle’s and Lagrange’s Mean Value Theorems</h4>
+                                    <h6 class="card-subtitle mb-2 text-body-secondary"><b>Description</b></h6>
+                                    <p class="card-text">To verify Rolle’s and Lagrange’s Mean Value Theorems for a given function using MATLAB.</p>
+                                    <a href="./experiment_viewer.html?path=./problem_statement/exp4.md">|read more|</a><a href="./experiments/experiment_viewer.html?exp=exp4">code walkthrough|</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="experiment-card">
+                            <div id="card-image">
+                                <img src="./images/exp5.png" alt="Project_image" class="card-img">
+                            </div>
+                            <div class="card-body">
+                                <div id="desc">
+                                    <h4 class="experiment-title mb-2">4.Taylor Series Approximation of Functions</h4>
+                                    <h6 class="card-subtitle mb-2 text-body-secondary"><b>Description</b></h6>
+                                    <p class="card-text">Approximating transcendental functions like sin(x),cos(x),e^x,log(1+x), etc.</p>
+                                    <a href="./experiment_viewer.html?path=./problem_statement/exp5.md">|read more|</a><a href="./experiments/experiment_viewer.html?exp=exp5">code walkthrough|</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="experiment-card">
+                            <div id="card-image">
+                                <img src="./images/exp6.png" alt="Project_image" class="card-img">
+                            </div>
+                            <div class="card-body">
+                                <div id="desc">
+                                    <h4 class="experiment-title mb-2">5.Partial Derivatives and Gradient Visualization</h4>
+                                    <h6 class="card-subtitle mb-2 text-body-secondary"><b>Description</b></h6>
+                                    <p class="card-text">First and Second order derivatives of functions of a single variable</p>
+                                    <a href="./experiment_viewer.html?path=./problem_statement/exp6.md">|read more|</a><a href="./experiments/experiment_viewer.html?exp=exp6">code walkthrough|</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="experiment-card">
+                            <div id="card-image">
+                                <img src="./images/exp7a.png" alt="Project_image" class="card-img">
+                            </div>
+                            <div class="card-body">
+                                <div id="desc">
+                                    <h4 class="experiment-title mb-2">6.Jacobian Matrix and Functional Dependence</h4>
+                                    <h6 class="card-subtitle mb-2 text-body-secondary"><b>Description</b></h6>
+                                    <p class="card-text">To grasp and analyse the fundamental principles and formation of the Jacobian matrix.</p>
+                                    <a href="./experiment_viewer.html?path=./problem_statement/exp7.md">|read more|</a><a href="./experiments/experiment_viewer.html?exp=exp7">code walkthrough|</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,128 +116,5 @@
     <special-footer></special-footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="HeaderFooter.js"></script>
-
-    <script>
-        let aboutCount = 0;
-
-        function showTab(tab, updateUrl = true) {
-            const contentArea = document.getElementById('content-area');
-            if (updateUrl) {
-                const url = new URL(window.location);
-                url.searchParams.set('tab', tab);
-                window.history.replaceState({}, '', url);
-            }
-            if (tab === 'about') {
-                aboutCount++;
-                contentArea.innerHTML = `
-                    <h2>About the Course</h2>
-                    <p>This course introduces Calculus concepts implemented in MATLAB.</p>
-                `;
-            } else if (tab === 'experiments') {
-    contentArea.innerHTML = `
-   <h3 id="section_heading" style="margin-top: 10px;">Experiments</h3>
-    <hr>
-    <div class="cards">
-      <div class="experiment-card">
-          <div id="card-image">
-          <img src="./images/exp1.png" alt="Project_image" class="card-img">
-        </div>
-        <div class="card-body">
-          <div id="desc">
-            <h4 class="experiment-title mb-2">1.First & Second Order Derivatives</h4>
-            <h6 class="card-subtitle mb-2 text-body-secondary"><b>Description</b></h6>
-              <p class="card-text">First and Second order derivatives of functions of a single variable</p>
-                <a href="./experiment_viewer.html?path=./problem_statement/exp1.md">|read more|</a><a href="./experiments/experiment_viewer.html?exp=exp1">code walkthrough|</a>
-        </div>
-      </div>
-      <hr>
-      <div class="experiment-card">
-          <div id="card-image">
-          <img src="./images/exp2.png" alt="Project_image" class="card-img">
-        </div>
-        <div class="card-body">
-          <div id="desc">
-            <h4 class="experiment-title mb-2">2.First and Second order derivatives of functions of a single variable.</h4>
-            <h6 class="card-subtitle mb-2 text-body-secondary"><b>Description</b></h6>
-              <p class="card-text">First and Second order derivatives of functions of a single variable</p>
-                <a href="./experiment_viewer.html?path=./problem_statement/exp2.md">|read more|</a><a href="./experiments/experiment_viewer.html?exp=exp2">code walkthrough|</a>
-        </div>
-      </div>
-      <hr>
-      <div class="experiment-card">
-          <div id="card-image">
-          <img src="./images/exp3.png" alt="Project_image" class="card-img">
-        </div>
-        <div class="card-body">
-          <div id="desc">
-            <h4 class="experiment-title mb-2">3.Evaluating maxima or minima of a single variable function using Taylors series.</h4>
-            <h6 class="card-subtitle mb-2 text-body-secondary"><b>Description</b></h6>
-              <p class="card-text">First and Second order derivatives of functions of a single variable</p>
-                <a href="./experiment_viewer.html?path=./problem_statement/exp3.md">|read more|</a><a href="./experiments/experiment_viewer.html?exp=exp3">code walkthrough|</a>
-        </div>
-      </div>
-      <hr>
-      <div class="experiment-card">
-          <div id="card-image">
-          <img src="./images/exp4.png" alt="Project_image" class="card-img">
-        </div>
-        <div class="card-body">
-          <div id="desc">
-            <h4 class="experiment-title mb-2">4.Verifying Rolle’s and Lagrange’s Mean Value Theorems</h4>
-            <h6 class="card-subtitle mb-2 text-body-secondary"><b>Description</b></h6>
-              <p class="card-text">To verify Rolle’s and Lagrange’s Mean Value Theorems for a given function using MATLAB.</p>
-                <a href="./experiment_viewer.html?path=./problem_statement/exp4.md">|read more|</a><a href="./experiments/experiment_viewer.html?exp=exp4">code walkthrough|</a>
-        </div>
-      </div>
-      <hr>
-      <div class="experiment-card">
-          <div id="card-image">
-          <img src="./images/exp5.png" alt="Project_image" class="card-img">
-        </div>
-        <div class="card-body">
-          <div id="desc">
-            <h4 class="experiment-title mb-2">5.Taylor Series Approximation of Functions</h4>
-            <h6 class="card-subtitle mb-2 text-body-secondary"><b>Description</b></h6>
-              <p class="card-text">Approximating transcendental functions like sin(x),cos(x),e^x,log(1+x), etc.</p>
-                <a href="./experiment_viewer.html?path=./problem_statement/exp5.md">|read more|</a><a href="./experiments/experiment_viewer.html?exp=exp5">code walkthrough|</a>
-        </div>
-      </div>
-      <hr>
-      <div class="experiment-card">
-          <div id="card-image">
-          <img src="./images/exp6.png" alt="Project_image" class="card-img">
-        </div>
-        <div class="card-body">
-          <div id="desc">
-            <h4 class="experiment-title mb-2">6.Partial Derivatives and Gradient Visualization</h4>
-            <h6 class="card-subtitle mb-2 text-body-secondary"><b>Description</b></h6>
-              <p class="card-text">First and Second order derivatives of functions of a single variable</p>
-                <a href="./experiment_viewer.html?path=./problem_statement/exp6.md">|read more|</a><a href="./experiments/experiment_viewer.html?exp=exp6">code walkthrough|</a>
-        </div>
-      </div>
-      <hr>
-      <div class="experiment-card">
-          <div id="card-image">
-          <img src="./images/exp7a.png" alt="Project_image" class="card-img">
-        </div>
-        <div class="card-body">
-          <div id="desc">
-            <h4 class="experiment-title mb-2">7.Jacobian Matrix and Functional Dependence</h4>
-            <h6 class="card-subtitle mb-2 text-body-secondary"><b>Description</b></h6>
-              <p class="card-text">To grasp and analyse the fundamental principles and formation of the Jacobian matrix.</p>
-                <a href="./experiment_viewer.html?path=./problem_statement/exp7.md">|read more|</a><a href="./experiments/experiment_viewer.html?exp=exp7">code walkthrough|</a>
-        </div>
-      </div>
-    `;
- }
-        }
-
-        // On page load, check for tab param
-        window.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const tab = params.get('tab') || 'about';
-            showTab(tab, false);
-        });
-    </script>
 </body>
 </html>
