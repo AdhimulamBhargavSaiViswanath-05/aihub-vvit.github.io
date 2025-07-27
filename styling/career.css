@@ -20,6 +20,7 @@ body {
 
 .card {
   width: 100%;
+  max-width: 10000px;
   background-color: #fff;
   border-radius: 8px;
   overflow-x: auto; /* Allow horizontal scrolling if content overflows */
