@@ -13,9 +13,11 @@ body {
 
 
 .card-img-top {
-  width: 100%;
-  height: auto;
   display: block;
+  max-width: 80%; /* Or any percent you like, e.g., 70%, 90% */
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .card {
