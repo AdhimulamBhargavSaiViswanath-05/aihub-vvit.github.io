@@ -13,3 +13,7 @@ body{
     display: flex;
     align-items: center;
 }
+.card iframe {
+    margin-top: 1rem;
+    border-radius: 5px;
+}
