@@ -11,14 +11,6 @@ body {
   padding: 1rem;
 }
 
-.card {
-  width: 100%;
-  max-width: 600px;
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
 
 .card-img-top {
   width: 100%;
@@ -26,8 +18,22 @@ body {
   display: block;
 }
 
+.card {
+  width: 100%;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow-x: auto; /* Allow horizontal scrolling if content overflows */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem; /* Add padding inside card */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
 .card-body {
   padding: 1rem;
+  display: flex;
+  flex-wrap: wrap; /* Allow children (like buttons) to wrap onto next line */
+  gap: 1rem; /* Add spacing between children */
 }
 
 .card-title {
