@@ -71,6 +71,7 @@ body {
 
   #cards {
     padding: 0.5rem;
+    gap: 5 rem;
   }
 }
 
