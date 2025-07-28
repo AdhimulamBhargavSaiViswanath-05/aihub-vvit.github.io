@@ -62,6 +62,7 @@ class SpecialHeader extends HTMLElement {
                                         <li><a class="dropdown-item" href="#">Verbal Ability</a></li>
                                     </ul>
                                 </li>
+                                <li><a class="dropdown-item" href="Career.html">DSA</a></li>
                                 <li><a class="dropdown-item" href="Career.html">Web Dev</a></li>
                             </ul>
                         </li>
