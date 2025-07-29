@@ -1,0 +1,348 @@
+/* Base reset & layout */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  background: #fff;
+  font-family: 'Roboto', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-breadcrumb a {
+color: #007bff;
+text-decoration: none;
+transition: color 0.2s;
+}
+.top-breadcrumb a:hover {
+color: #0056b3;
+text-decoration: underline;
+}
+.top-breadcrumb a .arrow-black {
+color: #000;
+text-decoration: none;
+}
+
+body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top control bar */
+
+.top-controls {
+  flex: 0 0 auto;
+  background: #fff;
+  padding: 12px 20px 8px 20px;
+  z-index: 1000;
+  align-items: center;
+  justify-items: center;
+  flex-direction: column;
+}
+
+/* Main container with content and row layout */
+
+.exp-container {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main row inside content */
+
+.exp-container .row {
+  flex: 1 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+/* Each code/explanation/output block */
+
+.exp-container .row > div {
+  word-break: break-word;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Code box — text wraps, no horizontal scroll */
+
+.code-box {
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  font-size: 1rem;
+  user-select: none;
+  cursor: not-allowed;
+  margin-bottom: 1rem;
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  overflow-x: hidden;
+  padding: 10px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.code-box pre, .code-box code {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  overflow-x: hidden !important;
+}
+
+.code-box img {
+  border-radius: 8px;
+}
+
+/* Slide topic styles */
+.slide-topic {
+  color: #bfa032;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-align: left;
+  width: 100%;
+}
+
+.slide-topic-box {
+  background: #fffbe6;
+  border: 1.5px solid #bfa032;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  margin: 0 0 1.2rem 20px;
+  width: fit-content;
+  max-width: 700px;
+  box-shadow: 0 2px 8px rgba(212,175,55,0.07);
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.slide-topic {
+  color: #bfa032;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+}
+
+/* Explanation slides */
+
+.slide {
+  display: none;
+}
+
+.slide.active {
+  display: block;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.slide h5 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.slide ul {
+  padding-left: 1.2rem;
+}
+
+.slide li {
+  margin-bottom: 0.5rem;
+  font-size: 1.08rem;
+  background: #f6e7c1;
+  border-radius: 6px;
+  padding: 6px 12px;
+  box-shadow: 0 1px 4px rgba(212,175,55,0.08);
+  transition: background 0.3s;
+}
+
+.slide li[style*="display:none"] {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Output section spacing */
+
+#output-section {
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+/* Bottom controls below content */
+
+.bottom-controls {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px 20px;
+  margin-top: 8px;
+}
+
+/* Drawing canvas overlay */
+
+#draw-canvas {
+  border: 2px solid #ccc;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  width: 100%;
+  height: calc(100% - 120px);
+  z-index: 10;
+  background: rgba(255,255,255,0.8);
+  display: none;
+}
+
+#draw-controls {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 20;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .draw-controls {
+    position: fixed !important;
+    bottom: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    top: auto !important;
+    right: auto !important;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  
+  .color-picker {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .color-btn {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  
+  .draw-controls .btn {
+    margin: 2px;
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}
+
+/* Keyboard navigation hint */
+.keyboard-hint {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  z-index: 1000;
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .keyboard-hint {
+    display: block;
+  }
+}
+
+/* Button styles */
+
+.btn-outline-primary {
+  color: rgb(212, 175, 55);
+  border-color: rgb(212, 175, 55);
+  background-color: transparent !important;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active,
+.btn-outline-primary:focus {
+  color: #fff !important;
+  background-color: rgb(212, 175, 55) !important;
+  border-color: rgb(212, 175, 55) !important;
+}
+
+.btn-outline-danger {
+  color: #d9534f;
+  border-color: #d9534f;
+  background-color: transparent !important;
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:active,
+.btn-outline-danger:focus {
+  color: #fff !important;
+  background-color: #d9534f !important;
+  border-color: #d9534f !important;
+}
+
+/* Headings */
+
+h4 {
+  color: rgb(212, 175, 55);
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 991px) {
+  .exp-container .row {
+    flex-direction: column;
+  }
+
+  .exp-container .row > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    border: none !important;
+    padding: 12px 16px !important;
+    margin: 0;
+  }
+
+  .code-box {
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+  }
+
+  #output-section {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  .bottom-controls {
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px 16px;
+    margin-top: 8px;
+  }
+}
+#slide-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}

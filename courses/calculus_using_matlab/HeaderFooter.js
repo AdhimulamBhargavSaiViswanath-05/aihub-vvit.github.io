@@ -5,8 +5,8 @@ class SpecialHeader extends HTMLElement {
         <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
             <div class="container-fluid">
                 <div style="display: flex; align-items: center">
-                    <img src="./images/AI-HUB.jpg" alt="AI-HUB@VVIT" width="35px" style="border-radius: 60%;">
-                    <a class="navbar-brand" href="#">AI-HUB@VVIT</a>
+                    <img src="../../images/AI-HUB.jpg" alt="AI-HUB@VVIT" width="35px" style="border-radius: 60%;">
+<a class="navbar-brand" href="../../index.html">AI-HUB@VVIT</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -14,47 +14,47 @@ class SpecialHeader extends HTMLElement {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                            <a class="nav-link" href="/index.html">Home</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Projects
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="projectsDropdown">
-                                <li><a class="dropdown-item" href="Projects.html">Ongoing Projects</a></li>
+                                <li><a class="dropdown-item" href="../../Projects.html">Ongoing Projects</a></li>
                                 <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="Projects.html" id="completedProjectsDropdown" aria-expanded="false">
+                                    <a class="dropdown-item dropdown-toggle" href="../../Projects.html" id="completedProjectsDropdown" aria-expanded="false">
                                         Completed Projects
                                         <i class="fas fa-chevron-right submenu-arrow"></i>
                                     </a>
                                     <ul class="dropdown-menu submenu" aria-labelledby="completedProjectsDropdown">
-                                        <li><a class="dropdown-item" href="Game.html">Games</a></li>
-                                        <li><a class="dropdown-item" href="Projects.html#ml">Machine Learning</a></li>
-                                        <li><a class="dropdown-item" href="Projects.html#dl">Deep Learning</a></li>
+                                        <li><a class="dropdown-item" href="../../Game.html">Games</a></li>
+<li><a class="dropdown-item" href="../../Projects.html#ml">Machine Learning</a></li>
+<li><a class="dropdown-item" href="../../Projects.html#dl">Deep Learning</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="courses.html">Courses</a>
+                            <a class="nav-link" href="/courses.html">Courses</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="blog.html">Blogs</a>
+                            <a class="nav-link" href="../../blog.html">Blogs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Events.html">Events</a>
+                            <a class="nav-link" href="../../Events.html">Events</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Apps.html">Apps</a>
+                            <a class="nav-link" href="../../Apps.html">Apps</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="careerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Career Catalysts
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="careerDropdown">
-                                <li><a class="dropdown-item" href="Career.html">Job Guide</a></li>
+                                <li><a class="dropdown-item" href="../../Career.html">Job Guide</a></li>
                                 <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="Career.html" id="lifeSkillsDropdown" aria-expanded="false">
+                                    <a class="dropdown-item dropdown-toggle" href="../../Career.html" id="lifeSkillsDropdown" aria-expanded="false">
                                         Life Skills
                                         <i class="fas fa-chevron-right submenu-arrow"></i>
                                     </a>
@@ -64,17 +64,16 @@ class SpecialHeader extends HTMLElement {
                                         <li><a class="dropdown-item" href="#">Verbal Ability</a></li>
                                     </ul>
                                 </li>
-                                <li><a class="dropdown-item" href="Career.html">DSA</a></li>
-                                <li><a class="dropdown-item" href="Career.html">Web Dev</a></li>
+                                <li><a class="dropdown-item" href="../../Career.html">Web Dev</a></li>
                             </ul>
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="News.html">News</a>
+                            <a class="nav-link" href="../../News.html">News</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="About.html">People</a>
+                            <a class="nav-link" href="../../About.html">People</a>
                         </li>
                     </ul>
                 </div>
@@ -151,8 +150,8 @@ class Links extends HTMLElement {
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./reuse_elements/common.css">
-        <link rel="stylesheet" href="./reuse_elements/hover.css">
+        <link rel="stylesheet" href="common.css">
+        <link rel="stylesheet" href="hover.css">
         `
     }
 }
@@ -161,8 +160,8 @@ class SpecialFooter extends HTMLElement {
         this.innerHTML = `
         <div class="bg-circle-container">
             <div class="wheel-container">
-                <img src="./images/vvit1.png" alt="Outer Wheel" class="outer">
-                <img src="./images/circular_cen.png" alt="Center" class="center">
+                <img src="../../images/vvit1.png" alt="Outer Wheel" class="outer">
+<img src="../../images/circular_cen.png" alt="Center" class="center">
             </div>
         </div>
         <nav class="navbar navbar-expand-lg fixed-bottom bg-body-tertiary">

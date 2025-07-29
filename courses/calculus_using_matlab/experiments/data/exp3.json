@@ -1,0 +1,94 @@
+{
+  "title": "2.Limits and Continuity",
+  "slides": [
+     {
+      "topic": "[1/8]: Clear the workspace and command window to start fresh.",
+      "code": "% MATLAB Script to Demonstrate Maxima/Minima using Taylor Series\n% Clear workspace and command window\nclear all;\nclc;",
+      "output": "",
+      "explanation": [
+        "clear all: Clears all variables from memory.",
+        "clc: Clears the command window.",
+        "Purpose: Starts the script with a clean environment."
+      ]
+    },
+    {
+      "topic": "[2/8]: Define the symbolic function f(x) = x⁴ - 4x² for analysis.",
+      "code": "% Define the function\n% Example function: f(x) = x^4 - 4x^2 (has a minimum and two maxima)\nsyms x;\nf = x^4 - 4*x^2;\ndisp('Function:');\ndisp(f);",
+      "output": "Function:\nx^4 - 4*x^2",
+      "explanation": [
+        "syms x: Declares x as a symbolic variable.",
+        ": Defines the function .",
+        "disp(f): Displays the function in the command window."
+      ]
+    },
+    {
+      "topic": "[3/8]: Compute the first derivative f '(x) to locate the critical points.",
+      "code": "% Compute the first derivative\nf_prime = diff(f, x);\ndisp('First Derivative:');\ndisp(f_prime);",
+      "output": "First Derivative:\n4*x^3 - 8*x",
+      "explanation": [
+        "diff(f, x): Calculates the first derivative .",
+        "f_prime: Stores the derivative.",
+        "F_prime is also a symbolic data type like f.",
+        "disp(f_prime): Displays the result in the command window."
+      ]
+    },
+    {
+      "topic": "[4/8]: Solve f '(x) = 0 to find the x-values of critical points.",
+      "code": "% Find critical points by solving f'(x) = 0\ncritical_points = double(solve(f_prime == 0, x));\ndisp('Critical Points:');\ndisp(critical_points);",
+      "output": "Critical Points:\n0\n1.4142\n-1.4142",
+      "explanation": [
+        "solve(f_prime == 0, x): Solves to find critical points.",
+        "double(...): Converts symbolic results to numeric values.",
+        "disp(critical_points): Displays the critical points."
+      ]
+    },
+    {
+      "topic": "[5/8]: Compute the second derivative f ''(x) to classify the nature of each critical point.",
+      "code": "% Compute the second derivative\nf_double_prime = diff(f_prime, x);\ndisp('Second Derivative:');\ndisp(f_double_prime);",
+      "output": "Second Derivative:\n12*x^2 - 8",
+      "explanation": [
+        "diff(f_prime, x): Calculates the second derivative .",
+        "f_double_prime: Stores the second derivative.",
+        "disp(f_double_prime): Displays it in the command window."
+      ]
+    },
+    {
+      "topic": "[6/8]: Evaluate f ''(x) at each critical point to determine if it is a maximum, minimum, or inconclusive.",
+      "code": "% Evaluate the second derivative at critical points\n% and determine maxima/minima\ndisp('Nature of Critical Points:');\nfor i = 1:length(critical_points)\n    x0 = critical_points(i);\n    second_deriv_value = double(subs(f_double_prime, x, x0));\n    fprintf('At x = %.2f, f''''(x) = %.2f', x0, second_deriv_value);\n    if second_deriv_value > 0\n        fprintf(' -> Local Minimum\\n');\n    elseif second_deriv_value < 0\n        fprintf(' -> Local Maximum\\n');\n    else\n        fprintf(' -> Need higher-order terms to determine\\n');\n    end\nend",
+      "output": "Nature of Critical Points:\nAt x = 0.00, f''(x) = -8.00 -> Local Maximum\nAt x = 1.41, f''(x) = 16.00 -> Local Minimum\nAt x = -1.41, f''(x) = 16.00 -> Local Minimum",
+      "explanation": [
+        "subs(...): Substitutes critical point into .",
+        "if-else: Checks sign of f''(x) to identify min or max.",
+        "fprintf(...): Prints the nature of each critical point.",
+        "for i = 1:length(...): Loops through all critical points.",
+        "double(...): Converts symbolic second derivative to a numeric value for comparison."
+      ]
+    },
+    {
+      "topic": "[7/8]: Use second-order Taylor series to approximate the function near each critical point and plot the results.",
+      "code": "% Taylor series approximation around each critical point\n% We'll use a second-order Taylor series: f(x) ? f(a) + f'(a)(x-a) + (f''(a)/2)(x-a)^2\nfigure; hold on; grid on; xlabel('x'); ylabel('f(x)'); title('Function and Taylor Series Approximation at Critical Points');\n% Define x-range for plotting\nx_range = linspace(-3, 3, 1000);\nf_numeric = matlabFunction(f); % Convert symbolic function to numeric\nplot(x_range, f_numeric(x_range), 'b-', 'LineWidth', 2, 'DisplayName', 'f(x) = x^4 - 4x^2');\n% Colors for Taylor approximations\ncolors = ['r', 'g', 'm'];\n% Loop through critical points to compute and plot Taylor series\nfor i = 1:length(critical_points)\n    x0 = critical_points(i);\n    % Compute Taylor series terms\n    f_at_x0 = double(subs(f, x, x0));\n    f_prime_at_x0 = double(subs(f_prime, x, x0)); % Should be 0 at critical points\n    f_double_prime_at_x0 = double(subs(f_double_prime, x, x0));\n    % Second-order Taylor approximation: f(x) ? f(x0) + f'(x0)(x-x0) + (f''(x0)/2)(x-x0)^2;\n    taylor_approx = f_at_x0 + f_prime_at_x0*(x - x0) + (f_double_prime_at_x0/2)*(x - x0)^2;\n    taylor_numeric = matlabFunction(taylor_approx); % Plot Taylor approximation near the critical point\n    x_near = linspace(x0 - 0.5, x0 + 0.5, 100); % Narrow range around critical point\n    plot(x_near, taylor_numeric(x_near), 'Color', colors(i), 'LineWidth', 1.5, ...\n        'DisplayName', sprintf('Taylor at x = %.2f', x0));\n    % Mark critical point\n    plot(x0, f_at_x0, 'ko', 'MarkerFaceColor', colors(i), ...\n        'DisplayName', sprintf('Critical Point x = %.2f', x0));\nend\n% Add legend and adjust plot\nlegend('show');\nhold off;",
+      "output": "<img src='../images/exp3.png' alt='exp1 plot' style='max-width:100%;height:auto;'>",
+      "explanation": [
+        "figure; plot(...): Plots the original function and Taylor approximations.",
+        "taylor_approx: Builds the 2nd-order Taylor series near each critical point.",
+        "matlabFunction(...): Converts symbolic Taylor expression to numeric form for plotting.",
+        "x_near: Chooses a small range around each critical point to plot the approximation.",
+        "colors(...): Assigns different colors to each Taylor curve for clarity.",
+        "plot(...): Draws both the Taylor curves and critical points on the graph.",
+        "hold on; keeps all plots on the same figure for easy comparison.",
+        "legend('show'); displays labels for the original function and each Taylor approximation.",
+        "The Taylor series visually shows how the function behaves locally near maxima/minima."
+      ]
+    },
+    {
+      "topic": "[8/8]: Display an explanation of the results using derivative tests and Taylor series approximation.",
+      "code": "% Display explanation\ndisp('Explanation:');\ndisp('The blue curve is the original function f(x) = x^4 - 4x^2.');\ndisp('Critical points are where f''(x) = 0. We check f''''(x) to determine if it''s a max or min:');\ndisp('- If f''''(x) > 0, the curve opens upward -> Minimum.');\ndisp('- If f''''(x) < 0, the curve opens downward -> Maximum.');\ndisp('The colored curves are second-order Taylor approximations near each critical point.');\ndisp('Notice how the Taylor series matches the function''s shape near these points!');",
+      "output": "Explanation:\nThe blue curve is the original function f(x) = x^4 - 4x^2.\nCritical points are where f'(x) = 0. We check f''(x) to determine if it's a max or min:\n- If f''(x) > 0, the curve opens upward -> Minimum.\n- If f''(x) < 0, the curve opens downward -> Maximum.\nThe colored curves are second-order Taylor approximations near each critical point.\nNotice how the Taylor series matches the function's shape near these points!",
+      "explanation": [
+        "Displays a summary of the results for the user.",
+        "Explains how the second derivative test helps classify maxima/minima.",
+        "Highlights that the Taylor series approximations closely match the function near critical points."
+      ]
+    }
+  ]
+} 

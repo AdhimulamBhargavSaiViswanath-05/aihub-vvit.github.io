@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Experiment 1 - Introduction to MATLAB</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Fira+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"/>
+  <link rel="stylesheet" href="common.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-matlab.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <style>
+    .code-box {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-x: hidden;
+      padding: 10px;
+  max-height: 500px;
+  overflow-y: auto;
+    }
+  
+    .code-box pre, .code-box code {
+      white-space: pre-wrap !important;
+      word-wrap: break-word !important;
+      overflow-x: hidden !important;
+    }
+    .slide-topic {
+      color: #bfa032;
+      font-size: 1.15rem;
+      font-weight: 600;
+      text-align: left;
+      width: 100%;
+    }
+    .slide-topic-box {
+  background: #fffbe6;
+  border: 1.5px solid #bfa032;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  margin: 0 0 1.2rem 20px;
+  width: fit-content;
+  max-width: 700px;
+  box-shadow: 0 2px 8px rgba(212,175,55,0.07);
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+    .slide-topic {
+      color: #bfa032;
+      font-size: 1.15rem;
+      font-weight: 600;
+      text-align: center;
+      margin: 0;
+    }
+  </style>
+  
+</head>
+
+<body>
+  <div class="top-controls">
+    <div style="display: flex; width: 100%; flex-direction: row; align-items: center; justify-content: space-between; gap: 10px;">
+      <button id="back-btn" class="btn btn-outline-danger">list of experiments</button>
+      <button id="exp-container" class="btn btn-outline-secondary">Explanation</button>
+      <div id="slide-buttons" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
+      <button id="draw-btn" class="btn btn-outline-secondary">Draw</button>
+    </div>
+  </div>
+  <div class="container-fluid exp-container">
+    <div class="row h-100">
+      <!-- Code Section (40%) -->
+      <div class="col-md-5 col-12 border-end p-3" style="flex: 0 0 40%; max-width: 40%;">
+        <h4>Experiment Code</h4>
+        <pre class="code-box"><code class="language-matlab" id="code-block"></code></pre>
+      </div>
+      <!-- Explanation + Output Section (60%) -->
+      <div class="col-md-7 col-12 p-3" style="flex: 0 0 60%; max-width: 60%;">
+        <h4>Explanation</h4>
+        <div id="slides"></div>
+        <div id="output-section" style="margin-top:2rem; display:none;">
+          <h4>Output</h4>
+          <div id="output-block"
+            oncopy="return false"
+            oncontextmenu="return false"
+            tabindex="0"
+            aria-label="Output block. Copying is disabled;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-controls">
+    <div style="display: flex; width: 100%; flex-direction: row; align-items: center; justify-content: space-between; gap: 10px;">
+      <div style="flex:1; display: flex; justify-content: flex-start;">
+        <button id="prev-slide" class="btn btn-outline-primary">&larr; Prev</button>
+      </div>
+      <div style="flex:1; display: flex; justify-content: center;">
+        <span id="slide-number" style="font-weight: bold; color: rgb(212, 175, 55);"></span>
+      </div>
+      <div style="flex:1; display: flex; justify-content: flex-end;">
+        <button id="next-slide" class="btn btn-outline-primary">Next &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawing Canvas Overlay -->
+  <canvas id="draw-canvas" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:2000; background:transparent;"></canvas>
+  <div id="draw-controls" style="display:none; position:fixed; top:70px; right:20px; z-index:2100;">
+    <div id="color-picker" style="display:inline-block; margin-right:12px;">
+        <button class="color-btn" data-color="#000000" style="background:#000; width:24px; height:24px; border-radius:50%; border:2px solid #ccc; margin-right:4px;"></button>
+        <button class="color-btn" data-color="#ff0000" style="background:#ff0000; width:24px; height:24px; border-radius:50%; border:2px solid #ccc; margin-right:4px;"></button>
+        <button class="color-btn" data-color="#008000" style="background:#008000; width:24px; height:24px; border-radius:50%; border:2px solid #ccc; margin-right:4px;"></button>
+        <button class="color-btn" data-color="#0000ff" style="background:#0000ff; width:24px; height:24px; border-radius:50%; border:2px solid #ccc; margin-right:4px;"></button>
+        <button class="color-btn" data-color="#ffa500" style="background:#ffa500; width:24px; height:24px; border-radius:50%; border:2px solid #ccc; margin-right:4px;"></button>
+        <button class="color-btn" data-color="#800080" style="background:#800080; width:24px; height:24px; border-radius:50%; border:2px solid #ccc;"></button>
+      </div>
+    <button id="save-btn" class="btn btn-outline-success btn-sm">Save</button>
+    <button id="clear-btn" class="btn btn-outline-danger btn-sm">Clear</button>
+    <button id="close-draw-btn" class="btn btn-outline-secondary btn-sm">Close</button>
+  </div>
+
+  <script>
+    const slidesData = [
+  {
+    topic: "[1/15]:Defining Symbolic Variables",
+    code: "%Step 1: Define x as a symbolic variable\n% MATLAB2014b\nclear all\nclose all\nclc\n% Define symbolic variable\nsyms x\nwhos",
+    output: "Name\t      Size  \t          Bytes \t Class  \t   Attributes\n\n  g \t        1x1\t               112   \t  symfun              \n  t          1x1  \t             112 \t    sym ",
+    explanation: [
+      "clear all clears all variables from memory.",
+      "close all closes any open figure windows.",
+      "clc clears the command window.",
+      "syms x creates a symbolic variable x for symbolic math operations."
+    ]
+  },
+  {
+    topic: "[2/15]:Defining the Function",
+    code: "% Step 2: Define the function\n% f = t^3 - 2*t^2 + 5*t - 1;\nf = x^3 - 2*x^2 + 5*x - 1;\ndisp('The given function f(x) is ');\ndisp(f)",
+    output: "The given function f(x) is  \nx^3 - 2*x^2 + 5*x - 1",
+    explanation: [
+      "The function f(x) is defined symbolically using the declared variable x.",
+      "disp displays the function expression to the command window so that the user can verify the definition."
+    ]
+  },
+  {
+    topic: "[3/15]:Computing Derivatives",
+    code: "%Step 3: Compute the First derivative\ndf_dx = diff(f);\nfprintf('First derivative f''(x) =  %s\\n', char(df_dx));",
+    output: "First derivative f'(x) =  3*x^2 - 4*x + 5",
+    explanation: [
+      "diff(f) computes the first derivative of f(x) with respect to x.",
+      "char(df_dx) converts the symbolic result into a string.",
+      "fprintf displays the derivative nicely formatted in the command window."
+    ]
+  },
+  {
+    topic: "[4/15]:Computing Derivatives",
+    code: "%Step4: Second derivative\nd2f_dx2 = diff(f, 2); % Or diff(df_dx)\nfprintf('Second derivative f''''(x) =  %s\\n', char(d2f_dx2));",
+    output: "Second derivative f''(x) =  6*x - 4",
+    explanation: [
+      "diff(f, 2) computes the second derivative (i.e., the derivative of the first derivative).",
+      "Four single quotes '''' are used in the fprintf to display double prime notation (f''(x)) in MATLAB.",
+      "char again converts the symbolic expression to string for display."
+    ]
+  },
+  {
+    topic: "[5/15]:Evaluating Derivatives",
+    code: "% You can also evaluate the derivatives at specific points\nx_val = 2;\ndf_dx_at_2 = subs(df_dx, x, x_val);\n% disp will display numbers directly\ndisp(['First derivative f''(', num2str(x_val), ') = ', num2str(double(df_dx_at_2))]);\n\nd2f_dx2_at_2 = subs(d2f_dx2, x, x_val);\n% disp will display numbers directly\ndisp(['Second derivative f''''(', num2str(x_val), ') = ', num2str(double(d2f_dx2_at_2))]);",
+    output: "First derivative f'(2) = 9\nSecond derivative f''(2) = 8",
+    explanation: [
+      "subs(expr, x, x_val) substitutes x = 2 into the symbolic expressions f, f' and f''.",
+      "double(...) converts the symbolic value into a numeric value.",
+      "disp(...) is used to display the evaluated result for each function at the point x = 2."
+    ]
+  },
+  {
+    topic: "[6/15]:Defining Symbolic Functions",
+    code: "% MATLAB2014b\nclear all\nclose all\nclc\n% Define symbolic variable\nsyms g(t)\nwhos",
+    output: "Name      Size            Bytes  Class     Attributes\n\ng         1x1               112     symfun              \nt         1x1               112     sym ",
+    explanation: [
+      "clear all clears all variables from memory.",
+      "close all closes any open figure windows.",
+      "clc clears the command window.",
+      "syms g(t) defines g(t) as a symbolic function of variable t, enabling symbolic operations (like differentiation)."
+    ]
+  },
+  {
+    topic: "[7/15]:Defining Symbolic Functions",
+    code: "% Define the function\ng(t) = input('Enter your function g(t) = ');\ndisp('The given function g(t) = ');\ndisp(g(t))",
+    output: "Enter your function g(t) = sin(t^2)\nThe given function g(t) = sin(t^2)",
+    explanation: [
+      "input() prompts the user to enter a function, like sin(t^2) or sin(t).",
+      "For example, when the user enters sin(t), it assigns that to the symbolic function g(t).",
+      "disp() displays the entered function to confirm the correct input."
+    ]
+  },
+  {
+    topic: "[8/15]:Computing Derivatives",
+    code: "% First derivative\ndg_dt = diff(g);\nfprintf('First derivative g''(t) =  %s\\n', char(dg_dt));",
+    output: "First derivative g'(t) =  2*t*cos(t^2)",
+    explanation: [
+      "diff(g) calculates the first derivative of the symbolic function g(t) with respect to t.",
+      "char(dg_dt) converts the symbolic expression to a string format for display.",
+      "fprintf() prints the result in a readable format (with g'(t) notation)."
+    ]
+  },
+  {
+    topic: "[9/15]:Evaluating Derivatives",
+    code: "% You can also evaluate the derivatives at specific points\nt_val = input('Enter the value of t at which first derivative to be evaluated: ');\ndg_dt_at_t = subs(dg_dt, t, t_val);\n% disp will display numbers directly\ndisp(['First derivative g''(', num2str(t_val), ') = ', num2str(double(dg_dt_at_t))]);",
+    output: "Enter the value of t at which first derivative to be evaluated: pi/3\nFirst derivative g'(1.0472) = 0.95631",
+    explanation: [
+      "The user is prompted to enter a value for t (e.g., pi/3).",
+      "subs(dg_dt, t, t_val) substitutes the value into the first derivative.",
+      "double() converts the symbolic result to a numerical value.",
+      "disp() prints the evaluated first derivative."
+    ]
+  },
+  {
+    topic: "[10/15]:Computing Derivatives",
+    code: "% Second derivative\nd2g_dt2 = diff(g, 2); % Or diff(dg_dt)\nfprintf('Second derivative g''''(t) =  %s\\n', char(d2g_dt2));",
+    output: "Second derivative g''(t) =  2*cos(t^2) - 4*t^2*sin(t^2)",
+    explanation: [
+      "diff(g, 2) computes the second derivative of g(t) (i.e., derivative of the first derivative).",
+      "char() again converts it to a string for display.",
+      "fprintf() prints it using the g''(t) notation (note that '''' escapes to show '' in the output)."
+    ]
+  },
+  {
+    topic: "[11/15]:Evaluating Derivatives",
+    code: "% You can also evaluate the derivatives at specific points\nt_val = input('Enter the value of t at which second derivative to be evaluated: ');\nd2g_dt2_at_t = subs(d2g_dt2, t, t_val);\n% disp will display numbers directly\ndisp(['Second derivative g''''(', num2str(t_val), ') = ', num2str(double(d2g_dt2_at_t))]);",
+    output: "Enter the value of t at which second derivative to be evaluated: pi/3\nSecond derivative g''(1.0472) = -2.9893",
+    explanation: [
+      "The user is again prompted to enter a value for t.",
+      "subs() substitutes that value into the second derivative expression.",
+      "double() computes the numerical result.",
+      "disp() displays the evaluated second derivative."
+    ]
+  },
+  {
+    topic: "[12/15]:Working with Data",
+    code: "clear all\nclose all\nclc\n% Sample data\nx_data = 0:0.1:10;\ny_data = x_data.^2; % Let's pretend this is experimental data from y = x^2",
+    output: "",
+    explanation: [
+      "clear all clears all variables from memory.",
+      "close all closes any open figure windows.",
+      "clc clears the command window.",
+      "x_data contains regularly spaced x-values.",
+      "y_data = x^2 generates corresponding y-values."
+    ]
+  },
+  {
+    topic: "[13/15]:Working with Data",
+    code: "% First derivative (approximation)\ndy_dx_approx = diff(y_data) ./ diff(x_data);\n% The length of dy_dx_approx will be one less than x_data and y_data",
+    output: "",
+    explanation: [
+      "This line estimates the first derivative (slope) between data points using finite differences.",
+      "diff(y_data) gives changes in y, diff(x_data) gives changes in x, and ./ performs element-wise division (Δy/Δx)."
+    ]
+  },
+  {
+    topic: "[14/15]:Working with Data",
+    code: "% To plot it, you might want to use the midpoint of each x interval.\nx_midpoints = (x_data(1:end-1) + x_data(2:end)) / 2;",
+    output: "",
+    explanation: [
+      "dy/dx values correspond to intervals between x-values.",
+      "x_midpoints gives the center of each interval so we can accurately plot the derivative values."
+    ]
+  },
+  {
+    topic: "[15/15]:Working with Data",
+    code: "% Second derivative (approximation)\n% Apply diff again to the approximated first derivative\nd2y_dx2_approx = diff(dy_dx_approx) ./ diff(x_midpoints);",
+    output: "",
+    explanation: [
+      "The same diff logic is applied again on the first derivative to get second derivative.",
+      "Since dy_dx_approx is shorter than x_data, its own diff result is one step shorter again, so x_midpoints2 is calculated from x_midpoints."
+    ]
+  }
+];
+    let currentSlide = 0;
+
+    function updateSlide() {
+      const codeBox = document.getElementById("code-block");
+      const outputBlock = document.getElementById("output-block");
+      const slidesList = document.getElementById("slides");
+      const slideNumber = document.getElementById("slide-number");
+
+      // Update code
+      codeBox.textContent = slidesData[currentSlide].code;
+      Prism.highlightElement(codeBox);
+
+      // Update output
+      if (slidesData[currentSlide].output && slidesData[currentSlide].output.trim() !== "") {
+        document.getElementById("output-section").style.display = "block";
+        outputBlock.innerHTML = slidesData[currentSlide].output.replace(/\n/g, "<br>");
+      } else {
+        document.getElementById("output-section").style.display = "none";
+        outputBlock.innerHTML = "";
+      }
+
+      // Update explanation
+      slidesList.innerHTML = `
+        <div class="slide active">
+          <ul>${slidesData[currentSlide].explanation.map(item => `<li>${item}</li>`).join("")}</ul>
+        </div>
+      `;
+
+      // Update slide number
+      slideNumber.textContent = `Step ${currentSlide + 1} of ${slidesData.length}`;
+
+      // Find the .top-controls element
+      const topControls = document.querySelector('.top-controls');
+
+      // Remove any existing topic box after .top-controls
+      document.querySelectorAll('.slide-topic-box').forEach(box => box.remove());
+
+      // Add topic just below the .top-controls row, centered
+      if (slidesData[currentSlide].topic) {
+        const topicBox = document.createElement('div');
+        topicBox.className = 'slide-topic-box mb-3';
+        topicBox.innerHTML = `<h5 class="slide-topic text-left m-0">${slidesData[currentSlide].topic}</h5>`;
+        topControls.parentElement.insertBefore(topicBox, topControls.nextSibling);
+      }
+    }
+
+    document.getElementById("next-slide").addEventListener("click", () => {
+      if (currentSlide < slidesData.length - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    });
+
+    document.getElementById("prev-slide").addEventListener("click", () => {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    });
+
+    // Add Back button functionality
+document.getElementById("back-btn").onclick = () => {
+  window.location.href = "../Matlab.html?tab=experiments";
+};
+document.getElementById("exp-container").onclick = () => {
+  window.location.href = "../experiment_viewer.html?path=./experiments/exp1.md";
+};
+
+// Numbered slide buttons
+function renderSlideButtons() {
+  const btnContainer = document.getElementById("slide-buttons");
+  btnContainer.innerHTML = "";
+  for (let i = 0; i < slidesData.length; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i + 1;
+    btn.className = "btn btn-sm " + (i === currentSlide ? "btn-primary" : "btn-outline-primary");
+    btn.style.minWidth = "36px";
+    btn.onclick = () => {
+      currentSlide = i;
+      updateSlide();
+      renderSlideButtons();
+    };
+    btnContainer.appendChild(btn);
+  }
+}
+
+// Update renderSlideButtons call in updateSlide
+const originalUpdateSlide = updateSlide;
+updateSlide = function() {
+  originalUpdateSlide();
+  renderSlideButtons();
+};
+
+// Initial render
+updateSlide();
+
+// Drawing functionality
+const drawBtn = document.getElementById('draw-btn');
+const drawCanvas = document.getElementById('draw-canvas');
+const drawControls = document.getElementById('draw-controls');
+const clearBtn = document.getElementById('clear-btn');
+const closeDrawBtn = document.getElementById('close-draw-btn');
+const saveBtn = document.getElementById('save-btn');
+let drawing = false;
+let ctx;
+let penColor = '#000000';
+
+function resizeCanvas() {
+  drawCanvas.width = window.innerWidth;
+  drawCanvas.height = window.innerHeight;
+}
+
+if (drawBtn && drawCanvas && drawControls) {
+  drawBtn.onclick = () => {
+    drawCanvas.style.display = 'block';
+    drawControls.style.display = 'block';
+    resizeCanvas();
+    ctx = drawCanvas.getContext('2d');
+    ctx.strokeStyle = penColor;
+  };
+  window.addEventListener('resize', resizeCanvas);
+
+  drawCanvas.addEventListener('mousedown', (e) => {
+    drawing = true;
+    ctx.beginPath();
+    ctx.moveTo(e.clientX, e.clientY);
+    ctx.strokeStyle = penColor;
+  });
+  drawCanvas.addEventListener('mousemove', (e) => {
+    if (!drawing) return;
+    ctx.lineTo(e.clientX, e.clientY);
+    ctx.strokeStyle = penColor;
+    ctx.stroke();
+  });
+  drawCanvas.addEventListener('mouseup', () => {
+    drawing = false;
+  });
+  drawCanvas.addEventListener('mouseleave', () => {
+    drawing = false;
+  });
+  clearBtn.onclick = () => {
+    ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+  };
+  closeDrawBtn.onclick = () => {
+    drawCanvas.style.display = 'none';
+    drawControls.style.display = 'none';
+  };
+  saveBtn.onclick = () => {
+    // Hide controls to avoid capturing them
+    drawControls.style.visibility = 'hidden';
+    html2canvas(document.body, { scale: 0.5 }).then(canvas => {
+      drawControls.style.visibility = 'visible';
+      const link = document.createElement('a');
+      link.download = 'page_with_drawing.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  };
+}
+
+// Pen color selector logic
+document.querySelectorAll('.color-btn').forEach(btn => {
+  btn.onclick = function() {
+    penColor = this.getAttribute('data-color');
+    // Optionally, visually indicate selected color
+    document.querySelectorAll('.color-btn').forEach(b => b.style.borderColor = '#ccc');
+    this.style.borderColor = '#bfa032';
+  };
+});
+</script>
+</body>
+</html>
