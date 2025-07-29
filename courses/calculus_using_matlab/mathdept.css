@@ -1,0 +1,278 @@
+/* Math Department Page Styles */
+
+/* Add padding for fixed header and footer */
+body {
+    padding-top: 60px; /* Reduced padding for smaller header */
+    padding-bottom: 50px; /* Reduced padding for smaller footer */
+}
+
+/* Ensure content doesn't overlap with fixed elements */
+main {
+    min-height: calc(100vh - 110px); /* Adjusted for smaller header/footer */
+}
+
+/* Ensure Font Awesome icons are visible */
+.fas, .fa, .fab, .far, .fal {
+    background-color: transparent !important;
+    color: inherit !important;
+    display: inline-block !important;
+}
+
+/* Page title styling */
+#page-title {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Content area styling */
+#content-area {
+    padding: 20px 0;
+}
+
+/* Section headings */
+h4 {
+    color: #333;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Paragraph styling */
+p {
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Horizontal rule styling */
+hr {
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* Cards container */
+.cards {
+    margin: 20px 0;
+}
+
+/* Experiment card styling */
+.experiment-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 15px 0;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+}
+
+.experiment-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+/* Card image container */
+#card-image {
+    flex-shrink: 0;
+    margin-right: 20px;
+    text-align: center;
+}
+
+/* Card image styling */
+.card-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+}
+
+/* Card body styling */
+.card-body {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Card description */
+#desc {
+    padding: 10px 0;
+}
+
+/* Experiment title */
+.experiment-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Card subtitle */
+.card-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Card text */
+.card-text {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+/* Card links */
+.card-body a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.card-body a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Code styling */
+code {
+    background-color: #f8f9fa;
+    color: #e83e8c;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .experiment-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    #card-image {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .card-img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .experiment-title {
+        font-size: 1.1rem;
+    }
+    
+    body {
+        padding-top: 70px;
+        padding-bottom: 60px;
+    }
+}
+
+/* Container styling */
+.container-fluid {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Row styling */
+.row {
+    margin: 0;
+}
+
+/* Column styling */
+.col-12.col-md-9 {
+    padding: 0 15px;
+}
+
+/* Icon styling for Font Awesome */
+.fas, .fa, .fab, .far, .fal {
+    font-size: 80px;
+    color: #6c757d;
+    margin: 20px;
+}
+
+/* Ensure proper spacing */
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-body-secondary {
+    color: #6c757d !important;
+}
+
+/* Footer icon consistency */
+.desc_item i {
+    font-size: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+    display: inline-block !important;
+    vertical-align: baseline !important;
+    line-height: 1 !important;
+    margin-right: 8px !important;
+    position: relative !important;
+    top: 0 !important;
+}
+
+/* Ensure all footer icons are the same size and alignment */
+.fa-solid, .fas, .fa-brands, .fab {
+    font-size: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+    vertical-align: baseline !important;
+    line-height: 1 !important;
+    position: relative !important;
+    top: 0 !important;
+}
+
+/* Footer item alignment */
+.desc_item {
+    display: flex !important;
+    align-items: baseline !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    height: 20px !important;
+}
+
+/* Force all footer icons to same baseline */
+#footer .desc_item i {
+    vertical-align: baseline !important;
+    position: static !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: translateY(0) !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Specific fix for different icon types */
+#footer .fa-solid,
+#footer .fas,
+#footer .fa-brands,
+#footer .fab {
+    vertical-align: baseline !important;
+    position: static !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    transform: translateY(0) !important;
+    line-height: 1 !important;
+    display: inline-block !important;
+    font-size: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+} 

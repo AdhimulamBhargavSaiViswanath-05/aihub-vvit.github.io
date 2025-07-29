@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Experiment 2 - Integration Techniques</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Fira+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"/>
+  <link rel="stylesheet" href="common.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-matlab.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="common.js"></script>
+</head>
+
+<body>
+  <div class="top-breadcrumb" style="margin-top: 0.5em; margin-left: 0.5em; font-size: 1.05em; display: flex; justify-content: space-between; align-items: center; padding-right: 20px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+          <a href="../Matlab.html" style="text-decoration: none; color: #007bff;">Calculus <span class="arrow-black">&gt;&gt;</span></a><a href="../Matlab.html?tab=experiments" style="text-decoration: none; color: #007bff;">Experiments <span class="arrow-black">&gt;&gt;</span></a><a href="../experiment_viewer.html?path=./problem_statement/exp2.md" style="text-decoration: none; color: #007bff;">Problem Statement <span class="arrow-black">&gt;&gt;</span></a>
+          <h5 style="margin: 0 0 0 8px; font-size: 1.05em; display: inline;">2.Integration Techniques</h5>
+      </div>
+      <button id="draw-btn" class="btn btn-outline-secondary">Draw</button>
+  </div>
+  <div class="top-controls">
+    <div style="display: flex; width: 100%; flex-direction: row; align-items: center; gap: 10px; justify-content: center;">
+      <div id="slide-buttons" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
+    </div>
+  </div>
+  <div class="container-fluid exp-container">
+    <div class="row h-100">
+      <!-- Code Section (40%) -->
+      <div class="col-md-5 col-12 border-end p-3" style="flex: 0 0 40%; max-width: 40%;">
+        <h4>Experiment Code</h4>
+        <pre class="code-box"><code class="language-matlab" id="code-block"></code></pre>
+      </div>
+      <!-- Explanation + Output Section (60%) -->
+      <div class="col-md-7 col-12 p-3" style="flex: 0 0 60%; max-width: 60%;">
+        <h4>Explanation</h4>
+        <div id="slides"></div>
+        <div id="output-section" style="margin-top:2rem; display:none;">
+          <h4>Output</h4>
+          <div id="output-block"
+            oncopy="return false"
+            oncontextmenu="return false"
+            tabindex="0"
+            aria-label="Output block. Copying is disabled;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-controls">
+    <div style="display: flex; width: 100%; flex-direction: row; align-items: center; justify-content: space-between; gap: 10px;">
+      <div style="flex:1; display: flex; justify-content: flex-start;">
+        <button id="prev-slide" class="btn btn-outline-primary">&larr; Prev</button>
+      </div>
+      <div style="flex:1; display: flex; justify-content: center;">
+        <span id="slide-number" style="font-weight: bold; color: rgb(212, 175, 55);"></span>
+      </div>
+      <div style="flex:1; display: flex; justify-content: flex-end;">
+        <button id="next-slide" class="btn btn-outline-primary">Next &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawing Canvas Overlay -->
+  <canvas id="draw-canvas" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:2000; background:transparent;"></canvas>
+  <div id="draw-controls" style="display:none; position:fixed; top:70px; right:20px; z-index:2100;">
+    <div id="color-picker" style="display:inline-block; margin-right:12px;">
+        <button class="color-btn" data-color="#000000" style="background:#000; width:24px; height:24px; border-radius:50%; border:2px solid #ccc; margin-right:4px;"></button>
+        <button class="color-btn" data-color="#ff0000" style="background:#ff0000; width:24px; height:24px; border-radius:50%; border:2px solid #ccc; margin-right:4px;"></button>
+        <button class="color-btn" data-color="#008000" style="background:#008000; width:24px; height:24px; border-radius:50%; border:2px solid #ccc; margin-right:4px;"></button>
+        <button class="color-btn" data-color="#0000ff" style="background:#0000ff; width:24px; height:24px; border-radius:50%; border:2px solid #ccc; margin-right:4px;"></button>
+        <button class="color-btn" data-color="#ffa500" style="background:#ffa500; width:24px; height:24px; border-radius:50%; border:2px solid #ccc; margin-right:4px;"></button>
+        <button class="color-btn" data-color="#800080" style="background:#800080; width:24px; height:24px; border-radius:50%; border:2px solid #ccc;"></button>
+      </div>
+    <button id="save-btn" class="btn btn-outline-success btn-sm">Save</button>
+    <button id="clear-btn" class="btn btn-outline-danger btn-sm">Clear</button>
+    <button id="close-draw-btn" class="btn btn-outline-secondary btn-sm">Close</button>
+  </div>
+
+  <!-- Keyboard navigation hint -->
+  <div class="keyboard-hint"></div>
+
+  <script>
+    // Ensure currentSlide is initialized
+    window.currentSlide = window.currentSlide || 0;
+
+    // Make slidesData global
+    window.slidesData = [
+  {
+    topic: "[1/8]:Defining Symbolic Variables",
+    code: "%Step 1: Define x as a symbolic variable\n% MATLAB2014b\nclear all\nclose all\nclc\n% Define symbolic variable\nsyms x\nwhos",
+    output: "Name      Size            Bytes  Class     Attributes\n\nx         1x1               112     sym ",
+    explanation: [
+      "clear all clears all variables from memory.",
+      "close all closes any open figure windows.",
+      "clc clears the command window.",
+      "syms x creates a symbolic variable x for symbolic math operations."
+    ]
+  },
+  {
+    topic: "[2/8]:Defining the Function",
+    code: "% Step 2: Define the function to integrate\nf = x^2 + 3*x + 1;\ndisp('The function to integrate f(x) = ');\ndisp(f)",
+    output: "The function to integrate f(x) = x^2 + 3*x + 1",
+    explanation: [
+      "We define a function f(x) = x² + 3x + 1 that we want to integrate.",
+      "This is a polynomial function that can be integrated using MATLAB's symbolic math capabilities."
+    ]
+  },
+  {
+    topic: "[3/8]:Indefinite Integration",
+    code: "% Step 3: Compute the indefinite integral\nF = int(f);\nfprintf('Indefinite integral ∫f(x)dx = %s + C\\n', char(F));",
+    output: "Indefinite integral ∫f(x)dx = x^3/3 + (3*x^2)/2 + x + C",
+    explanation: [
+      "int(f) computes the indefinite integral of f(x) with respect to x.",
+      "The result includes the constant of integration C.",
+      "This gives us the antiderivative of our function."
+    ]
+  },
+  {
+    topic: "[4/8]:Definite Integration",
+    code: "% Step 4: Compute definite integral from 0 to 2\na = 0;\nb = 2;\nresult = int(f, x, a, b);\nfprintf('Definite integral from %d to %d = %s\\n', a, b, char(result));",
+    output: "Definite integral from 0 to 2 = 26/3",
+    explanation: [
+      "int(f, x, a, b) computes the definite integral from a to b.",
+      "This gives us the area under the curve from x=0 to x=2.",
+      "The result is a numerical value (26/3 ≈ 8.67)."
+    ]
+  },
+  {
+    topic: "[5/8]:Numeric Integration",
+    code: "% Step 5: Numeric integration using quad\nf_numeric = @(x) x.^2 + 3*x + 1;\nresult_numeric = quad(f_numeric, 0, 2);\nfprintf('Numeric result: %.6f\\n', result_numeric);",
+    output: "Numeric result: 8.666667",
+    explanation: [
+      "We can also use numeric integration with quad function.",
+      "@(x) creates an anonymous function for numeric evaluation.",
+      "This gives us a numeric approximation of the integral."
+    ]
+  },
+  {
+    topic: "[6/8]:Integration by Parts",
+    code: "% Step 6: Integration by parts example\nsyms u v\nu = x;\nv = exp(x);\n% ∫u*dv = u*v - ∫v*du\nresult_parts = u*v - int(v*diff(u));\ndisp('Integration by parts result:');\ndisp(result_parts);",
+    output: "Integration by parts result:\nx*exp(x) - exp(x)",
+    explanation: [
+      "Integration by parts formula: ∫u*dv = u*v - ∫v*du",
+      "Here u = x and v = e^x",
+      "The result is x*e^x - e^x + C"
+    ]
+  },
+  {
+    topic: "[7/8]:Trigonometric Integration",
+    code: "% Step 7: Trigonometric integration\nsyms t\ng = sin(t)^2;\nG = int(g);\nfprintf('∫sin²(t)dt = %s\\n', char(G));",
+    output: "∫sin²(t)dt = t/2 - sin(2*t)/4",
+    explanation: [
+      "We integrate sin²(t) using trigonometric identities.",
+      "The result uses the identity: sin²(t) = (1-cos(2t))/2",
+      "This gives us t/2 - sin(2t)/4 + C"
+    ]
+  },
+  {
+    topic: "[8/8]:Multiple Integration",
+    code: "% Step 8: Double integration example\nsyms x y\nh = x*y;\n% Double integral ∫∫h(x,y)dxdy\nresult_double = int(int(h, x), y);\nfprintf('Double integral result: %s\\n', char(result_double));",
+    output: "Double integral result: (x^2*y^2)/4",
+    explanation: [
+      "We perform double integration by integrating twice.",
+      "First integrate with respect to x, then with respect to y.",
+      "The result is (x²y²)/4 + C"
+    ]
+  }
+];
+
+    // Custom updateSlide function
+    function updateSlide() {
+      const codeBox = document.getElementById("code-block");
+      const outputBlock = document.getElementById("output-block");
+      const slidesList = document.getElementById("slides");
+      const slideNumber = document.getElementById("slide-number");
+
+      // Defensive: If codeBox is missing, do nothing
+      if (!codeBox) return;
+
+      // Always use window.currentSlide
+      const slide = window.slidesData[window.currentSlide];
+
+      // Defensive: If slide is missing, clear codeBox
+      if (!slide) {
+        codeBox.textContent = '';
+        return;
+      }
+
+      // Update code
+      codeBox.textContent = slide.code || '';
+      if (window.Prism) Prism.highlightElement(codeBox);
+
+      // Update output
+      if (slide.output && slide.output.trim() !== "") {
+        document.getElementById("output-section").style.display = "block";
+        outputBlock.innerHTML = slide.output.replace(/\n/g, "<br>");
+      } else {
+        document.getElementById("output-section").style.display = "none";
+        outputBlock.innerHTML = "";
+      }
+
+      // Update explanation
+      slidesList.innerHTML = `
+        <div class="slide active">
+          <ul>${(slide.explanation || []).map(item => `<li>${item}</li>`).join("")}</ul>
+        </div>
+      `;
+
+      // Update slide number
+      slideNumber.textContent = `Step ${window.currentSlide + 1} of ${window.slidesData.length}`;
+
+      // Find the .top-controls element
+      const topControls = document.querySelector('.top-controls');
+
+      // Remove any existing topic box after .top-controls
+      document.querySelectorAll('.slide-topic-box').forEach(box => box.remove());
+
+      // Add topic just below the .top-controls row, centered
+      if (slide.topic) {
+        const topicBox = document.createElement('div');
+        topicBox.className = 'slide-topic-box mb-3';
+        topicBox.innerHTML = `<h5 class="slide-topic text-left m-0">${slide.topic}</h5>`;
+        topControls.parentElement.insertBefore(topicBox, topControls.nextSibling);
+      }
+    }
+
+    // Make updateSlide available to common.js
+    window.updateSlide = updateSlide;
+    window.experimentCommon = window.experimentCommon || {};
+    window.experimentCommon.updateSlide = updateSlide;
+
+    // Initial render
+    document.addEventListener('DOMContentLoaded', updateSlide);
+  </script>
+</body>
+</html> 
