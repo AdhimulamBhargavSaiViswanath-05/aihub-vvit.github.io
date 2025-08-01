@@ -35,9 +35,7 @@ class SpecialHeader extends HTMLElement {
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="courses.html">Courses</a>
-                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="blog.html">Blogs</a>
                         </li>
@@ -64,6 +62,7 @@ class SpecialHeader extends HTMLElement {
                                         <li><a class="dropdown-item" href="#">Verbal Ability</a></li>
                                     </ul>
                                 </li>
+                                <li><a class="dropdown-item" href="Career.html">DSA</a></li>
                                 <li><a class="dropdown-item" href="Career.html">Web Dev</a></li>
                             </ul>
                         </li>
