@@ -1,15 +1,94 @@
-body{
-    background-color: rgb(240, 238, 238);
+body {
+  background-color: rgb(240, 238, 238);
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
-.footer_list{
-    display: flex;
+
+#cards {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  gap: 5rem;
 }
-#buttons i{
-    margin-left: 2rem;
-    font-size: 1.5rem;
-    color: rgb(239, 116, 116)
+
+
+.card-img-top {
+  display: block;
+  max-width: 25%; /* Or any percent you like, e.g., 70%, 90% */
+  height: 25%;
+  margin-left: auto;
+  margin-right: auto;
 }
-#buttons{
-    display: flex;
-    align-items: center;
+
+.card {
+  width: 100%;
+  max-width: 10000px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow-x: auto; /* Allow horizontal scrolling if content overflows */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem; /* Add padding inside card */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.card-body {
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap; /* Allow children (like buttons) to wrap onto next line */
+  gap: 1rem; /* Add spacing between children */
+}
+
+.card-title {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.card iframe {
+  width: 100%;
+  max-width: 100%;
+  height: 500px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 1rem;
+  box-sizing: border-box;
+}
+
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .card iframe {
+    height: 350px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card iframe {
+    height: 280px;
+  }
+
+
+  #cards {
+    padding: 0.5rem;
+    gap: 5 rem;
+  }
+}
+
+.footer_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+#buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+#buttons i {
+  font-size: 1.5rem;
+  color: rgb(239, 116, 116);
 }
