@@ -19,7 +19,7 @@ body {
   color: #333;
   background-color: #f5f7fa;
   padding-top: 70px; /* Header height */
-  padding-bottom: 60px; /* Footer height */
+  padding-bottom: 70px; /* Footer height */
   min-height: 100vh; /* Ensure body takes at least full viewport height */
 }
 
