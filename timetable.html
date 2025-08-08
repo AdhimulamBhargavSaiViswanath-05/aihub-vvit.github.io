@@ -1,164 +1,159 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Timetable Generator</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="./styling/timetable.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Time Table Generator</title>
+
+    <required-links></required-links>
+
+    <link rel="stylesheet" href="./styling/timetable.css">
+
 </head>
+
 <body>
-  <special-header></special-header>
-  <center><h1 id="page-title">Time Table Generator</h1></center>
-  <center><p>Content regarding the Timetable generator</p></center>
 
-  <header>
-    <h1>AI Timetable Generator</h1>
-    <p>Upload → Generate → View & Download</p>
-  </header>
+    <special-header></special-header>
 
-  <div class="container">
-    <h2>1. Upload Input Dataset</h2>
-    <a href="sample_dataset.csv" download><button><i class="fa fa-download"></i> Download Sample Dataset</button></a>
-    <input type="file" id="datasetInput">
-    <button onclick="generateTimetable()"><i class="fa fa-cogs"></i> Generate Timetable</button>
-    <div id="statusMsg"></div>
+    <center><h1 id="page-title">Time Table Generator</h1></center>
 
-    <h2>2. View & Download Results</h2>
-    <button onclick="showSection('classTT')">Show Class Timetable</button>
-    <button onclick="showSection('facultyTT')">Show Faculty Timetable</button>
-    <button onclick="showSection('facultyWorkload')">Show Faculty Workload</button>
-
-    <div id="classTT" class="output-box" style="display:none;">
-      <h3>Class Timetable</h3>
-      <p>[Class timetable will appear here]</p>
-      <div class="download-buttons">
-        <button>Download PDF</button>
-        <button>Download Excel</button>
-      </div>
-    </div>
-
-    <div id="facultyTT" class="output-box" style="display:none;">
-      <h3>Faculty Timetable</h3>
-      <p>[Faculty timetable will appear here]</p>
-      <div class="download-buttons">
-        <button>Download PDF</button>
-        <button>Download Excel</button>
-      </div>
-    </div>
-
-    <div id="facultyWorkload" class="output-box" style="display:none;">
-      <h3>Faculty Workload</h3>
-      <p>[Faculty workload data will appear here]</p>
-      <div class="download-buttons">
-        <button>Download PDF</button>
-        <button>Download Excel</button>
-      </div>
-    </div>
+    <center><p>Content regarding the Timetable generator</p></center>
 
     <section class="benefits-section">
-      <h2 class="text-center text-white mb-3">Who Can Benefit From Our Timetable Generator?</h2>
-      <p class="text-center text-secondary mb-4">Our tool is designed to help various educational institutions and organizations create efficient schedules.</p>
-      <div class="row g-4 justify-content-center">
+
+    <h2 class="text-center text-white mb-3">Who Can Benefit From Our Timetable Generator?</h2>
+
+    <p class="text-center text-secondary mb-4">Our tool is designed to help various educational institutions and organizations create efficient schedules.</p>
+
+    
+
+    <div class="row g-4 justify-content-center">
+
         <div class="col-md-4">
-          <div class="card benefit-card">
-            <div class="card-body">
-              <h5 class="card-title text-primary"><i class="bi bi-building"></i> School Administrators</h5>
-              <p class="card-text">Create balanced class schedules while managing teacher availability and resource constraints.</p>
+
+            <div class="card benefit-card">
+
+                <div class="card-body">
+
+                    <h5 class="card-title text-primary"><i class="bi bi-building"></i> School Administrators</h5>
+
+                    <p class="card-text">Create balanced class schedules while managing teacher availability and resource constraints.</p>
+
+                </div>
+
             </div>
-          </div>
+
         </div>
+
+    
+
         <div class="col-md-4">
-          <div class="card benefit-card">
-            <div class="card-body">
-              <h5 class="card-title text-success"><i class="bi bi-bank"></i> Universities</h5>
-              <p class="card-text">Generate complex timetables for multiple departments and courses with varying requirements.</p>
+
+            <div class="card benefit-card">
+
+                <div class="card-body">
+
+                    <h5 class="card-title text-success"><i class="bi bi-bank"></i> Universities</h5>
+
+                    <p class="card-text">Generate complex timetables for multiple departments and courses with varying requirements.</p>
+
+                </div>
+
             </div>
-          </div>
+
         </div>
+
+    
+
         <div class="col-md-4">
-          <div class="card benefit-card">
-            <div class="card-body">
-              <h5 class="card-title text-warning"><i class="bi bi-lightning"></i> Training Centers</h5>
-              <p class="card-text">Optimize class schedules for various training programs and instructor availability.</p>
+
+            <div class="card benefit-card">
+
+                <div class="card-body">
+
+                    <h5 class="card-title text-warning"><i class="bi bi-lightning"></i> Training Centers</h5>
+
+                    <p class="card-text">Optimize class schedules for various training programs and instructor availability.</p>
+
+                </div>
+
             </div>
-          </div>
+
         </div>
+
+    
+
         <div class="col-md-4">
-          <div class="card benefit-card">
-            <div class="card-body">
-              <h5 class="card-title text-info"><i class="bi bi-calendar-check"></i> Educational Planners</h5>
-              <p class="card-text">Design efficient academic schedules that maximize learning effectiveness.</p>
+
+            <div class="card benefit-card">
+
+                <div class="card-body">
+
+                    <h5 class="card-title text-info"><i class="bi bi-calendar-check"></i> Educational Planners</h5>
+
+                    <p class="card-text">Design efficient academic schedules that maximize learning effectiveness.</p>
+
+                </div>
+
             </div>
-          </div>
+
         </div>
+
+    
+
         <div class="col-md-4">
-          <div class="card benefit-card">
-            <div class="card-body">
-              <h5 class="card-title text-pink"><i class="bi bi-person-circle"></i> Teachers</h5>
-              <p class="card-text">Plan personal teaching schedules and coordinate with other faculty members.</p>
+
+            <div class="card benefit-card">
+
+                <div class="card-body">
+
+                    <h5 class="card-title text-pink"><i class="bi bi-person-circle"></i> Teachers</h5>
+
+                    <p class="card-text">Plan personal teaching schedules and coordinate with other faculty members.</p>
+
+                </div>
+
             </div>
-          </div>
+
         </div>
+
+    
+
         <div class="col-md-4">
-          <div class="card benefit-card">
-            <div class="card-body">
-              <h5 class="card-title text-orange"><i class="bi bi-rocket-takeoff"></i> Educational Startups</h5>
-              <p class="card-text">Create flexible schedules for innovative learning programs and courses.</p>
+
+            <div class="card benefit-card">
+
+                <div class="card-body">
+
+                    <h5 class="card-title text-orange"><i class="bi bi-rocket-takeoff"></i> Educational Startups</h5>
+
+                    <p class="card-text">Create flexible schedules for innovative learning programs and courses.</p>
+
+                </div>
+
             </div>
-          </div>
+
         </div>
-      </div>
+
+    </div>
+
     </section>
 
-    <section class="info">
-      <h2>Why Choose Our AI Timetable Generator?</h2>
-      <p>Automatic, intelligent, clash-free scheduling that saves hours of planning.</p>
+    </div>
 
-      <h2>How It Works</h2>
-      <p>Upload your dataset → AI processes it → View timetables instantly.</p>
+  
 
-      <h2>Key Features</h2>
-      <ul>
-        <li>Download as PDF/Excel</li>
-        <li>Class-wise & Faculty-wise view</li>
-        <li>Faculty workload calculator</li>
-      </ul>
+    <special-footer></special-footer>
 
-      <h2>Tips for Effective Timetable Planning</h2>
-      <ul>
-        <li>Ensure teacher names and subject codes are unique</li>
-        <li>Define lab sessions and lecture periods clearly</li>
-      </ul>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-      <h2>FAQs</h2>
-      <p><strong>Q:</strong> What file types are supported?<br><strong>A:</strong> CSV or Excel files.</p>
-      <p><strong>Q:</strong> Can I regenerate a timetable?<br><strong>A:</strong> Yes, just reupload and click generate.</p>
-    </section>
-  </div>
+    <script src="./reuse_elements/HeaderFooter.js"></script>
 
-  <special-footer></special-footer>
-  <script src="./reuse_elements/HeaderFooter.js"></script>
-  <script>
-    function generateTimetable() {
-      const input = document.getElementById('datasetInput');
-      if (!input.files.length) {
-        alert("Please upload a dataset file first.");
-        return;
-      }
-      document.getElementById("statusMsg").innerHTML = "⏳ Processing your file...";
-      setTimeout(() => {
-        document.getElementById("statusMsg").innerHTML = "✅ Timetable successfully generated!";
-      }, 2000); // Simulated delay
-    }
-
-    function showSection(id) {
-      ["classTT", "facultyTT", "facultyWorkload"].forEach(sec => {
-        document.getElementById(sec).style.display = "none";
-      });
-      document.getElementById(id).style.display = "block";
-    }
-  </script>
 </body>
+
 </html>
