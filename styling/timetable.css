@@ -76,7 +76,7 @@ a:hover {
 
 .hero-section h2 {
   font-size: 2rem;
-  color: var(--primary-color);
+  color: black;
 }
 
 /* Optional: To prevent background images bleeding in */
@@ -90,6 +90,7 @@ a:hover {
     background-image: none; /* or override background from global styles */
     opacity: 0.1;
     pointer-events: none;
+    color: black;
 }
 
 /* Card Styles */
