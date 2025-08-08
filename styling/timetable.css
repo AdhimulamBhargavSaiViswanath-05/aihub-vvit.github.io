@@ -48,7 +48,7 @@ a:hover {
   background-clip: text;
   color: transparent;
   margin-bottom: 0.5rem;
-  margin-top: 4rem;
+  padding-top: 4rem;
 }
 
 @media (min-width: 768px) {
