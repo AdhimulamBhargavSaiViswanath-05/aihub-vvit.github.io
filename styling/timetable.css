@@ -49,7 +49,7 @@ a:hover {
   background: linear-gradient(90deg, var(--primary-color), var(--danger-color));
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: black;
   margin-bottom: 0.5rem;
 }
 
