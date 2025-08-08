@@ -166,55 +166,7 @@ a:hover {
   border-bottom: none;
 }
 
-/* CTA Section */
-.cta-section {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--danger-color) 100%);
-  position: relative;
-  overflow: hidden;
-}
 
-.cta-section::before {
-  content: '';
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 200px;
-  height: 200px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-}
-
-.cta-section::after {
-  content: '';
-  position: absolute;
-  bottom: -80px;
-  left: -80px;
-  width: 250px;
-  height: 250px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-}
-
-.cta-section h2 {
-  position: relative;
-  z-index: 2;
-}
-
-.cta-section p {
-  position: relative;
-  z-index: 2;
-}
-
-.cta-section .btn-light {
-  background-color: white;
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.cta-section .btn-outline-light:hover {
-  background-color: white;
-  color: var(--primary-color);
-}
 
 /* Scroll to Top Button */
 .scroll-to-top-btn {
