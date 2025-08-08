@@ -317,9 +317,47 @@
     <!-- Main Header -->
     <header class="container mt-4">
         <h1 class="header-title">Timetable Generator - AIHUB</h1>
+        <p class="sub-heading">Effortlessly create and manage optimized timetables with intelligent scheduling</p>
+    </header>
 
     <!-- Main Content -->
     <main class="container">
+        <!-- Features Section -->
+        <section>
+            <h2><i class="fas fa-star me-2"></i>Key Features</h2>
+            <ul>
+                <li><strong>Automated Schedule Creation:</strong> Generate conflict-free timetables in seconds</li>
+                <li><strong>Smart Conflict Detection:</strong> Real-time identification of scheduling issues</li>
+                <li><strong>Customizable Parameters:</strong> Tailor time slots, breaks, and constraints</li>
+                <li><strong>Multi-dimensional Management:</strong> Handle courses, teachers, and rooms efficiently</li>
+                <li><strong>Visual Analytics:</strong> Clear workload distribution and schedule visualization</li>
+            </ul>
+        </section>
+
+        <!-- How It Works Section -->
+        <section>
+            <h2><i class="fas fa-cogs me-2"></i>How It Works</h2>
+            <ol>
+                <li><strong>Input Data:</strong> Enter course, teacher, and classroom details</li>
+                <li><strong>Configure Preferences:</strong> Set time slots, breaks, and constraints</li>
+                <li><strong>Generate Timetable:</strong> Our AI creates an optimized schedule</li>
+                <li><strong>Review & Adjust:</strong> Fine-tune with intuitive controls</li>
+                <li><strong>Export & Share:</strong> Download in multiple formats</li>
+            </ol>
+        </section>
+
+        <!-- Rules Section -->
+        <section>
+            <h2><i class="fas fa-clipboard-check me-2"></i>Rules and Guidelines</h2>
+            <ul class="rules-list">
+                <li>Verify the sample dataset format before uploading</li>
+                <li>Ensure accurate data input following the required structure</li>
+                <li>Upload files <strong>only in .CSV or .XLSX format</strong></li>
+                <li>Review generated timetable thoroughly before finalizing</li>
+                <li>Contact support for any data format questions</li>
+            </ul>
+        </section>
+
         <!-- Sample Download Section -->
         <section>
             <h2><i class="fas fa-download me-2"></i>Download Sample Dataset</h2>
@@ -342,17 +380,11 @@
                 <div id="uploadSuccess" class="alert-message info-message" style="display: none;">
                     <i class="fas fa-check-circle me-2"></i>File uploaded successfully! Click "Generate Timetable" to proceed.
                 </div>
-                <div id="uploadError" class="alert-message error-message" style="display: none;">
-                    <i class="fas fa-times-circle me-2"></i>File upload failed! Please try again.
-                </div>
-                <button type="submit" class="myButton" id="generateBtn">
+                <button type="submit" class="myButton">
                     <i class="fas fa-magic me-2"></i>Generate Timetable
                 </button>
                 <div id="generationSuccess" class="alert-message success-message" style="display: none;">
                     <i class="fas fa-check-circle me-2"></i>Timetable generated successfully!
-                </div>
-                <div id="generationError" class="alert-message error-message" style="display: none;">
-                    <i class="fas fa-times-circle me-2"></i>Timetable generation failed! Please check your file and try again.
                 </div>
             </form>
             <hr>
@@ -400,107 +432,48 @@
         </section>
     </main>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 - AIHUB @ VVIT | Intelligent Scheduling Solutions</p>
+        <p>
+            <i class="fas fa-envelope me-2"></i>support@aihub-vvit.edu | 
+            <i class="fas fa-phone me-2"></i>(555) 123-4567 |
+            <i class="fas fa-map-marker-alt me-2"></i>Visvesvaraya Technological University
+        </p>
+    </footer>
 
     <script>
         // File upload handling
         document.getElementById("fileInput").addEventListener("change", function() {
             const fileError = document.getElementById("fileError");
             const uploadSuccess = document.getElementById("uploadSuccess");
-            const uploadError = document.getElementById("uploadError");
-            const generationSuccess = document.getElementById("generationSuccess");
-            const generationError = document.getElementById("generationError");
             const filePath = this.value.toLowerCase();
-
-            // Reset all messages when file changes
-            fileError.style.display = "none";
-            uploadSuccess.style.display = "none";
-            uploadError.style.display = "none";
-            generationSuccess.style.display = "none";
-            generationError.style.display = "none";
 
             if (filePath.endsWith(".csv") || filePath.endsWith(".xlsx")) {
                 fileError.style.display = "none";
+                uploadSuccess.style.display = "inline-block";
             } else {
                 fileError.style.display = "block";
+                uploadSuccess.style.display = "none";
             }
         });
 
         // Form submission handling
-        document.getElementById("uploadForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-            
+        document.getElementById("uploadForm").addEventListener("submit", function(event) {
             const fileInput = document.getElementById("fileInput");
             const fileError = document.getElementById("fileError");
-            const uploadSuccess = document.getElementById("uploadSuccess");
-            const uploadError = document.getElementById("uploadError");
-            const generationSuccess = document.getElementById("generationSuccess");
-            const generationError = document.getElementById("generationError");
-            const generateBtn = document.getElementById("generateBtn");
             const filePath = fileInput.value.toLowerCase();
 
-            // Reset messages
-            fileError.style.display = "none";
-            uploadSuccess.style.display = "none";
-            uploadError.style.display = "none";
-            generationSuccess.style.display = "none";
-            generationError.style.display = "none";
-
-            // Validate file type
             if (!filePath.endsWith(".csv") && !filePath.endsWith(".xlsx")) {
                 fileError.style.display = "block";
-                return;
+                event.preventDefault();
             }
-
-            // Disable button during processing
-            generateBtn.disabled = true;
-            generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
-
-            try {
-                // Simulate upload (replace with actual fetch)
-                const uploadResponse = await simulateUpload(fileInput);
-                
-                if (uploadResponse.success) {
-                    uploadSuccess.style.display = "inline-block";
-                    
-                    // Simulate generation (replace with actual fetch)
-                    const generationResponse = await simulateGeneration();
-                    
-                    if (generationResponse.success) {
-                        generationSuccess.style.display = "inline-block";
-                    } else {
-                        generationError.style.display = "inline-block";
-                    }
-                } else {
-                    uploadError.style.display = "inline-block";
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                uploadError.style.display = "inline-block";
-            } finally {
-                generateBtn.disabled = false;
-                generateBtn.innerHTML = '<i class="fas fa-magic me-2"></i>Generate Timetable';
-            }
+            
+            // Simulate generation success (replace with actual backend call)
+            setTimeout(() => {
+                document.getElementById("generationSuccess").style.display = "inline-block";
+            }, 1500);
         });
-
-        // Simulate upload (replace with actual fetch)
-        function simulateUpload(fileInput) {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    // For demo purposes, we'll assume upload is successful if file is selected
-                    resolve({ success: fileInput.files.length > 0 });
-                }, 1000);
-            });
-        }
-
-        // Simulate generation (replace with actual fetch)
-        function simulateGeneration() {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    // For demo purposes, we'll assume generation is successful
-                    resolve({ success: true });
-                }, 1500);
-            });
-        }
 
         // Download sample file
         function downloadFile() {
