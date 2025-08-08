@@ -48,6 +48,7 @@ a:hover {
   background-clip: text;
   color: transparent;
   margin-bottom: 0.5rem;
+  margin-top: 4rem;
 }
 
 @media (min-width: 768px) {
@@ -64,6 +65,7 @@ a:hover {
     padding: 60px 20px;
     position: relative;
     overflow: hidden;
+    margin-top: 0rem;
 }
 
 .hero-heading {
