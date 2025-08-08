@@ -17,43 +17,537 @@
     
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-blue: #2563eb;
+            --secondary-blue: #3b82f6;
+            --light-blue: #93c5fd;
+            --accent-orange: #f59e0b;
+            --accent-green: #10b981;
+            --dark-text: #1e293b;
+            --light-text: #f8fafc;
+            --error-red: #ef4444;
+            --success-green: #10b981;
+            --section-bg: rgba(255, 255, 255, 0.85);
+        }
+    
+        /* Background Animation */
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    
+        /* Base Styles */
+        body {
+            background: transparent;
+            background-size: 300% 300%;
+            animation: gradientBackground 15s ease infinite;
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+    
+        /* Main Content Container */
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+    
+        /* Typography */
+        .header-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin: 1.5rem 0 1rem;
+            text-align: center;
+            color: var(--primary-blue);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(to right, var(--primary-blue), var(--accent-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    
+        .sub-heading {
+            font-size: 1.25rem;
+            color: var(--dark-text);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 300;
+        }
+    
+        h2 {
+            color: var(--primary-blue);
+            margin: 2rem 0 1.5rem;
+            font-weight: 600;
+            border-bottom: 2px solid var(--secondary-blue);
+            padding-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+    
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin: 1.5rem 0;
+            background: var(--section-bg);
+            backdrop-filter: blur(5px);
+        }
+    
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-size: 15px;
+        }
+    
+        th {
+            background: var(--secondary-blue);
+            font-weight: 500;
+            font-family: 'Montserrat', sans-serif;
+        }
+    
+        tr:nth-child(even) {
+            background-color: rgba(233, 236, 239, 0.5);
+        }
+    
+        tr:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+    
+        /* Workload Table */
+        .workload-table {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    
+        .workload-table th {
+            background-color: var(--light-blue) !important;
+            color: var(--dark-text);
+        }
+    
+        .workload-table td:last-child {
+            font-weight: bold;
+            color: var(--error-red);
+        }
+    
+        /* Lists */
+        .rules-list {
+            padding-left: 1.5rem;
+            list-style-type: lower-alpha;
+        }
+    
+        ul, ol {
+            padding-left: 1.2rem;
+        }
+    
+        li {
+            margin-bottom: 0.5rem;
+        }
+    
+        /* Buttons */
+        .myButton {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-orange) 100%);
+            border-radius: 28px;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 12px 28px;
+            margin: 0.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-family: 'Montserrat', sans-serif;
+        }
+    
+        .myButton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+    
+        .btn-success {
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--secondary-blue) 100%);
+        }
+    
+        /* Form Elements */
+        .form-control {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.3s;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: 'Poppins', sans-serif;
+        }
+    
+        .form-control:focus {
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25);
+            background: white;
+        }
+    
+        /* Messages */
+        .alert-message {
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: inline-block;
+            font-weight: 500;
+            animation: fadeIn 0.5s ease;
+        }
+    
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    
+        .success-message {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--success-green);
+            border-left: 4px solid var(--success-green);
+        }
+    
+        .info-message {
+            background-color: rgba(59, 130, 246, 0.2);
+            color: var(--primary-blue);
+            border-left: 4px solid var(--primary-blue);
+        }
+    
+        /* Scroll to Top Button */
+        .scroll-to-top-btn {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+    
+        .scroll-to-top-btn:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-3px) scale(1.05);
+        }
+    
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--dark-text);
+            color: white;
+            margin-top: 3rem;
+        }
+    
+        .footer p {
+            margin: 0.5rem 0;
+        }
+    
+        /* Sections */
+        section {
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: var(--section-bg);
+            backdrop-filter: blur(8px);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+    
+        section:hover {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+        }
+    
+        /* Timetable Sections */
+        .timetable-section {
+            display: none;
+            margin-top: 20px;
+        }
+    
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header-title {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
     <!-- Header Section -->
     <special-header></special-header>
-    <title>TimeTable</title>
-
     <!-- Scroll to Top Button -->
     <button onclick="scrollToTop()" class="scroll-to-top-btn" id="scrollBtn" aria-label="Scroll to top">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Footer -->
-    <special-footer></special-footer>
+    <!-- Main Header -->
+    <header class="container mt-4">
+        <h1 class="header-title">Timetable Generator - AIHUB</h1>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./reuse_elements/HeaderFooter.js"></script>
-    
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Sample Download Section -->
+        <section>
+            <h2><i class="fas fa-download me-2"></i>Download Sample Dataset</h2>
+            <button onclick="downloadFile()" class="myButton">
+                <i class="fas fa-file-download me-2"></i>Download Sample
+            </button>
+            <p class="mt-2 text-muted">Get started with our pre-formatted template</p>
+        </section>
+
+        <!-- File Upload Section -->
+        <section>
+            <h2><i class="fas fa-upload me-2"></i>Upload Timetable File</h2>
+            <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <input type="file" name="file" id="fileInput" class="form-control" required accept=".csv, .xlsx">
+                    <p id="fileError" style="color: var(--error-red); display: none;">
+                        <i class="fas fa-exclamation-circle me-2"></i>Please upload a valid .CSV or .XLSX file!
+                    </p>
+                </div>
+                <div id="uploadSuccess" class="alert-message info-message" style="display: none;">
+                    <i class="fas fa-check-circle me-2"></i>File uploaded successfully! Click "Generate Timetable" to proceed.
+                </div>
+                <button type="submit" class="myButton">
+                    <i class="fas fa-magic me-2"></i>Generate Timetable
+                </button>
+                <div id="generationSuccess" class="alert-message success-message" style="display: none;">
+                    <i class="fas fa-check-circle me-2"></i>Timetable generated successfully!
+                </div>
+            </form>
+            <hr>
+            <div>{{ timetable|safe }}</div>
+        </section>
+
+        <!-- Class Timetable Section -->
+        <section>
+            <h2><i class="fas fa-calendar-alt me-2"></i>Class Timetable</h2>
+            <button class="myButton" onclick="fetchAndShowClassTimetable()">
+                <i class="fas fa-eye me-2"></i>Show Class Timetable
+            </button>
+            <div id="classTimetableSection" class="timetable-section">
+                <a href="/download_timetable/excel" class="myButton mt-3 btn-success">
+                    <i class="fas fa-file-excel me-2"></i>Download Class Timetable
+                </a>
+            </div>
+        </section>
+
+        <!-- Faculty Timetable Section -->
+        <section>
+            <h2><i class="fas fa-chalkboard-teacher me-2"></i>Faculty Timetable</h2>
+            <button class="myButton" onclick="fetchAndShowFacultyTimetable()">
+                <i class="fas fa-eye me-2"></i>Show Faculty Timetable
+            </button>
+            <div id="facultyTimetableSection" class="timetable-section">
+                <a href="/download_faculty_timetable/excel" class="myButton mt-3 btn-success">
+                    <i class="fas fa-file-excel me-2"></i>Download Faculty Timetable
+                </a>
+            </div>
+        </section>
+
+        <!-- Faculty Workload Section -->
+        <section>
+            <h2><i class="fas fa-tasks me-2"></i>Faculty Workload</h2>
+            <button class="myButton" onclick="fetchAndShowWorkload()">
+                <i class="fas fa-chart-pie me-2"></i>Show Faculty Workload
+            </button>
+            <div id="facultyWorkloadSection" class="timetable-section">
+                <div class="workload-container"></div>
+                <a href="/download_faculty_workload/excel" class="myButton mt-3 btn-success">
+                    <i class="fas fa-file-export me-2"></i>Download Faculty Workload
+                </a>
+            </div>
+        </section>
+    </main>
+
+
     <script>
-        // Scroll to top function
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-        
-        // Show scroll button when scrolling down
-        window.onscroll = function() {
-            const scrollBtn = document.getElementById('scrollBtn');
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                scrollBtn.style.display = "block";
+        // File upload handling
+        document.getElementById("fileInput").addEventListener("change", function() {
+            const fileError = document.getElementById("fileError");
+            const uploadSuccess = document.getElementById("uploadSuccess");
+            const filePath = this.value.toLowerCase();
+
+            if (filePath.endsWith(".csv") || filePath.endsWith(".xlsx")) {
+                fileError.style.display = "none";
+                uploadSuccess.style.display = "inline-block";
             } else {
-                scrollBtn.style.display = "none";
+                fileError.style.display = "block";
+                uploadSuccess.style.display = "none";
+            }
+        });
+
+        // Form submission handling
+        document.getElementById("uploadForm").addEventListener("submit", function(event) {
+            const fileInput = document.getElementById("fileInput");
+            const fileError = document.getElementById("fileError");
+            const filePath = fileInput.value.toLowerCase();
+
+            if (!filePath.endsWith(".csv") && !filePath.endsWith(".xlsx")) {
+                fileError.style.display = "block";
+                event.preventDefault();
+            }
+            
+            // Simulate generation success (replace with actual backend call)
+            setTimeout(() => {
+                document.getElementById("generationSuccess").style.display = "inline-block";
+            }, 1500);
+        });
+
+        // Download sample file
+        function downloadFile() {
+            window.location.href = "/download";
+            showDownloadMessage("Sample dataset downloaded successfully!");
+        }
+
+        // Fetch and display class timetable
+        async function fetchAndShowClassTimetable() {
+            try {
+                const section = document.getElementById('classTimetableSection');
+                section.style.display = 'block';
+                
+                // Simulate API call (replace with actual fetch)
+                setTimeout(() => {
+                    section.innerHTML = `
+                        <div class="alert-message info-message mb-3">
+                            <i class="fas fa-info-circle me-2"></i>Class timetable loaded successfully
+                        </div>
+                        ${section.innerHTML}
+                    `;
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }, 800);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Fetch and display faculty timetable
+        async function fetchAndShowFacultyTimetable() {
+            try {
+                const section = document.getElementById('facultyTimetableSection');
+                section.style.display = 'block';
+                
+                const response = await fetch('/get_faculty_timetable');
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.text();
+                section.innerHTML = `
+                    <div class="alert-message info-message mb-3">
+                        <i class="fas fa-info-circle me-2"></i>Faculty timetable loaded successfully
+                    </div>
+                    ${data}
+                    ${section.innerHTML}
+                `;
+                
+                section.scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Fetch and display faculty workload
+        async function fetchAndShowWorkload() {
+            try {
+                const section = document.getElementById('facultyWorkloadSection');
+                section.style.display = 'block';
+                
+                const response = await fetch('/get_faculty_workload');
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.text();
+                section.querySelector('.workload-container').innerHTML = `
+                    <div class="alert-message info-message mb-3">
+                        <i class="fas fa-info-circle me-2"></i>Faculty workload loaded successfully
+                    </div>
+                    ${data}
+                `;
+                
+                section.scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Show download success message
+        function showDownloadMessage(message) {
+            const alert = document.createElement('div');
+            alert.className = 'alert-message success-message';
+            alert.innerHTML = `<i class="fas fa-check-circle me-2"></i>${message}`;
+            alert.style.position = 'fixed';
+            alert.style.bottom = '20px';
+            alert.style.right = '20px';
+            alert.style.zIndex = '1000';
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 3000);
+        }
+
+        // Scroll to top functionality
+        window.onscroll = function() {
+            const btn = document.getElementById("scrollBtn");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
             }
         };
+
+        function scrollToTop() {
+            window.scrollTo({ 
+                top: 0, 
+                behavior: 'smooth' 
+            });
+        }
+
+        // Add animation to buttons on hover
+        document.querySelectorAll('.myButton').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.style.transform = 'translateY(-2px)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'translateY(0)';
+            });
+        });
     </script>
+
 </body>
 </html>
