@@ -18,19 +18,11 @@ body {
   line-height: 1.6;
   color: #333;
   background-color: #f5f7fa;
-  padding-top: 70px; /* Header height */
-  padding-bottom: 70px; /* Footer height */
-  min-height: 100vh; /* Ensure body takes at least full viewport height */
 }
 
-h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
-  color: black;
-}
-
-h1, h2 {
-  font-weight: 700;
-  color: black;
+  color: var(--dark-color);
 }
 
 a {
@@ -49,7 +41,7 @@ a:hover {
   background: linear-gradient(90deg, var(--primary-color), var(--danger-color));
   -webkit-background-clip: text;
   background-clip: text;
-  color: black;
+  color: transparent;
   margin-bottom: 0.5rem;
 }
 
@@ -61,36 +53,15 @@ a:hover {
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(to right, #f0f0ff, #e6e6fa); /* soft gradient */
-    border-radius: 15px;
-    margin: 40px 20px;
-    padding: 60px 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-heading {
-    font-size: 2rem;
-    color: black; /* soft blue */
+  background: linear-gradient(135deg, rgba(67, 97, 238, 0.1) 0%, rgba(114, 9, 183, 0.1) 100%);
+  padding: 3rem 1rem;
+  border-radius: 15px;
+  margin-bottom: 3rem;
 }
 
 .hero-section h2 {
   font-size: 2rem;
-  color: black;
-}
-
-/* Optional: To prevent background images bleeding in */
-.hero-section::after {
-    content: '';
-    position: absolute;
-    bottom: -20px;
-    right: -20px;
-    width: 300px;
-    height: 300px;
-    background-image: none; /* or override background from global styles */
-    opacity: 0.1;
-    pointer-events: none;
-    color: black;
+  color: var(--primary-color);
 }
 
 /* Card Styles */
@@ -225,7 +196,7 @@ a:hover {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: var(--primary-color);
+  background-color: brown;
   color: white;
   border: none;
   cursor: pointer;
