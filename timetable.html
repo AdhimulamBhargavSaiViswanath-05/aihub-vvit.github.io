@@ -1,87 +1,340 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Time Table Generator</title>
-
+    
+    <!-- Required Links -->
     <required-links></required-links>
-
     <link rel="stylesheet" href="./styling/timetable.css">
-
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
 <body>
-
+    <!-- Header Section -->
     <special-header></special-header>
-    <center><h1 id="page-title">Time Table Generator</h1></center>
-    <strong><h2 text-align = left >Why Choose Our AI Timetable Generator?</h2></strong>
-    <p text-align = left >Create conflict-free, balanced timetables that optimize learning schedules and resource allocation. Our AI-powered Timetable Generator helps educational institutions save time and effort in schedule planning.</p>
-    <h4>1. Generate balanced timetables that consider multiple constraints and preferences.</h4>
-    <h4>2. Save hours of manual scheduling work with AI-powered automation.<h4>
-    <h4>3. Ensure optimal distribution of subjects across the week for better learning outcomes.</h4>
-    <section class="benefits-section">
-    <strong><h2 text-align = left >Who Can Benefit From Our Timetable Generator?</h2></strong>
-    <p text-align = left >Our tool is designed to help various educational institutions and organizations create efficient schedules.</p>
-    <div class="row g-4 justify-content-center">
-        <div class="col-md-4">
-            <div class="card benefit-card">
-                <div class="card-body">
-                    <h5 class="card-title text-primary"><i class="bi bi-building"></i> School Administrators</h5>
-                    <p class="card-text">Create balanced class schedules while managing teacher availability and resource constraints.</p>
-                </div>
+    
+    <!-- Main Content -->
+    <div class="container-fluid timetable-generator">
+        <!-- Page Title -->
+        <div class="row justify-content-center">
+            <div class="col-12 text-center py-4">
+                <h1 class="display-4 fw-bold text-primary">Time Table Generator</h1>
+                <p class="lead text-muted">Intelligent scheduling solutions for educational institutions</p>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card benefit-card">
-                <div class="card-body">
-                    <h5 class="card-title text-success"><i class="bi bi-bank"></i> Universities</h5>
-                    <p class="card-text">Generate complex timetables for multiple departments and courses with varying requirements.</p>
-                </div>
+
+        <!-- Hero Section -->
+        <div class="row hero-section mb-5">
+            <div class="col-md-8 mx-auto text-center">
+                <h2 class="fw-bold mb-3">Effortlessly create and manage optimized timetables</h2>
+                <p class="fs-5 text-secondary">Our AI-powered solution saves you hours of manual work while ensuring optimal resource allocation and balanced schedules.</p>
+                <button class="btn btn-primary btn-lg mt-3">Get Started Now</button>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card benefit-card">
-                <div class="card-body">
-                    <h5 class="card-title text-warning"><i class="bi bi-lightning"></i> Training Centers</h5>
-                    <p class="card-text">Optimize class schedules for various training programs and instructor availability.</p>
+
+        <!-- Features Section -->
+        <section class="features-section mb-5 py-4 bg-light rounded-3">
+            <div class="container">
+                <h2 class="text-center mb-4"><i class="fas fa-star me-2 text-warning"></i>Key Features</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-bolt text-primary me-2"></i>Automated Schedule Creation</h5>
+                                <p class="card-text">Generate conflict-free timetables in seconds with our advanced algorithms.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-exclamation-triangle text-danger me-2"></i>Smart Conflict Detection</h5>
+                                <p class="card-text">Real-time identification and resolution of scheduling issues.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-sliders-h text-success me-2"></i>Customizable Parameters</h5>
+                                <p class="card-text">Tailor time slots, breaks, and constraints to your specific needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-layer-group text-info me-2"></i>Multi-dimensional Management</h5>
+                                <p class="card-text">Handle courses, teachers, and rooms efficiently in one platform.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-chart-bar text-purple me-2"></i>Visual Analytics</h5>
+                                <p class="card-text">Clear workload distribution and schedule visualization with interactive dashboards.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card benefit-card">
-                <div class="card-body">
-                    <h5 class="card-title text-info"><i class="bi bi-calendar-check"></i> Educational Planners</h5>
-                    <p class="card-text">Design efficient academic schedules that maximize learning effectiveness.</p>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works mb-5">
+            <div class="container">
+                <h2 class="text-center mb-4"><i class="fas fa-cogs me-2 text-secondary"></i>How It Works</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="step-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">1</div>
+                                <h5 class="card-title">Input Data</h5>
+                                <p class="card-text">Enter course, teacher, and classroom details through our intuitive interface or upload your existing data.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="step-number bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">2</div>
+                                <h5 class="card-title">Configure Preferences</h5>
+                                <p class="card-text">Set time slots, breaks, and constraints according to your institutional requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="step-number bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">3</div>
+                                <h5 class="card-title">Generate Timetable</h5>
+                                <p class="card-text">Our AI creates an optimized schedule in seconds, considering all your parameters.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="step-number bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">4</div>
+                                <h5 class="card-title">Review & Adjust</h5>
+                                <p class="card-text">Fine-tune with intuitive drag-and-drop controls and real-time conflict detection.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="step-number bg-danger text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">5</div>
+                                <h5 class="card-title">Export & Share</h5>
+                                <p class="card-text">Download in multiple formats (PDF, Excel) or share directly with stakeholders.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card benefit-card">
-                <div class="card-body">
-                    <h5 class="card-title text-pink"><i class="bi bi-person-circle"></i> Teachers</h5>
-                    <p class="card-text">Plan personal teaching schedules and coordinate with other faculty members.</p>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits-section mb-5 py-4 bg-light rounded-3">
+            <div class="container">
+                <h2 class="text-center mb-4"><i class="fas fa-check-circle me-2 text-success"></i>Why Choose Our AI Timetable Generator?</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary"><i class="fas fa-balance-scale me-2"></i>Balanced Schedules</h5>
+                                <p class="card-text">Create conflict-free, balanced timetables that optimize learning schedules and resource allocation.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title text-success"><i class="fas fa-clock me-2"></i>Time Saving</h5>
+                                <p class="card-text">Save hours of manual scheduling work with AI-powered automation.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title text-info"><i class="fas fa-brain me-2"></i>Optimal Learning</h5>
+                                <p class="card-text">Ensure optimal distribution of subjects across the week for better learning outcomes.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card benefit-card">
-                <div class="card-body">
-                    <h5 class="card-title text-orange"><i class="bi bi-rocket-takeoff"></i> Educational Startups</h5>
-                    <p class="card-text">Create flexible schedules for innovative learning programs and courses.</p>
+        </section>
+
+        <!-- Who Benefits Section -->
+        <section class="who-benefits mb-5">
+            <div class="container">
+                <h2 class="text-center mb-4"><i class="fas fa-users me-2 text-primary"></i>Who Can Benefit?</h2>
+                <p class="text-center mb-5 fs-5">Our tool is designed to help various educational institutions and organizations create efficient schedules.</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper bg-primary bg-opacity-10 text-primary rounded-circle mb-3 mx-auto">
+                                    <i class="fas fa-school fs-3"></i>
+                                </div>
+                                <h5 class="card-title">School Administrators</h5>
+                                <p class="card-text">Create balanced class schedules while managing teacher availability and resource constraints.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper bg-success bg-opacity-10 text-success rounded-circle mb-3 mx-auto">
+                                    <i class="fas fa-university fs-3"></i>
+                                </div>
+                                <h5 class="card-title">Universities</h5>
+                                <p class="card-text">Generate complex timetables for multiple departments and courses with varying requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper bg-warning bg-opacity-10 text-warning rounded-circle mb-3 mx-auto">
+                                    <i class="fas fa-chalkboard-teacher fs-3"></i>
+                                </div>
+                                <h5 class="card-title">Training Centers</h5>
+                                <p class="card-text">Optimize class schedules for various training programs and instructor availability.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper bg-info bg-opacity-10 text-info rounded-circle mb-3 mx-auto">
+                                    <i class="fas fa-calendar-alt fs-3"></i>
+                                </div>
+                                <h5 class="card-title">Educational Planners</h5>
+                                <p class="card-text">Design efficient academic schedules that maximize learning effectiveness.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper bg-danger bg-opacity-10 text-danger rounded-circle mb-3 mx-auto">
+                                    <i class="fas fa-user-tie fs-3"></i>
+                                </div>
+                                <h5 class="card-title">Teachers</h5>
+                                <p class="card-text">Plan personal teaching schedules and coordinate with other faculty members.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper bg-purple bg-opacity-10 text-purple rounded-circle mb-3 mx-auto">
+                                    <i class="fas fa-rocket fs-3"></i>
+                                </div>
+                                <h5 class="card-title">Educational Startups</h5>
+                                <p class="card-text">Create flexible schedules for innovative learning programs and courses.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Rules Section -->
+        <section class="rules-section mb-5 py-4 bg-light rounded-3">
+            <div class="container">
+                <h2 class="text-center mb-4"><i class="fas fa-clipboard-check me-2 text-danger"></i>Rules and Guidelines</h2>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex align-items-start">
+                                        <i class="fas fa-check-circle text-success mt-1 me-3"></i>
+                                        <span>Verify the sample dataset format before uploading your data</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-start">
+                                        <i class="fas fa-check-circle text-success mt-1 me-3"></i>
+                                        <span>Ensure accurate data input following the required structure for optimal results</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-start">
+                                        <i class="fas fa-check-circle text-success mt-1 me-3"></i>
+                                        <span>Upload files <strong>only in .CSV or .XLSX format</strong> for processing</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-start">
+                                        <i class="fas fa-check-circle text-success mt-1 me-3"></i>
+                                        <span>Review generated timetable thoroughly before finalizing and sharing</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-start">
+                                        <i class="fas fa-check-circle text-success mt-1 me-3"></i>
+                                        <span>Contact support for any data format questions or technical assistance</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section mb-5 py-5 bg-primary text-white rounded-3">
+            <div class="container text-center">
+                <h2 class="mb-4">Ready to Transform Your Scheduling Process?</h2>
+                <p class="fs-5 mb-4">Join hundreds of educational institutions that trust our timetable generator</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <button class="btn btn-light btn-lg px-4">Start Free Trial</button>
+                    <button class="btn btn-outline-light btn-lg px-4">Schedule Demo</button>
+                </div>
+            </div>
+        </section>
     </div>
-    </section>
-    </div>
+
+    <!-- Scroll to Top Button -->
+    <button onclick="scrollToTop()" class="scroll-to-top-btn" id="scrollBtn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
     <special-footer></special-footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./reuse_elements/HeaderFooter.js"></script>
+    
+    <script>
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Show scroll button when scrolling down
+        window.onscroll = function() {
+            const scrollBtn = document.getElementById('scrollBtn');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollBtn.style.display = "block";
+            } else {
+                scrollBtn.style.display = "none";
+            }
+        };
+    </script>
 </body>
 </html>
