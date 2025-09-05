@@ -49,7 +49,6 @@
 /*             background: var(--gradient-bg); */
             background-size: 300% 300%;
             animation: gradientBackground 15s ease infinite;
-            font-family: 'Poppins', sans-serif;
             color: var(--dark-text);
             line-height: 1.6;
             margin: 0;
@@ -371,45 +370,43 @@
 </head>
 <body>
     <!-- Header Section -->
-    <special-header></special-header>
-    <header class="main-header">
-        <div class="container">
-            <h1 class="header-title" data-aos="fade-down">Smart Timetable Generator</h1>
-            <p class="header-subtitle" data-aos="fade-down" data-aos-delay="100">Create optimized timetables with AI-powered scheduling for educational institutions</p>
+<special-header></special-header>
+    <div class="container">
+        <h1 class="header-title" data-aos="fade-down">Smart Timetable Generator</h1>
+        <p class="header-subtitle" data-aos="fade-down" data-aos-delay="100">Create optimized timetables with AI-powered scheduling for educational institutions</p>
+        
+        <div class="features-grid">
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h4>AI-Powered</h4>
+                    <p>Intelligent algorithms optimize schedules automatically</p>
+                </div>
+            </div>
             
-            <div class="features-grid">
-                <div class="card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <h4>AI-Powered</h4>
-                        <p>Intelligent algorithms optimize schedules automatically</p>
+            <div class="card" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
                     </div>
+                    <h4>Fast Generation</h4>
+                    <p>Generate complete timetables in seconds, not hours</p>
                 </div>
-                
-                <div class="card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <h4>Fast Generation</h4>
-                        <p>Generate complete timetables in seconds, not hours</p>
+            </div>
+            
+            <div class="card" data-aos="fade-up" data-aos-delay="400">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-check"></i>
                     </div>
-                </div>
-                
-                <div class="card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-user-check"></i>
-                        </div>
-                        <h4>User-Friendly</h4>
-                        <p>Intuitive interface designed for all user levels</p>
-                    </div>
+                    <h4>User-Friendly</h4>
+                    <p>Intuitive interface designed for all user levels</p>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
 
     <!-- Main Content -->
     <main class="container">
