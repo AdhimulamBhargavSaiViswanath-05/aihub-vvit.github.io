@@ -44,7 +44,7 @@
             color: var(--dark-text);
             line-height: 1.6;
             margin: 0;
-            padding-top: 20px;
+            padding-top: 4rem;
             paddding-bottom: 100px;
             min-height: 100vh;
         }
@@ -272,29 +272,30 @@
         .workload-table th {
             background: linear-gradient(135deg, var(--accent-green) 0%, var(--secondary-blue) 100%);
         }
-        
+                
         /* Scroll to Top Button */
         .scroll-to-top-btn {
-            position: fixed;
-            right: 25px;
-            bottom: 80px;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-purple) 100%);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.25rem;
-            cursor: pointer;
-            display: none;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
+          position: fixed;
+          bottom: 60px;
+          right: 30px;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: #bca89f;
+          color: white;
+          border: none;
+          cursor: pointer;
+          display: none;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+          transition: all 0.3s ease;
+          z-index: 99;
         }
         
         .scroll-to-top-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+          background-color: red;
+          transform: translateY(-3px);
         }
         
         /* Feature Grid */
